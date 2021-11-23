@@ -16,6 +16,7 @@ import XMonad.Util.SpawnOnce
 -- HOOKS
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.SetWMName
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
@@ -54,7 +55,7 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#222222"
+myNormalBorderColor  = "#282828"
 myFocusedBorderColor = "#5c4f6a"
 windowCount :: X (Maybe String)
 windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
@@ -256,6 +257,7 @@ myStartupHook = do
   spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --pos 0x0 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 2560x0 --rotate normal --output DP-1 --off &"
   spawnOnce "picom &"
   spawn "/usr/bin/feh --bg-fill /home/hammsvietro/wallpapers/0239.jpg &"
+  setWMName "LG3D"
 
 
 
@@ -289,13 +291,13 @@ main = do
         logHook = dynamicLogWithPP $ xmobarPP
                 -- the following variables beginning with 'pp' are settings for xmobar.
                 { ppOutput = hPutStrLn barpipe                          -- xmobar on monitor 1
-                , ppCurrent = xmobarColor "#c792ea" "" . wrap "<box type=Bottom width=2 mb=2 color=#c792ea>" "</box>"         -- Current workspace
-                , ppVisible = xmobarColor "#c792ea" ""                          -- Visible but not current workspace
-                , ppHidden = xmobarColor "#82AAFF" "" . wrap "<box type=Top width=2 mt=2 color=#82AAFF>" "</box>"  -- Hidden workspaces
-                , ppHiddenNoWindows = xmobarColor "#82AAFF" ""                  -- Hidden workspaces (no windows)
-                , ppTitle = xmobarColor "#b3afc2" "" . shorten 60               -- Title of active window
+                , ppCurrent = xmobarColor "#d79921" "" . wrap "<box type=Bottom width=2 mb=2 color=#c792ea>" "</box>"         -- Current workspace
+                , ppVisible = xmobarColor "#d79921" ""                          -- Visible but not current workspace
+                , ppHidden = xmobarColor "#83a598" "" . wrap "<box type=Top width=2 mt=2 color=#82AAFF>" "</box>"  -- Hidden workspaces
+                , ppHiddenNoWindows = xmobarColor "#83a598" ""                  -- Hidden workspaces (no windows)
+                , ppTitle = xmobarColor "#b8bb26" "" . shorten 60               -- Title of active window
                 , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
-                , ppUrgent = xmobarColor "#C45500" "" . wrap "!" "!"            -- Urgent workspace
+                , ppUrgent = xmobarColor "#d3869b" "" . wrap "!" "!"            -- Urgent workspace
                 , ppExtras  = [windowCount]                                     -- # of windows current workspace
                 , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
                 }

@@ -1,1 +1,3 @@
-.xmonad/xmonad.errors
+.xmonad/*
+!.xmonad/xpm
+!.xmonad/xmonad.hs
