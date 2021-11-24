@@ -73,7 +73,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_d     ), spawn "rofi -modi drun,run -show drun -theme gruvbox-dark-hard")
 
     -- screenshot current workspace
-    , ((modm,  xK_Print              ), spawn "flameshot screen -c")
+    , ((modm,               xK_Print ), spawn "flameshot screen -c")
+    , ((modm .|. shiftMask, xK_Print ), spawn "flameshot screen -p ~/Pictures")
 
     -- screenshot crop mode
     , ((modm .|. shiftMask, xK_s     ), spawn "flameshot gui")
@@ -256,7 +257,7 @@ myManageHook = composeAll
 myStartupHook = do
   spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --pos 0x0 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 2560x0 --rotate normal --output DP-1 --off &"
   spawnOnce "picom &"
-  spawn "/usr/bin/feh --bg-fill /home/hammsvietro/wallpapers/0239.jpg &"
+  spawn "/usr/bin/feh --bg-fill ~/wallpapers/current.jpg &"
   setWMName "LG3D"
 
 
