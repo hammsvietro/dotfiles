@@ -69,8 +69,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
-    -- launch dmenu
+    -- launch rofi
     , ((modm,               xK_d     ), spawn "rofi -modi drun,run -show drun -theme gruvbox-dark-hard")
+    , ((modm .|. shiftMask, xK_d     ), spawn "~/.local/bin/d_kill")
 
     -- screenshot current workspace
     , ((modm,               xK_Print ), spawn "flameshot screen -c")
@@ -292,9 +293,9 @@ main = do
         logHook = dynamicLogWithPP $ xmobarPP
                 -- the following variables beginning with 'pp' are settings for xmobar.
                 { ppOutput = hPutStrLn barpipe                          -- xmobar on monitor 1
-                , ppCurrent = xmobarColor "#d79921" "" . wrap "<box type=Bottom width=2 mb=2 color=#c792ea>" "</box>"         -- Current workspace
+                , ppCurrent = xmobarColor "#d79921" "" . wrap "<box type=Bottom width=2 mb=2 color=#d79921>" "</box>"         -- Current workspace
                 , ppVisible = xmobarColor "#d79921" ""                          -- Visible but not current workspace
-                , ppHidden = xmobarColor "#83a598" "" . wrap "<box type=Top width=2 mt=2 color=#82AAFF>" "</box>"  -- Hidden workspaces
+                , ppHidden = xmobarColor "#83a598" "" . wrap "<box type=Top width=2 mt=2 color=#83a598>" "</box>"  -- Hidden workspaces
                 , ppHiddenNoWindows = xmobarColor "#83a598" ""                  -- Hidden workspaces (no windows)
                 , ppTitle = xmobarColor "#b8bb26" "" . shorten 60               -- Title of active window
                 , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
