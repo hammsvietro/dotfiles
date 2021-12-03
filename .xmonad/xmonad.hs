@@ -42,16 +42,6 @@ myBorderWidth   = 2
 --
 myModMask       = mod4Mask
 
--- The default number of workspaces (virtual screens) and their names.
--- By default we use numeric strings, but any string may be used as a
--- workspace name. The number of workspaces is determined by the length
--- of this list.
---
--- A tagging example:
---
--- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
---
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -209,10 +199,20 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 
 ------------------------------------------------------------------------
 -- Window rules:
+-- The default number of workspaces (virtual screens) and their names.
+-- By default we use numeric strings, but any string may be used as a
+-- workspace name. The number of workspaces is determined by the length
+-- of this list.
+--
+-- A tagging example:
+--
+-- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
+--
+myWorkspaces    = ["supp", "www", "code", "term", "mus", "chat"] ++ map show [7..9]
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
 -- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
+-- particular program, or have a client always appear on a particu0lar
 -- workspace.
 --
 -- To find the property name associated with a program, use
@@ -226,6 +226,8 @@ myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
     , resource  =? "desktop_window" --> doIgnore
+    , title =? "Mozilla Firefox"    --> doShift ( myWorkspaces !! 1 )
+    , title =? "Discord"            --> doShift ( myWorkspaces !! 5 )
     , resource  =? "kdesktop"       --> doIgnore ]
 
 ------------------------------------------------------------------------
@@ -293,7 +295,7 @@ main = do
         logHook = dynamicLogWithPP $ xmobarPP
                 -- the following variables beginning with 'pp' are settings for xmobar.
                 { ppOutput = hPutStrLn barpipe                          -- xmobar on monitor 1
-                , ppCurrent = xmobarColor "#d79921" "" . wrap "<box type=Bottom width=2 mb=2 color=#d79921>" "</box>"         -- Current workspace
+                , ppCurrent = xmobarColor "#d79921" "" . wrap "<box type=Bottom width=2 fn=3 mb=2 color=#d79921>" "</box>"         -- Current workspace
                 , ppVisible = xmobarColor "#d79921" ""                          -- Visible but not current workspace
                 , ppHidden = xmobarColor "#83a598" "" . wrap "<box type=Top width=2 mt=2 color=#83a598>" "</box>"  -- Hidden workspaces
                 , ppHiddenNoWindows = xmobarColor "#83a598" ""                  -- Hidden workspaces (no windows)

@@ -1,4 +1,4 @@
-Config { font            = "ttf:JetBrainsMono Nerd Font:bold:size=60"
+Config { font            = "xft:MesloLGS Nerd Font:regular:size=10"
        , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"
                            , "xft:Font Awesome 5 Free Solid:pixelsize=12"
                            , "xft:Font Awesome 5 Brands:pixelsize=12"
@@ -9,7 +9,7 @@ Config { font            = "ttf:JetBrainsMono Nerd Font:bold:size=60"
        --   an alignment parameter (L/R/C) for Left, Right or Center.
        --   an integer for the percentage width, so 100 would be 100%.
        --   an integer for the minimum pixel height for xmobar, so 24 would force a height of at least 24 pixels.
-       , position       = TopSize L 100 24
+       , position       = TopSize L 100 26
        , lowerOnStart = True
        , hideOnStart  = False
        , allDesktops  = True
@@ -21,13 +21,13 @@ Config { font            = "ttf:JetBrainsMono Nerd Font:bold:size=60"
                         -- Get kernel version (script found in .local/bin)
                     , Run Com "/home/hammsvietro/.local/bin/kernel" [] "kernel" 36000
                         -- Cpu usage in percent
-                    , Run Cpu ["-t", "<fn=2>\xf108</fn>  cpu: (<total>%)","-H","50","--high","red"] 20
+                    , Run Cpu ["-t", "<fn=2>\xf108</fn> cpu:(<total>%)","-H","50","--high","red"] 20
                         -- Ram used number and percent
-                    , Run Memory ["-t", "<fn=2>\xf233</fn>  mem: <used>M (<usedratio>%)"] 20
+                    , Run Memory ["-t", "<fn=2>\xf233</fn> mem: <used>M (<usedratio>%)"] 20
                         -- Disk space free
-                    , Run DiskU [("/", "<fn=2>\xf0c7</fn>  hdd: <free> free")] [] 60
+                    , Run DiskU [("/", "<fn=2>\xf0c7</fn> hdd: <free> free")] [] 60
                         -- Echos an "up arrow" icon in front of the uptime output.
-                    , Run Com "echo" ["<fn=2>\xf0aa</fn>"] "uparrow" 3600
+                    , Run Com "echo" ["<fn=2>\xf0aa</fn>"]"uparrow" 3600
                         -- Uptime
                     , Run Uptime ["-t", "uptime: <days>d <hours>h"] 360
                         -- Echos a "bell" icon in front of the pacman updates.
@@ -35,12 +35,12 @@ Config { font            = "ttf:JetBrainsMono Nerd Font:bold:size=60"
                         -- Check for pacman updates (script found in .local/bin)
                     , Run Com "/home/hammsvietro/.local/bin/pacupdate" [] "pacupdate" 36000
                         -- Time and date
-                    , Run Date "<fn=2>\xf017</fn>  %b %d %Y - (%H:%M) " "date" 50
+                    , Run Date "<fn=2>\xf017</fn> %b %d %Y-(%H:%M)" "date" 50
                         -- Prints out the left side items such as workspaces, layout, etc.
                     ,  Run StdinReader
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=knight.xpm/>   %StdinReader% }{ <box type=Bottom width=2 mb=2 color=#d3869b><fc=#d3869b>%penguin%  <action=`alacritty -e htop`>%kernel%</action> </fc></box>  <box type=Bottom width=2 mb=2 color=#b8bb26><fc=#b8bb26><action=`alacritty -e htop`>%cpu%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#458588><fc=#458588><action=`alacritty -e htop`>%memory%</action></fc></box>    <box type=Bottom width=2 mb=2 color=#d79921><fc=#d79921><action=`alacritty -e htop`>%disku%</action></fc></box>     <box type=Bottom width=2 mb=2 color=#b16286><fc=#b16286>%bell%  <action=`alacritty -e sudo pacman -Syu`>%pacupdate%</action></fc></box>   <box type=Bottom width=2 mb=2 color=#83a598><fc=#83a598><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>"
+       , template = " <icon=knight.xpm/>   %StdinReader% }{ <box type=Bottom width=2 mb=2 color=#d3869b><fc=#d3869b>%penguin%<action=`alacritty -e htop`>%kernel%</action></fc></box> <box type=Bottom width=2 mb=2 color=#b8bb26><fc=#b8bb26><action=`alacritty -e htop`>%cpu%</action></fc></box> <box type=Bottom width=2 mb=2 color=#458588><fc=#458588><action=`alacritty -e htop`>%memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#d79921><fc=#d79921><action=`alacritty -e htop`>%disku%</action></fc></box> <box type=Bottom width=2 mb=2 color=#b16286><fc=#b16286>%bell%  <action=`alacritty -e sudo pacman -Syu`>%pacupdate%</action></fc></box> <box type=Bottom width=2 mb=2 color=#83a598><fc=#83a598><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>"
      }
