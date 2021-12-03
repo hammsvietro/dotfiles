@@ -1,4 +1,5 @@
 let mapleader = "\<Space>"
+set termguicolors
 
 call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/popup.nvim'
