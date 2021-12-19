@@ -14,6 +14,10 @@ function parse_git_branch() {
 	fi
 }
 
+function killpath {
+  kill $(ps aux | grep '$1' | awk '{print $2}')
+}
+
 # get current status of git repo
 function parse_git_dirty {
 	status=`git status 2>&1 | tee`
