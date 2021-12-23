@@ -60,7 +60,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch rofi
-    , ((modm,               xK_d     ), spawn "rofi -modi drun,run -show drun -theme gruvbox-dark-hard")
+    , ((modm,               xK_d     ), spawn "rofi -modi drun,run -show drun -show-icons")
     , ((modm .|. shiftMask, xK_d     ), spawn "~/.local/bin/d_kill")
 
     -- screenshot current workspace
@@ -295,13 +295,13 @@ main = do
         logHook = dynamicLogWithPP $ xmobarPP
                 -- the following variables beginning with 'pp' are settings for xmobar.
                 { ppOutput = hPutStrLn barpipe                          -- xmobar on monitor 1
-                , ppCurrent = xmobarColor "#d79921" "" . wrap "<box type=Bottom width=2 fn=3 mb=2 color=#d79921>" "</box>"         -- Current workspace
-                , ppVisible = xmobarColor "#d79921" ""                          -- Visible but not current workspace
-                , ppHidden = xmobarColor "#83a598" "" . wrap "<box type=Top width=2 mt=2 color=#83a598>" "</box>"  -- Hidden workspaces
-                , ppHiddenNoWindows = xmobarColor "#83a598" ""                  -- Hidden workspaces (no windows)
-                , ppTitle = xmobarColor "#b8bb26" "" . shorten 60               -- Title of active window
+                , ppCurrent = xmobarColor "#f1fa8c" "" . wrap "<box type=Bottom width=2 fn=3 mb=2 color=#f1fa8c>" "</box>"         -- Current workspace
+                , ppVisible = xmobarColor "#f1fa8c" ""                          -- Visible but not current workspace
+                , ppHidden = xmobarColor "#8be9fd" "" . wrap "<box type=Top width=2 mt=2 color=#8be9fd>" "</box>"  -- Hidden workspaces
+                , ppHiddenNoWindows = xmobarColor "#8be9fd" ""                  -- Hidden workspaces (no windows)
+                , ppTitle = xmobarColor "#50fa7b" "" . shorten 60               -- Title of active window
                 , ppSep =  "<fc=#666666> <fn=1>|</fn> </fc>"                    -- Separator character
-                , ppUrgent = xmobarColor "#d3869b" "" . wrap "!" "!"            -- Urgent workspace
+                , ppUrgent = xmobarColor "#ff79c6" "" . wrap "!" "!"            -- Urgent workspace
                 , ppExtras  = [windowCount]                                     -- # of windows current workspace
                 , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]                    -- order of things in xmobar
                 }

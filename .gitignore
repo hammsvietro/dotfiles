@@ -1,3 +1,5 @@
 .xmonad/*
 !.xmonad/xpm
 !.xmonad/xmonad.hs
+
+.local/share

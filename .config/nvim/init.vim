@@ -10,7 +10,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'alvan/vim-closetag'
   Plug 'rktjmp/lush.nvim'
-  Plug 'ellisonleao/gruvbox.nvim'
+  Plug 'Mofiqul/dracula.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
   Plug 'mxw/vim-jsx'
@@ -19,7 +19,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'elixir-editors/vim-elixir'
   Plug 'jiangmiao/auto-pairs'
   Plug 'akinsho/bufferline.nvim'
-  Plug 'famiu/feline.nvim'
+  Plug 'famiu/feline.nvim', {'commit': '4ef5e1516395eea731275e0f58b6bfba5c6ac9c1'}
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'mattn/emmet-vim'
 call plug#end()
