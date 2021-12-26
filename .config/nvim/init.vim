@@ -1,5 +1,4 @@
 let mapleader = "\<Space>"
-set termguicolors
 
 call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/popup.nvim'
@@ -13,17 +12,17 @@ call plug#begin('~/.vim/plugged')
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
+  Plug 'elixir-editors/vim-elixir'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'jiangmiao/auto-pairs'
   Plug 'akinsho/bufferline.nvim'
-  Plug 'famiu/feline.nvim', {'commit': '4ef5e1516395eea731275e0f58b6bfba5c6ac9c1'}
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'mattn/emmet-vim'
+  Plug 'vim-airline/vim-airline'
 call plug#end()
 
-lua require('feline_setup')
 lua require('treesitter_setup')
 lua require('bufferline_setup')
 lua require('colorizer_setup')

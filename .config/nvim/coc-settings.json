@@ -3,5 +3,19 @@
   "diagnostic.virtualTextCurrentLineOnly": false,
   "diagnostic.refreshOnInsertMode": true,
   "css.validate": false,
-  "tailwindCSS.headwind.runOnSave": false
+  "tailwindCSS.headwind.runOnSave": false,
+  "languageserver": {
+    "elixir": {
+      "command": "~/lsp/elixir-ls/language_server.sh",
+      "filetypes": ["elixir", "eelixir"],
+      "trace.server": "verbose",
+      "rootPatterns": ["mix.exs"],
+      "initializationOptions": {},
+      "settings": {
+        "elixirLS": {
+          "dialyzerEnabled": false
+        }
+      }
+    }
+  }
 }

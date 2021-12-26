@@ -228,6 +228,7 @@ myManageHook = composeAll
     , resource  =? "desktop_window" --> doIgnore
     , title =? "Mozilla Firefox"    --> doShift ( myWorkspaces !! 1 )
     , title =? "Discord"            --> doShift ( myWorkspaces !! 5 )
+    , title =? "Neovide"            --> doShift ( myWorkspaces !! 2 )
     , resource  =? "kdesktop"       --> doIgnore ]
 
 ------------------------------------------------------------------------
