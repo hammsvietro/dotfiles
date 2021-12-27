@@ -27,3 +27,6 @@ set cmdheight=2
 set updatetime=50
 
 set shortmess+=c
+
+let g:neovide_transparency=0.85
+set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h12
