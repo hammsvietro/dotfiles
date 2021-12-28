@@ -11,7 +11,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'rktjmp/lush.nvim'
   Plug 'dracula/vim', { 'as': 'dracula' }
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'elixir-lsp/coc-elixir', {'do': 'yarn install && yarn prepack'}
   Plug 'elixir-editors/vim-elixir'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
