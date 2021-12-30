@@ -18,6 +18,12 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 
+-- Layout
+import XMonad.Layout.Spiral
+import Data.Ratio
+import XMonad.Layout.Grid
+import XMonad.Layout.Spacing
+
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
@@ -42,6 +48,14 @@ myBorderWidth   = 2
 --
 myModMask       = mod4Mask
 
+
+decGap = do
+  decWindowSpacing 4 
+  decScreenSpacing 4
+
+incGap = do
+  incWindowSpacing 4 
+  incScreenSpacing 4
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -118,6 +132,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
+    , ((modm .|.   controlMask, xK_h), decGap)
+    , ((modm .|.   controlMask, xK_l), incGap)
+    , ((modm .|.   controlMask, xK_l), incGap)
+
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
@@ -182,11 +200,18 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
---
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+
+border = (Border 4 4 4 4)
+myLayout = avoidStruts $ spacingRaw True border True border True $ layoutTall ||| layoutSpiral ||| layoutGrid ||| layoutMirror ||| layoutFull
+
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
+     layoutTall = Tall 1 (3/100) (1/2)
+     layoutSpiral = spiral (125 % 146)
+     layoutGrid = Grid
+     layoutMirror = Mirror (Tall 1 (3/100) (3/5))
+     layoutFull = Full
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -261,7 +286,7 @@ myManageHook = composeAll
 myStartupHook = do
   spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --pos 0x0 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 2560x0 --rotate normal --output DP-1 --off &"
   spawnOnce "picom &"
-  spawn "/usr/bin/feh --bg-fill ~/wallpapers/current.jpg &"
+  spawn "/usr/bin/feh --bg-fill ~/wallpapers/arch.png &"
   setWMName "LG3D"
 
 
