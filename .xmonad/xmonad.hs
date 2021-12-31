@@ -132,9 +132,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Deincrement the number of windows in the master area
     , ((modm              , xK_period), sendMessage (IncMasterN (-1)))
 
-    , ((modm .|.   controlMask, xK_h), decGap)
-    , ((modm .|.   controlMask, xK_l), incGap)
-    , ((modm .|.   controlMask, xK_l), incGap)
+    , ((modm .|.   controlMask, xK_l), decGap)
+    , ((modm .|.   controlMask, xK_h), incGap)
+    , ((modm .|.   controlMask, xK_b), sendMessage $ ModifySmartBorder (\x -> not x))
 
     -- Toggle the status bar gap
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
@@ -202,7 +202,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- which denotes layout choice.
 
 border = (Border 4 4 4 4)
-myLayout = avoidStruts $ spacingRaw True border True border True $ layoutTall ||| layoutSpiral ||| layoutGrid ||| layoutMirror ||| layoutFull
+myLayout = avoidStruts $ spacingRaw False border True border True $ layoutTall ||| layoutSpiral ||| layoutGrid ||| layoutMirror ||| layoutFull
 
   where
      -- default tiling algorithm partitions the screen into two panes
