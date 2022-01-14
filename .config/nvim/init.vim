@@ -20,7 +20,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'mattn/emmet-vim'
   Plug 'vim-airline/vim-airline'
-call plug#end()
+  call plug#end()
 
 lua require('treesitter_setup')
 lua require('bufferline_setup')
