@@ -1,5 +1,6 @@
 
 set tabstop=2 softtabstop=2
+set shiftwidth=2
 set encoding=utf-8
 set shiftwidth=2
 set expandtab

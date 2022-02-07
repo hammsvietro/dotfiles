@@ -84,3 +84,5 @@ fi
 
 
 shopt -s extglob
+set -o emacs
+. "$HOME/.cargo/env"
