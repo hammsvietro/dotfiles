@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'alvan/vim-closetag'
   Plug 'rktjmp/lush.nvim'
-  Plug 'dracula/vim', { 'as': 'dracula' }
+  Plug 'morhetz/gruvbox'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'elixir-editors/vim-elixir'
   Plug 'mxw/vim-jsx'

@@ -250,10 +250,11 @@ myWorkspaces    = ["supp", "www", "code", "term", "mus", "chat"] ++ map show [7.
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "hl_linux"       --> doFloat
     , resource  =? "desktop_window" --> doIgnore
+    , className =? "Spotify"        --> doShift ( myWorkspaces !! 4 )
     , title =? "Mozilla Firefox"    --> doShift ( myWorkspaces !! 1 )
     , title =? "Discord"            --> doShift ( myWorkspaces !! 5 )
-    , title =? "Spotify"            --> doShift ( myWorkspaces !! 4 )
     , title =? "Neovide"            --> doShift ( myWorkspaces !! 2 )
     , resource  =? "kdesktop"       --> doIgnore ]
 

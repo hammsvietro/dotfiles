@@ -50,3 +50,5 @@ nnoremap <leader>n :NvimTreeFindFile<CR>c
 " window moving
 nnoremap <silent><C-h> <C-w>h
 nnoremap <silent><C-l> <C-w>l
+nnoremap <silent><C-j> <C-w>j
+nnoremap <silent><C-k> <C-w>k

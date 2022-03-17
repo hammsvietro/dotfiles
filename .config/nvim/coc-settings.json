@@ -1,6 +1,8 @@
 {
   "diagnostic.refreshOnInsertMode": true,
   "css.validate": false,
+  "diagnostic.enable": true,
+  "diagnostic.virtualText": true,
   "tailwindCSS.headwind.runOnSave": false,
   "languageserver": {
     "elixir": {
