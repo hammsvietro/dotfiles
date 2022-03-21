@@ -36,6 +36,8 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
+nnoremap <silent>Y y$
+
 " telescope
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -48,7 +50,7 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>c
 
 " window moving
-nnoremap <silent><C-h> <C-w>h
-nnoremap <silent><C-l> <C-w>l
-nnoremap <silent><C-j> <C-w>j
-nnoremap <silent><C-k> <C-w>k
+nnoremap <silent><C-h> <C-w>h " move to left split
+nnoremap <silent><C-l> <C-w>l " move to right split
+nnoremap <silent><C-j> <C-w>j " move to bottom split
+nnoremap <silent><C-k> <C-w>k " move to top split

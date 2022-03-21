@@ -288,6 +288,7 @@ myManageHook = composeAll
 myStartupHook = do
   spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --pos 0x0 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 2560x0 --rotate normal --output DP-1 --off &"
   spawnOnce "picom &"
+  spawnOnce "xscreensaver -no-splash &"
   spawn "/usr/bin/feh --bg-fill ~/wallpapers/city.png &"
   setWMName "LG3D"
 
@@ -299,7 +300,8 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-  barpipe <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
+  barpipe0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
+  barpipe1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/xmobarrc"
   xmonad $ docks $ ewmh $ def {
       -- simple stuff
         terminal           = myTerminal,
@@ -322,7 +324,10 @@ main = do
         startupHook        = myStartupHook,
         logHook = dynamicLogWithPP $ xmobarPP
                 -- the following variables beginning with 'pp' are settings for xmobar.
-                { ppOutput = hPutStrLn barpipe                          -- xmobar on monitor 1
+                { ppOutput = \x ->
+                  hPutStrLn barpipe0 x                          -- xmobar on monitor 1
+                  >> hPutStrLn barpipe1 x                          -- xmobar on monitor 2
+
                 , ppCurrent = xmobarColor "#f1fa8c" "" . wrap "<box type=Bottom width=2 fn=3 mb=2 color=#f1fa8c>" "</box>"         -- Current workspace
                 , ppVisible = xmobarColor "#f1fa8c" ""                          -- Visible but not current workspace
                 , ppHidden = xmobarColor "#8be9fd" "" . wrap "<box type=Top width=2 mt=2 color=#8be9fd>" "</box>"  -- Hidden workspaces
