@@ -9,7 +9,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'alvan/vim-closetag'
   Plug 'rktjmp/lush.nvim'
-  Plug 'morhetz/gruvbox'
+  Plug 'joshdick/onedark.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'elixir-editors/vim-elixir'
   Plug 'mxw/vim-jsx'
@@ -20,7 +20,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'mattn/emmet-vim'
   Plug 'vim-airline/vim-airline'
-  call plug#end()
+  Plug 'neovimhaskell/haskell-vim'
+call plug#end()
 
 lua require('treesitter_setup')
 lua require('bufferline_setup')

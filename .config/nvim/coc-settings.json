@@ -1,9 +1,29 @@
 {
   "diagnostic.refreshOnInsertMode": true,
+  "diagnostic.checkCurrentLine": true,
   "css.validate": false,
   "diagnostic.enable": true,
   "tailwindCSS.headwind.runOnSave": false,
+
   "languageserver": {
+    "haskell": {
+      "command": "haskell-language-server-wrapper",
+      "args": [
+        "--lsp"
+      ],
+      "rootPatterns": [
+        ".stack.yaml",
+        ".hie-bios",
+        "BUILD.bazel",
+        "cabal.config",
+        "package.yaml"
+      ],
+      "filetypes": [
+        "hs",
+        "lhs",
+        "haskell"
+      ]
+    },
     "elixir": {
       "command": "~/lsp/elixir-ls/language_server.sh",
       "filetypes": ["elixir", "eelixir"],
