@@ -21,6 +21,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mattn/emmet-vim'
   Plug 'vim-airline/vim-airline'
   Plug 'neovimhaskell/haskell-vim'
+  Plug 'tpope/vim-surround'
 call plug#end()
 
 lua require('treesitter_setup')
