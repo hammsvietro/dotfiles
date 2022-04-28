@@ -19,6 +19,7 @@ set scrolloff=8
 set colorcolumn=90
 set signcolumn=yes
 set mouse=a
+set autoread
 
 
 set cmdheight=2

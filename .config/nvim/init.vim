@@ -22,10 +22,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'vim-airline/vim-airline'
   Plug 'neovimhaskell/haskell-vim'
   Plug 'tpope/vim-surround'
+  Plug 'TimUntersberger/neogit'
 call plug#end()
 
 lua require('treesitter_setup')
 lua require('bufferline_setup')
 lua require('colorizer_setup')
 lua require('nvim_tree_setup')
+lua require('neogit_setup')
 

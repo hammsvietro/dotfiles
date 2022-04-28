@@ -4,7 +4,8 @@
   "css.validate": false,
   "diagnostic.enable": true,
   "tailwindCSS.headwind.runOnSave": false,
-
+  "python.linting.enabled": true,
+  "python.linting.mypyEnabled": true,
   "languageserver": {
     "haskell": {
       "command": "haskell-language-server-wrapper",
