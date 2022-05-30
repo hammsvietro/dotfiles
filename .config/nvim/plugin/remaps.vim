@@ -29,14 +29,14 @@ nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
 " Open atuocomplete
+
 inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <C-@> coc#refresh()
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-
-
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 nnoremap <silent>Y y$
 
