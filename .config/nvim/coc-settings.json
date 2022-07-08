@@ -7,24 +7,6 @@
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "languageserver": {
-    "haskell": {
-      "command": "haskell-language-server-wrapper",
-      "args": [
-        "--lsp"
-      ],
-      "rootPatterns": [
-        ".stack.yaml",
-        ".hie-bios",
-        "BUILD.bazel",
-        "cabal.config",
-        "package.yaml"
-      ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ]
-    },
     "elixir": {
       "command": "~/lsp/elixir-ls/language_server.sh",
       "filetypes": ["elixir", "eelixir"],

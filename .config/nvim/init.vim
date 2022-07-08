@@ -10,6 +10,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'alvan/vim-closetag'
   Plug 'rktjmp/lush.nvim'
   Plug 'joshdick/onedark.vim'
+  Plug 'morhetz/gruvbox'
+  Plug 'drewtempelmeyer/palenight.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'elixir-editors/vim-elixir'
   Plug 'mxw/vim-jsx'
@@ -23,7 +25,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'neovimhaskell/haskell-vim'
   Plug 'tpope/vim-surround'
   Plug 'TimUntersberger/neogit'
-call plug#end()
+  Plug 'dart-lang/dart-vim-plugin'
+  Plug 'thosakwe/vim-flutter'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+  call plug#end()
 
 lua require('treesitter_setup')
 lua require('bufferline_setup')

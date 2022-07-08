@@ -28,5 +28,5 @@ set updatetime=50
 
 set shortmess+=c
 
-let g:neovide_transparency=0.92
-set guifont=FiraCode\ Nerd\ Font:h17
+let g:neovide_transparency=0.8
+set guifont=FiraCode\ Nerd\ Font:h15
