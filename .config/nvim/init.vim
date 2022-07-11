@@ -28,6 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'dart-lang/dart-vim-plugin'
   Plug 'thosakwe/vim-flutter'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+  Plug 'tpope/vim-commentary'
   call plug#end()
 
 lua require('treesitter_setup')
