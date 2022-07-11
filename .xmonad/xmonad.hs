@@ -286,10 +286,10 @@ myManageHook = composeAll
 --
 -- By default, do nothing.
 myStartupHook = do
-  spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --pos 0x0 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 2560x0 --rotate normal --output DP-1 --off &"
+  spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --pos 1920x0 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off &"
   spawnOnce "picom --experimental-backends &"
   spawnOnce "xscreensaver -no-splash &"
-  spawn "/usr/bin/feh --bg-fill ~/wallpapers/vim.jpg &"
+  spawn "/usr/bin/feh --bg-fill ~/terra.jpg &"
   setWMName "LG3D"
 
 
@@ -302,7 +302,7 @@ myStartupHook = do
 main = do
   barpipe0 <- spawnPipe "xmobar -x 0 ~/.config/xmobar/xmobarrc"
   barpipe1 <- spawnPipe "xmobar -x 1 ~/.config/xmobar/xmobarrc"
-  xmonad $ docks $ ewmh $ def {
+  xmonad $ docks $ ewmh $ ewmhFullscreen $ def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
@@ -320,7 +320,6 @@ main = do
       -- hooks, layouts
         layoutHook         = avoidStruts myLayout,
         manageHook         = myManageHook <+> manageDocks <+> composeOne [isFullscreen -?> doFullFloat],
-        handleEventHook    = docksEventHook <+> handleEventHook def <+> fullscreenEventHook,
         startupHook        = myStartupHook,
         logHook = dynamicLogWithPP $ xmobarPP
                 -- the following variables beginning with 'pp' are settings for xmobar.
