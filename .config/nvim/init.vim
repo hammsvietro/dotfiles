@@ -3,6 +3,7 @@ let mapleader = "\<Space>"
 call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'sindrets/diffview.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'kyazdani42/nvim-web-devicons' " for file icons
   Plug 'kyazdani42/nvim-tree.lua'
