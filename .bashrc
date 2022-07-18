@@ -57,12 +57,13 @@ function parse_git_dirty {
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-alias ls='ls --color=auto'
+alias ls='ls -h --color=auto'
 alias xclipboard='xclip -selection clipboard'
 PS1="\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]@\[\033[0;34m\]\h'; fi)\[\033[0;37m\]]\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]] \[\e[35m\]\`parse_git_branch\`\[\e[m\] \n\[\033[0;37m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]"
 
 force_color_prompt=yes
 source ~/.local/share/icons-in-terminal/icons_bash.sh
+source ~/.env_secrets
 
 
 # node / NPM
@@ -72,6 +73,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # Java
 export CATALINA_HOME="~/programs/tomcat"
+
+# Android
+export ANDROID_SDK_ROOT="/home/hammsvietro/Android/Sdk"
+
+alias emulator="~/Android/Sdk/emulator/emulator" 
 
 ### PATH
 if [ -d "$HOME/.bin" ] ;
