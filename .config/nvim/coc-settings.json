@@ -1,6 +1,8 @@
 {
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.checkCurrentLine": true,
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false,
   "css.validate": false,
   "diagnostic.enable": true,
   "tailwindCSS.headwind.runOnSave": false,

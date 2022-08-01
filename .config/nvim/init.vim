@@ -5,14 +5,12 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'sindrets/diffview.nvim'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'kyazdani42/nvim-web-devicons' " for file icons
+  Plug 'kyazdani42/nvim-web-devicons'
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'alvan/vim-closetag'
   Plug 'rktjmp/lush.nvim'
-  Plug 'joshdick/onedark.vim'
   Plug 'morhetz/gruvbox'
-  Plug 'drewtempelmeyer/palenight.vim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'elixir-editors/vim-elixir'
   Plug 'mxw/vim-jsx'
@@ -30,6 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'thosakwe/vim-flutter'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
   Plug 'tpope/vim-commentary'
+  Plug 'EdenEast/nightfox.nvim' " Vim-Plug
   call plug#end()
 
 lua require('treesitter_setup')

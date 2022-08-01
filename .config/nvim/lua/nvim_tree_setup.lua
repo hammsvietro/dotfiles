@@ -1,4 +1,30 @@
-require'nvim-tree'.setup()
+require'nvim-tree'.setup({
+  filters = {
+    dotfiles = false,
+  },
+  filesystem_watchers = {
+    enable = true,
+  },
+  view = {
+    adaptive_size = true,
+    side = "left",
+    width = 25,
+  },
+  renderer = {
+    indent_markers = {
+      enable = true,
+      inline_arrows = true,
+      root_folder_modifier = ":~",
+      icons = {
+        corner = "└",
+        edge = "│",
+        item = "│",
+        none = " ",
+      },
+    },
+  },    
+})
+
 vim.cmd([[
 
 let g:nvim_tree_icons = {
@@ -23,11 +49,5 @@ let g:nvim_tree_icons = {
     \   'symlink': "",
     \   'symlink_open': "",
     \   },
-    \   'lsp': {
-    \     'hint': "",
-    \     'info': "",
-    \     'warning': "",
-    \     'error': "",
-    \   }
     \ }
 ]])
