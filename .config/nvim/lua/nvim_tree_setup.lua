@@ -6,7 +6,6 @@ require'nvim-tree'.setup({
     enable = true,
   },
   view = {
-    adaptive_size = true,
     side = "left",
     width = 25,
   },
@@ -14,7 +13,6 @@ require'nvim-tree'.setup({
     indent_markers = {
       enable = true,
       inline_arrows = true,
-      root_folder_modifier = ":~",
       icons = {
         corner = "└",
         edge = "│",

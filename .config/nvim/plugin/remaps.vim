@@ -2,6 +2,7 @@
 nnoremap <silent><Tab> :BufferLineCycleNext<CR>
 nnoremap <silent><S-Tab> :BufferLineCyclePrev<CR>
 nnoremap <silent><leader>x :bd<CR> :bprevious<CR>
+nnoremap <silent> gb :BufferLinePick<CR>
 
 
 " coc setting

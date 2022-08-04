@@ -12,7 +12,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'rktjmp/lush.nvim'
   Plug 'morhetz/gruvbox'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'elixir-editors/vim-elixir'
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -28,7 +27,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'thosakwe/vim-flutter'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
   Plug 'tpope/vim-commentary'
-  Plug 'EdenEast/nightfox.nvim' " Vim-Plug
   call plug#end()
 
 lua require('treesitter_setup')
@@ -36,4 +34,5 @@ lua require('bufferline_setup')
 lua require('colorizer_setup')
 lua require('nvim_tree_setup')
 lua require('neogit_setup')
+
 

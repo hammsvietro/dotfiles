@@ -1,16 +1,13 @@
 {
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.checkCurrentLine": true,
-  "diagnostic.virtualText": true,
-  "diagnostic.virtualTextCurrentLineOnly": false,
   "css.validate": false,
   "diagnostic.enable": true,
-  "tailwindCSS.headwind.runOnSave": false,
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
-  "languageserver": {
+ "languageserver": {
     "elixir": {
-      "command": "~/lsp/elixir-ls/language_server.sh",
+      "command": "/home/hammsvietro/lsp/elixir-ls/language_server.sh",
       "filetypes": ["elixir", "eelixir"],
       "trace.server": "verbose",
       "rootPatterns": ["mix.exs"],
