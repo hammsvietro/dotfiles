@@ -35,6 +35,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 inoremap <silent><expr> <C-@> coc#refresh()
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -73,3 +75,10 @@ nnoremap <silent><C-h> <C-w>h " move to left split
 nnoremap <silent><C-l> <C-w>l " move to right split
 nnoremap <silent><C-j> <C-w>j " move to bottom split
 nnoremap <silent><C-k> <C-w>k " move to top split
+
+" vim toggleterm
+autocmd TermEnter term://*toggleterm#*
+      \ tnoremap <silent><A-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+
+nnoremap <silent><A-t> <Cmd>exe v:count1 . "ToggleTerm"<CR>
+inoremap <silent><A-t> <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>

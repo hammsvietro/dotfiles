@@ -27,12 +27,13 @@ call plug#begin('~/.vim/plugged')
   Plug 'thosakwe/vim-flutter'
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
   Plug 'tpope/vim-commentary'
-  call plug#end()
+  Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.*'}
+call plug#end()
 
 lua require('treesitter_setup')
 lua require('bufferline_setup')
 lua require('colorizer_setup')
 lua require('nvim_tree_setup')
 lua require('neogit_setup')
-
+lua require('terminal_setup')
 
