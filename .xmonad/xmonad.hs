@@ -19,10 +19,12 @@ import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.SetWMName
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.DynamicProperty
 
 -- Layout
 import XMonad.Layout.Spiral
 import Data.Ratio
+import Data.Semigroup
 import XMonad.Layout.Grid
 import XMonad.Layout.Spacing
 
@@ -233,7 +235,7 @@ myLayout = avoidStruts $ spacingRaw False border True border True $ layoutTall |
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["supp", "www", "code", "term", "mus", "chat"] ++ map show [7..9]
+myWorkspaces = ["sup", "web", "code", "term", "mus", "chat", "org", "game", "movie"]
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
 -- a new window. You can use this to, for example, always float a
@@ -252,11 +254,17 @@ myManageHook = composeAll
     , className =? "Gimp"           --> doFloat
     , className =? "hl_linux"       --> doFloat
     , resource  =? "desktop_window" --> doIgnore
-    , className =? "Spotify"        --> doShift ( myWorkspaces !! 4 )
+    , className =? "Google-chrome"  --> doShift ( myWorkspaces !! 0 )
     , title =? "Mozilla Firefox"    --> doShift ( myWorkspaces !! 1 )
-    , title =? "Discord"            --> doShift ( myWorkspaces !! 5 )
     , title =? "Neovide"            --> doShift ( myWorkspaces !! 2 )
+    , className =? "Spotify"        --> doShift ( myWorkspaces !! 4 )
+    , title =? "Discord"            --> doShift ( myWorkspaces !! 5 )
+    , className =? "notion-app"     --> doShift ( myWorkspaces !! 6 )
+    , className =? "Steam"          --> doShift ( myWorkspaces !! 7 )
+    , className =? "Stremio"        --> doShift ( myWorkspaces !! 8 )
     , resource  =? "kdesktop"       --> doIgnore ]
+
+myHandleEventHook = dynamicPropertyChange "WM_NAME" myManageHook
 
 ------------------------------------------------------------------------
 -- Event handling
@@ -289,7 +297,7 @@ myStartupHook = do
   spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --pos 1920x0 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off &"
   spawnOnce "picom --experimental-backends &"
   spawnOnce "xscreensaver -no-splash &"
-  spawn "/usr/bin/feh --bg-fill ~/terra.jpg &"
+  spawn "/usr/bin/feh --bg-fill ~/wallpapers/current.jpg &"
   setWMName "LG3D"
 
 
@@ -320,6 +328,7 @@ main = do
       -- hooks, layouts
         layoutHook         = avoidStruts myLayout,
         manageHook         = myManageHook <+> manageDocks <+> composeOne [isFullscreen -?> doFullFloat],
+        handleEventHook    = myHandleEventHook,
         startupHook        = myStartupHook,
         logHook = dynamicLogWithPP $ xmobarPP
                 -- the following variables beginning with 'pp' are settings for xmobar.

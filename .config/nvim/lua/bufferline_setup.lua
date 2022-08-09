@@ -7,7 +7,7 @@
       left_trunc_marker = '',
       right_trunc_marker = '',
       color_icons = true,
-      numbers = "buffer_id",
+      -- numbers = "buffer_id",
       tab_size = 18,
       max_name_length = 22,
       close_command = "bdelete! %d",

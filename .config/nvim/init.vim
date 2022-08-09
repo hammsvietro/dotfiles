@@ -28,6 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
   Plug 'tpope/vim-commentary'
   Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.*'}
+  Plug 'bluz71/vim-moonfly-colors'
 call plug#end()
 
 lua require('treesitter_setup')

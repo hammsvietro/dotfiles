@@ -90,5 +90,8 @@ fi
 
 
 shopt -s extglob
-set -o emacs
+set -o vi
 . "$HOME/.cargo/env"
+
+
+alias make_etc="make format && make lint && make test"
