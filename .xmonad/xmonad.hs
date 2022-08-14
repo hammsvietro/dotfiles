@@ -264,7 +264,11 @@ myManageHook = composeAll
     , className =? "Stremio"        --> doShift ( myWorkspaces !! 8 )
     , resource  =? "kdesktop"       --> doIgnore ]
 
-myHandleEventHook = dynamicPropertyChange "WM_NAME" myManageHook
+myHandleEventHook = dynamicPropertyChange "WM_NAME" $ composeAll 
+  [ className =? "Spotify"        --> doShift ( myWorkspaces !! 4 )
+  , title =? "Discord"            --> doShift ( myWorkspaces !! 5 )
+  , className =? "Steam"          --> doShift ( myWorkspaces !! 7 )
+  , className =? "Stremio"        --> doShift ( myWorkspaces !! 8 )]
 
 ------------------------------------------------------------------------
 -- Event handling

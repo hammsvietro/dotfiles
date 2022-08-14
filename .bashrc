@@ -63,7 +63,6 @@ PS1="\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0
 
 force_color_prompt=yes
 source ~/.local/share/icons-in-terminal/icons_bash.sh
-source ~/.env_secrets
 
 
 # node / NPM
@@ -90,7 +89,7 @@ fi
 
 
 shopt -s extglob
-set -o vi
+set -o emacs
 . "$HOME/.cargo/env"
 
 
