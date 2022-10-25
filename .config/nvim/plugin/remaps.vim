@@ -32,6 +32,7 @@ nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
 " Open atuocomplete
 
 inoremap <silent><expr> <c-space> coc#refresh()
+inoremap <silent><expr> <c-Space> coc#refresh()
 inoremap <silent><expr> <C-@> coc#refresh()
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>

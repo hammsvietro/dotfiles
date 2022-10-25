@@ -16,7 +16,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'pangloss/vim-javascript'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'jiangmiao/auto-pairs'
-  Plug 'akinsho/bufferline.nvim'
+  Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'mattn/emmet-vim'
   Plug 'vim-airline/vim-airline'
