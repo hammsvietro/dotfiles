@@ -72,10 +72,15 @@ nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>c
 
 " window moving
-nnoremap <silent><C-h> <C-w>h " move to left split
-nnoremap <silent><C-l> <C-w>l " move to right split
-nnoremap <silent><C-j> <C-w>j " move to bottom split
-nnoremap <silent><C-k> <C-w>k " move to top split
+
+" move to left split
+nnoremap <silent><C-h> <C-w>h
+" move to right split
+nnoremap <silent><C-l> <C-w>l
+" move to bottom split
+nnoremap <silent><C-j> <C-w>j
+" move to top split
+nnoremap <silent><C-k> <C-w>k
 
 " vim toggleterm
 autocmd TermEnter term://*toggleterm#*
