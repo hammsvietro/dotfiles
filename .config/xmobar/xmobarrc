@@ -35,12 +35,12 @@ Config { font            = "xft:MesloLGS Nerd Font:regular:size=10"
                         -- Check for pacman updates (script found in .local/bin)
                     , Run Com ".local/bin/pacupdate" [] "pacupdate" 3600
                         -- Time and date
-                    , Run Date "<fn=2>\xf017</fn> %b %d %Y-(%H:%M)" "date" 50
+                    , Run Date " <fn=2>\xf017</fn> %d %b %Y-(%H:%M) " "date" 50
                         -- Prints out the left side items such as workspaces, layout, etc.
                     ,  Run StdinReader
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=knight.xpm/>   %StdinReader% }{  <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`>%cpu%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`>%memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`>%disku%</action></fc></box> <box type=Bottom width=2 mb=2 color=#bd93f9><fc=#bd93f9>%bell% <action=`alacritty -e sudo pacman -Syu`>%pacupdate% </action></fc></box> <box type=Bottom width=2 mb=2 color=#bd93f9><fc=#bd93f9>%penguin%<action=`alacritty -e htop`> %kernel%</action></fc></box> <box type=Bottom width=2 mb=2 color=#ffb86c><fc=#ffb86c>%uparrow%<action=`alacritty -e htop`> %uptime%</action></fc></box> <box type=Bottom width=2 mb=2 color=#ffb86c><fc=#ffb86c><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>"
+       , template = " <icon=knight.xpm/>   %StdinReader% }{  <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %cpu%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %disku%</action></fc></box> <box type=Bottom width=2 mb=2 color=#bd93f9><fc=#bd93f9> %bell% <action=`alacritty -e sudo pacman -Syu`>%pacupdate% </action></fc></box> <box type=Bottom width=2 mb=2 color=#bd93f9><fc=#bd93f9> %penguin%<action=`alacritty -e htop`> %kernel%</action></fc></box> <box type=Bottom width=2 mb=2 color=#ffb86c><fc=#ffb86c> %uparrow%<action=`alacritty -e htop`> %uptime%</action></fc></box> <box type=Bottom width=2 mb=2 color=#ffb86c><fc=#ffb86c><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>"
      }
