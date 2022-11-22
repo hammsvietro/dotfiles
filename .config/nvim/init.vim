@@ -28,7 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'elixir-editors/vim-elixir'
   Plug 'jvirtanen/vim-hcl'
-  Plug 'folke/tokyonight.nvim'
+  Plug 'navarasu/onedark.nvim'
 call plug#end()
 
 lua require('treesitter_setup')
