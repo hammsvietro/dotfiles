@@ -145,17 +145,20 @@ laptopPp = do
   pipe <- spawnPipe "xmobar -x 0 ~/.config/xmobar/laptopxmobarrc"
   return (\x -> hPutStrLn pipe x)
 
-
-getBarPipes = do
+getIsDesktop = do
   isDesktop <- lookupEnv "IS_DESKTOP"
-  return (case ( fromMaybe "0" isDesktop ) == "1" of
+  return ((fromMaybe "0" isDesktop) == "1")
+
+getBarPipes isDesktop = do
+  return (case  isDesktop of
       True -> desktopPp
       False -> laptopPp
    )
 
 
 main = do
-  barPipesFn <- getBarPipes
+  isDesktop <- getIsDesktop
+  barPipesFn <- getBarPipes isDesktop
   barPipes <- barPipesFn
   xmonad $ docks $ ewmh $ ewmhFullscreen $ def {
       -- simple stuff
@@ -176,6 +179,6 @@ main = do
         layoutHook         = avoidStruts myLayout,
         manageHook         = myManageHook <+> manageDocks <+> composeOne [isFullscreen -?> doFullFloat],
         handleEventHook    = myHandleEventHook,
-        startupHook        = myStartupHook,
+        startupHook        = myStartupHook isDesktop,
         logHook            = myLogHook barPipes
     }
