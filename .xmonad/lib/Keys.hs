@@ -27,6 +27,7 @@ module Keys (
   import Data.Semigroup
   import XMonad.Layout.Grid
   import XMonad.Layout.Spacing
+  import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 
   import Layout
   import StartupHook
@@ -116,6 +117,7 @@ module Keys (
 
       -- Increment the number of windows in the master area
       , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
+      , ((modm              , xK_f     ), sendMessage (Toggle "Full"))
 
       -- Deincrement the number of windows in the master area
       , ((modm              , xK_period), sendMessage (IncMasterN (-1)))

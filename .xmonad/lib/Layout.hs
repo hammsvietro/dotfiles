@@ -17,10 +17,12 @@ module Layout (myLayout) where
   import Data.Semigroup
   import XMonad.Layout.Grid
   import XMonad.Layout.Spacing
+  import XMonad.Layout.NoBorders (noBorders, smartBorders)
+  import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 
 
   border = (Border 4 4 4 4)
-  myLayout = spacingRaw False border True border True $ layoutTall ||| layoutSpiral ||| layoutGrid ||| layoutMirror ||| layoutFull
+  myLayout = toggleLayouts (noBorders Full) (spacingRaw False border True border True $ layoutTall ||| layoutSpiral ||| layoutGrid ||| layoutMirror ||| layoutFull)
 
     where
        -- default tiling algorithm partitions the screen into two panes
