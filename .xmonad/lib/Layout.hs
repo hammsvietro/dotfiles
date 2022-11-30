@@ -22,7 +22,7 @@ module Layout (myLayout) where
 
 
   border = (Border 4 4 4 4)
-  myLayout = toggleLayouts (noBorders Full) (spacingRaw False border True border True $ layoutTall ||| layoutSpiral ||| layoutGrid ||| layoutMirror ||| layoutFull)
+  myLayout = smartBorders $ toggleLayouts (noBorders Full) (spacingRaw False border True border True $ layoutTall ||| layoutSpiral ||| layoutGrid ||| layoutMirror ||| layoutFull)
 
     where
        -- default tiling algorithm partitions the screen into two panes
