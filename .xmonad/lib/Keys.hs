@@ -29,9 +29,18 @@ module Keys (
   import XMonad.Layout.Spacing
   import XMonad.Layout.ToggleLayouts (ToggleLayout(..), toggleLayouts)
 
+  import XMonad.Operations
+  import qualified XMonad.StackSet as W
+
   import Layout
   import StartupHook
 
+
+  centerWindow :: Window -> X ()
+  centerWindow win = do
+    (_, W.RationalRect x y w h) <- floatLocation win
+    windows $ W.float win (W.RationalRect ((1 - w) / 2) ((1 - h) / 2) w h)
+    return ()
 
   -- modMask lets you specify which modkey you want to use. The default
   -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -114,6 +123,10 @@ module Keys (
 
       -- Push window back into tiling
       , ((modm,               xK_t     ), withFocused $ windows . W.sink)
+
+      -- Center focused window
+      , (( modm,              xK_c     ), withFocused centerWindow)
+
 
       -- Increment the number of windows in the master area
       , ((modm              , xK_comma ), sendMessage (IncMasterN 1))
