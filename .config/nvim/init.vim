@@ -28,7 +28,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'elixir-editors/vim-elixir'
   Plug 'jvirtanen/vim-hcl'
-  Plug 'navarasu/onedark.nvim'
+  Plug 'nyoom-engineering/oxocarbon.nvim'
   Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
 
