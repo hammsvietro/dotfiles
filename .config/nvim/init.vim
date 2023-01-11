@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'jiangmiao/auto-pairs'
+  Plug 'm4xshen/autoclose.nvim'
   Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
   Plug 'norcalli/nvim-colorizer.lua'
   Plug 'mattn/emmet-vim'
@@ -28,7 +28,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-commentary'
   Plug 'elixir-editors/vim-elixir'
   Plug 'jvirtanen/vim-hcl'
-  Plug 'rebelot/kanagawa.nvim'
   Plug 'lukas-reineke/indent-blankline.nvim'
 call plug#end()
 
@@ -38,4 +37,4 @@ lua require('colorizer_setup')
 lua require('nvim_tree_setup')
 lua require('neogit_setup')
 lua require('lualine_setup')
-
+lua require('autoclose_setup')
