@@ -29,6 +29,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'elixir-editors/vim-elixir'
   Plug 'jvirtanen/vim-hcl'
   Plug 'lukas-reineke/indent-blankline.nvim'
+  Plug 'f-person/git-blame.nvim'
 call plug#end()
 
 lua require('treesitter_setup')
