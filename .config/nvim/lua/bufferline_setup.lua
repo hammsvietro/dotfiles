@@ -1,6 +1,17 @@
  require('bufferline').setup {
     options = {
-      indicator_icon = '▎',
+      offsets = {
+          {
+              filetype = "NvimTree",
+              text = "File Explorer",
+              highlight = "Directory",
+              separator = true -- use a "true" to enable the default, or set your own character
+          }
+      },
+      indicator = {
+        style = 'icon',
+        icon = '▎'
+      },
       buffer_close_icon = '',
       modified_icon = '●',
       close_icon = '',
