@@ -6,6 +6,7 @@ set smartindent
 set guicursor=
 set relativenumber
 set nu
+set smartcase
 set nohlsearch
 set hidden
 set noerrorbells
