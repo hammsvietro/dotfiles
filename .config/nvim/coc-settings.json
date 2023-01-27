@@ -1,18 +1,24 @@
 {
+  "coc.preferences.formatOnSave": true,
+  "html.format.enable": false,
   "diagnostic.refreshOnInsertMode": true,
   "diagnostic.checkCurrentLine": true,
   "css.validate": false,
   "diagnostic.enable": true,
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
-  "python.jediEnabled": false,
   "python.formatting.provider": "black",
   "languageserver": {
     "elixir": {
       "command": "~/lsp/elixir-ls/language_server.sh",
-      "filetypes": ["elixir", "eelixir"],
+      "filetypes": [
+        "elixir",
+        "eelixir"
+      ],
       "trace.server": "verbose",
-      "rootPatterns": ["mix.exs"],
+      "rootPatterns": [
+        "mix.exs"
+      ],
       "initializationOptions": {},
       "settings": {
         "elixirLS": {

@@ -27,6 +27,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
   Plug 'tpope/vim-commentary'
   Plug 'elixir-editors/vim-elixir'
+  Plug 'mhinz/vim-mix-format'
   Plug 'jvirtanen/vim-hcl'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'f-person/git-blame.nvim'
