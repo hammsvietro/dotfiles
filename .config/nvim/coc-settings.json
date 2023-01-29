@@ -8,6 +8,7 @@
   "python.linting.enabled": true,
   "python.linting.mypyEnabled": true,
   "python.formatting.provider": "black",
+  "rust-analyzer.cargo.features": "all",
   "languageserver": {
     "elixir": {
       "command": "~/lsp/elixir-ls/language_server.sh",

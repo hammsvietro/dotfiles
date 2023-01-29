@@ -1,5 +1,4 @@
 let mapleader = "\<Space>"
-
 call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/popup.nvim'
   Plug 'nvim-lua/plenary.nvim'
@@ -31,6 +30,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'jvirtanen/vim-hcl'
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'f-person/git-blame.nvim'
+  Plug 'folke/todo-comments.nvim'
 call plug#end()
 
 lua require('treesitter_setup')
@@ -40,3 +40,5 @@ lua require('nvim_tree_setup')
 lua require('neogit_setup')
 lua require('lualine_setup')
 lua require('autoclose_setup')
+lua require('todo_comments_setup')
+
