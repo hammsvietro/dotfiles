@@ -108,7 +108,7 @@ myManageHook = composeAll
     , title =? "Mozilla Firefox"    --> doShift ( myWorkspaces !! 1 )
     , title =? "Neovide"            --> doShift ( myWorkspaces !! 2 )
     , className =? "Spotify"        --> doShift ( myWorkspaces !! 4 )
-    , title =? "Discord"            --> doShift ( myWorkspaces !! 5 )
+    , className =? "discord"        --> doShift ( myWorkspaces !! 5 )
     , className =? "notion-app"     --> doShift ( myWorkspaces !! 6 )
     , className =? "Steam"          --> doShift ( myWorkspaces !! 7 )
     , className =? "Stremio"        --> doShift ( myWorkspaces !! 8 )
@@ -117,7 +117,6 @@ myManageHook = composeAll
 myHandleEventHook = dynamicPropertyChange "WM_NAME" $ composeAll 
   [ className =? "Spotify"        --> doShift ( myWorkspaces !! 4 )
   , className =? "tidal-hifi"     --> doShift ( myWorkspaces !! 4 )
-  , className =? "discord"        --> doShift ( myWorkspaces !! 5 )
   , className =? "Steam"          --> doShift ( myWorkspaces !! 7 )
   , className =? "Stremio"        --> doShift ( myWorkspaces !! 8 )]
 
