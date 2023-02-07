@@ -31,6 +31,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'f-person/git-blame.nvim'
   Plug 'folke/todo-comments.nvim'
+  Plug 'navarasu/onedark.nvim'
 call plug#end()
 
 lua require('treesitter_setup')
