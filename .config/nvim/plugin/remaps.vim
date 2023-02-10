@@ -63,6 +63,7 @@ nnoremap <silent>Y y$
 nnoremap <leader>ff <cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fr <cmd>Telescope resume<cr>
 
 
 " nvim tree
