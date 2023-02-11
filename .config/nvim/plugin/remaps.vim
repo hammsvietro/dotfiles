@@ -24,9 +24,13 @@ nnoremap <silent><nowait> <leader>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent><nowait> <leader>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <leader>j  :<C-u>CocNext<CR>
+nnoremap <silent> <Leader>J <Plug>(coc-diagnostic-next)
 " Do default action for previous item.
-nnoremap <silent><nowait> <leader>k  :<C-u>CocPrev<CR>
+nnoremap <silent> <Leader>K <Plug>(coc-diagnostic-prev)
+" Do default action for next item.
+nnoremap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
+" Do default action for previous item.
+nnoremap <silent> <Leader>k <Plug>(coc-diagnostic-prev-error)
 " Resume latest coc list.
 nnoremap <silent><nowait> <leader>p  :<C-u>CocListResume<CR>
 " Open atuocomplete
