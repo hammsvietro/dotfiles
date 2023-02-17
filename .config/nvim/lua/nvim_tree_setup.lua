@@ -6,8 +6,9 @@ require'nvim-tree'.setup({
     enable = true,
   },
   view = {
+    hide_root_folder = false,
     side = "left",
-    width = 25,
+    width = 40,
   },
   renderer = {
     indent_markers = {
