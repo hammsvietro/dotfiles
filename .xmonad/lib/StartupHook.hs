@@ -3,6 +3,7 @@ module StartupHook (myStartupHook) where
   import XMonad
   import XMonad.Util.Run
   import XMonad.Util.SpawnOnce
+  import XMonad.Util.Cursor
   import XMonad.Hooks.SetWMName
 
   ------------------------------------------------------------------------
@@ -18,6 +19,7 @@ module StartupHook (myStartupHook) where
     spawn "picom &"
     spawn "nvidia-settings --load-config-only &"
     spawn "xss-lock -- i3lock -n -i ~/wallpapers/city.png &"
+    setDefaultCursor xC_left_ptr
     setWMName "HVWM"
     if isDesktop then do
       spawn "/usr/bin/feh --bg-fill ~/wallpapers/tarantula_nebula.png --bg-fill ~/wallpapers/cloud-vertical.jpg &"
