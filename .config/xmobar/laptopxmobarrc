@@ -1,7 +1,7 @@
-Config { font            = "xft:MesloLGS Nerd Font:regular:size=10"
-       , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"
-                           , "xft:Font Awesome 5 Free Solid:pixelsize=12"
-                           , "xft:Font Awesome 5 Brands:pixelsize=12"
+Config { font            = "xft:Hack Nerd Font regular 10"
+       , additionalFonts = [ "xft:Mononoki:pixelsize=6:antialias=true:hinting=true"
+                           , "xft:Font Awesome 6 Free Solid 11"
+                           , "xft:Font Awesome 6 Brands 11"
                            ]
        , bgColor      = "#282a36"
        , fgColor      = "#f8f8f2"
@@ -9,7 +9,7 @@ Config { font            = "xft:MesloLGS Nerd Font:regular:size=10"
        --   an alignment parameter (L/R/C) for Left, Right or Center.
        --   an integer for the percentage width, so 100 would be 100%.
        --   an integer for the minimum pixel height for xmobar, so 24 would force a height of at least 24 pixels.
-       , position       = TopSize L 100 26
+       , position       = TopSize L 100 30
        , lowerOnStart = True
        , hideOnStart  = False
        , allDesktops  = True
@@ -21,9 +21,9 @@ Config { font            = "xft:MesloLGS Nerd Font:regular:size=10"
                         -- Get kernel version (script found in .local/bin)
                     , Run Com "/home/hammsvietro/.local/bin/kernel" [] "kernel" 36000
                         -- Cpu usage in percent
-                    , Run Cpu ["-t", "<fn=2>\xf2db</fn> <total>% ","-H","50","--high","red"] 20
+                    , Run Cpu ["-t", "<fn=2>\xf2db</fn>  <total>% ","-H","50","--high","red"] 20
                         -- Ram used number and percent
-                    , Run Memory ["-t", "<fn=2>\xf233</fn> <used>M (<usedratio>%)"] 20
+                    , Run Memory ["-t", "<fn=2>\xf233 </fn> <used>M (<usedratio>%)"] 20
                         -- Disk space free
                     , Run DiskU [("/", "<fn=2>\xf0c7</fn> <free> ")] [] 60
                         -- Echos an "up arrow" icon in front of the uptime output.
@@ -31,7 +31,7 @@ Config { font            = "xft:MesloLGS Nerd Font:regular:size=10"
                         -- Uptime
                     , Run Uptime ["-t", "<days>d <hours>h <minutes>m"] 360
                         -- Echos a "bell" icon in front of the pacman updates.
-                    , Run Com "echo" ["<fn=2>\xf019</fn>"]"bell" 3600
+                    , Run Com "echo" ["<fn=2>\xf0f3</fn>"] "bell" 3600
                         -- Check for pacman updates (script found in .local/bin)
                     , Run Com ".local/bin/pacupdate" [] "pacupdate" 3600
 		    , Run DynNetwork
@@ -52,12 +52,12 @@ Config { font            = "xft:MesloLGS Nerd Font:regular:size=10"
 			"-l", "red"
 			] 300
                         -- Time and date
-                    , Run Date " <fn=2>\xf017</fn> %d %b %Y-(%H:%M) " "date" 50
+                    , Run Date " <fn=2>\xf133 </fn> %d %b %Y-(%H:%M) " "date" 50
                         -- Prints out the left side items such as workspaces, layout, etc.
                     ,  Run StdinReader
                     , Run UnsafeStdinReader
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = " <icon=knight.xpm/>   %StdinReader% }{  <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %cpu%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %battery%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %disku%</action></fc></box> <box type=Bottom width=2 mb=2 color=#bd93f9><fc=#bd93f9> %bell% <action=`alacritty -e sudo pacman -Syu`>%pacupdate% </action></fc></box> <box type=Bottom width=2 mb=2 color=#bd93f9><fc=#bd93f9> %penguin%<action=`alacritty -e htop`> %kernel%</action></fc></box> <box type=Bottom width=2 mb=2 color=#ffb86c><fc=#ffb86c> %uparrow%<action=`alacritty -e htop`> %uptime%</action></fc></box> <box type=Bottom width=2 mb=2 color=#ffb86c><fc=#ffb86c><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>"
+       , template = " <icon=knight.xpm/>   %StdinReader% }{  <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %cpu%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %battery% </action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %memory%</action></fc></box> <box type=Bottom width=2 mb=2 color=#50fa7b><fc=#50fa7b><action=`alacritty -e htop`> %disku%</action></fc></box> <box type=Bottom width=2 mb=2 color=#bd93f9><fc=#bd93f9> %bell% <action=`alacritty -e sudo pacman -Syu`> %pacupdate% </action></fc></box> <box type=Bottom width=2 mb=2 color=#bd93f9><fc=#bd93f9> %penguin% <action=`alacritty -e htop`> %kernel%</action></fc></box> <box type=Bottom width=2 mb=2 color=#ffb86c><fc=#ffb86c> %uparrow% <action=`alacritty -e htop`> %uptime% </action></fc></box> <box type=Bottom width=2 mb=2 color=#ffb86c><fc=#ffb86c><action=`emacsclient -c -a 'emacs' --eval '(doom/window-maximize-buffer(dt/year-calendar))'`>%date%</action></fc></box>"
      }
