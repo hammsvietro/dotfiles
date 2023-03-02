@@ -8,7 +8,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'alvan/vim-closetag'
-  Plug 'morhetz/gruvbox'
+  Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'mxw/vim-jsx'
@@ -31,7 +31,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'lukas-reineke/indent-blankline.nvim'
   Plug 'f-person/git-blame.nvim'
   Plug 'folke/todo-comments.nvim'
-  Plug 'navarasu/onedark.nvim'
 call plug#end()
 
 lua require('treesitter_setup')
