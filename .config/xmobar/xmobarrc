@@ -1,7 +1,7 @@
-Config { font            = "xft:MesloLGS Nerd Font:regular:size=10"
-       , additionalFonts = [ "xft:Mononoki:pixelsize=11:antialias=true:hinting=true"
-                           , "xft:Font Awesome 5 Free Solid:pixelsize=12"
-                           , "xft:Font Awesome 5 Brands:pixelsize=12"
+Config { font            = "xft:Hack Nerd Font regular 10"
+       , additionalFonts = [ "xft:Mononoki 11"
+                           , "xft:Font Awesome 6 Free Solid 11"
+                           , "xft:Font Awesome 6 Brands 11"
                            ]
        , bgColor      = "#282a36"
        , fgColor      = "#f8f8f2"

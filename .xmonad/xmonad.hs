@@ -4,42 +4,40 @@
 
 -- base
 import Data.Kind
+import qualified Data.Map as M
 import Data.Maybe
-import System.Environment
-
-import XMonad
 import Data.Monoid
-import System.Exit
-import qualified XMonad.StackSet as W
-import qualified Data.Map        as M
-
 -- UTIL
-import XMonad.Util.Run
-import XMonad.Util.ClickableWorkspaces
 
 -- HOOKS
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.DynamicProperty
 
 -- Layout
-import XMonad.Layout.Spiral
+
 import Data.Ratio
 import Data.Semigroup
-import XMonad.Layout.Grid
-import XMonad.Layout.Spacing
-
+import Keys
 import Layout
 import Log
 import StartupHook
-import Keys
+import System.Environment
+import System.Exit
+import XMonad
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.DynamicProperty
+import XMonad.Hooks.EwmhDesktops
+import XMonad.Hooks.ManageDocks
+import XMonad.Hooks.ManageHelpers
+import XMonad.Layout.Grid
+import XMonad.Layout.Spacing
+import XMonad.Layout.Spiral
+import qualified XMonad.StackSet as W
+import XMonad.Util.ClickableWorkspaces
+import XMonad.Util.Run
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "kitty"
+myTerminal = "kitty"
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -53,26 +51,28 @@ myClickJustFocuses = False
 myBorderWidth = 2
 
 myModMask = mod4Mask
+
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
-myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
-
+myMouseBindings (XConfig {XMonad.modMask = modm}) =
+  M.fromList
     -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modm, button1), (\w -> focus w >> mouseMoveWindow w
-                                       >> windows W.shiftMaster))
-
-    -- mod-button2, Raise the window to the top of the stack
-    , ((modm, button2), (\w -> focus w >> windows W.shiftMaster))
-
-    -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modm, button3), (\w -> focus w >> mouseResizeWindow w
-                                       >> windows W.shiftMaster))
-
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    [ ( (modm, button1),
+        \w ->
+          focus w >> mouseMoveWindow w
+            >> windows W.shiftMaster
+      ),
+      -- mod-button2, Raise the window to the top of the stack
+      ((modm, button2), \w -> focus w >> windows W.shiftMaster),
+      -- mod-button3, Set the window to floating mode and resize by dragging
+      ( (modm, button3),
+        \w ->
+          focus w >> mouseResizeWindow w
+            >> windows W.shiftMaster
+      )
+      -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
-
-
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -99,31 +99,37 @@ myWorkspaces = ["sup", "web", "code", "term", "mus", "chat", "org", "game", "mov
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gimp"           --> doFloat
-    , className =? "hl_linux"       --> doFloat
-    , resource  =? "desktop_window" --> doIgnore
-    , className =? "Google-chrome"  --> doShift ( myWorkspaces !! 0 )
-    , title =? "Mozilla Firefox"    --> doShift ( myWorkspaces !! 1 )
-    , title =? "Neovide"            --> doShift ( myWorkspaces !! 2 )
-    , className =? "Spotify"        --> doShift ( myWorkspaces !! 4 )
-    , className =? "discord"        --> doShift ( myWorkspaces !! 5 )
-    , className =? "notion-app"     --> doShift ( myWorkspaces !! 6 )
-    , className =? "Steam"          --> doShift ( myWorkspaces !! 7 )
-    , className =? "Stremio"        --> doShift ( myWorkspaces !! 8 )
-    , resource  =? "kdesktop"       --> doIgnore ]
+myManageHook =
+  composeAll
+    [ className =? "MPlayer" --> doFloat,
+      className =? "Gimp" --> doFloat,
+      className =? "hl_linux" --> doFloat,
+      resource =? "desktop_window" --> doIgnore,
+      className =? "Google-chrome" --> doShift (myWorkspaces !! 0),
+      title =? "Mozilla Firefox" --> doShift (myWorkspaces !! 1),
+      title =? "Neovide" --> doShift (myWorkspaces !! 2),
+      className =? "Spotify" --> doShift (myWorkspaces !! 4),
+      className =? "discord" --> doShift (myWorkspaces !! 5),
+      className =? "notion-app" --> doShift (myWorkspaces !! 6),
+      className =? "Steam" --> doShift (myWorkspaces !! 7),
+      className =? "Stremio" --> doShift (myWorkspaces !! 8),
+      resource =? "kdesktop" --> doIgnore
+    ]
 
-myHandleEventHook = dynamicPropertyChange "WM_NAME" $ composeAll 
-  [ className =? "Spotify"        --> doShift ( myWorkspaces !! 4 )
-  , className =? "tidal-hifi"     --> doShift ( myWorkspaces !! 4 )
-  , className =? "Steam"          --> doShift ( myWorkspaces !! 7 )
-  , className =? "Stremio"        --> doShift ( myWorkspaces !! 8 )]
+myHandleEventHook =
+  dynamicPropertyChange "WM_NAME" $
+    composeAll
+      [ className =? "Spotify" --> doShift (myWorkspaces !! 4),
+        className =? "tidal-hifi" --> doShift (myWorkspaces !! 4),
+        className =? "Steam" --> doShift (myWorkspaces !! 7),
+        className =? "Stremio" --> doShift (myWorkspaces !! 8)
+      ]
 
 ------------------------------------------------------------------------
 -- Event handling
 
 -- * EwmhDesktops users should change this to ewmhDesktopsEventHook
+
 --
 -- Defines a custom handler function for X Events. The function should
 -- return (All True) if the default handler is to be run afterwards. To
@@ -149,35 +155,37 @@ getIsDesktop = do
   return ((fromMaybe "0" isDesktop) == "1")
 
 getBarPipes isDesktop = do
-  return (case  isDesktop of
-      True -> desktopPp
-      False -> laptopPp
-   )
-
+  return
+    ( case isDesktop of
+        True -> desktopPp
+        False -> laptopPp
+    )
 
 main = do
   isDesktop <- getIsDesktop
   barPipesFn <- getBarPipes isDesktop
   barPipes <- barPipesFn
-  xmonad $ docks $ ewmh $ ewmhFullscreen $ def {
-      -- simple stuff
-        terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        clickJustFocuses   = myClickJustFocuses,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = myWorkspaces,
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-
-      -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
-
-      -- hooks, layouts
-        layoutHook         = avoidStruts myLayout,
-        manageHook         = myManageHook <+> manageDocks <+> composeOne [isFullscreen -?> doFullFloat],
-        handleEventHook    = myHandleEventHook,
-        startupHook        = myStartupHook isDesktop,
-        logHook            = myLogHook barPipes
-    }
+  xmonad $
+    docks $
+      ewmh $
+        ewmhFullscreen $
+          def
+            { -- simple stuff
+              terminal = myTerminal,
+              focusFollowsMouse = myFocusFollowsMouse,
+              clickJustFocuses = myClickJustFocuses,
+              borderWidth = myBorderWidth,
+              modMask = myModMask,
+              workspaces = myWorkspaces,
+              normalBorderColor = myNormalBorderColor,
+              focusedBorderColor = myFocusedBorderColor,
+              -- key bindings
+              keys = myKeys,
+              mouseBindings = myMouseBindings,
+              -- hooks, layouts
+              layoutHook = avoidStruts myLayout,
+              manageHook = myManageHook <+> manageDocks <+> composeOne [isFullscreen -?> doFullFloat],
+              handleEventHook = myHandleEventHook,
+              startupHook = myStartupHook isDesktop,
+              logHook = myLogHook barPipes
+            }

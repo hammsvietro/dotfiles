@@ -1,31 +1,27 @@
 module StartupHook (myStartupHook) where
 
-  import XMonad
-  import XMonad.Util.Run
-  import XMonad.Util.SpawnOnce
-  import XMonad.Util.Cursor
-  import XMonad.Hooks.SetWMName
+import Control.Monad
+import XMonad
+import XMonad.Hooks.SetWMName
+import XMonad.Util.Cursor
+import XMonad.Util.Run
+import XMonad.Util.SpawnOnce
 
-  ------------------------------------------------------------------------
-  -- Startup hook
+------------------------------------------------------------------------
+-- Startup hook
+------------------------------------------------------------------------
 
-  -- Perform an arbitrary action each time xmonad starts or is restarted
-  -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
-  -- per-workspace layout choices.
-  --
-  -- By default, do nothing.
+specificStartup :: Bool -> X ()
+specificStartup True =
+  spawn "/usr/bin/feh --bg-fill ~/wallpapers/tarantula_nebula.png --bg-fill ~/wallpapers/cloud-vertical.jpg &"
+    >> spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --rate 75 --pos 1920x0 --rate 75 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --rate 144 --output DP-1 --off &"
+specificStartup False =
+  void $ spawn "/usr/bin/feh --bg-fill ~/wallpapers/tarantula_nebula.png &"
 
-  myStartupHook isDesktop = do
-    spawn "picom &"
-    spawn "nvidia-settings --load-config-only &"
-    spawn "xss-lock -- i3lock -n -i ~/wallpapers/city.png &"
-    setDefaultCursor xC_left_ptr
-    setWMName "HVWM"
-    if isDesktop then do
-      spawn "/usr/bin/feh --bg-fill ~/wallpapers/tarantula_nebula.png --bg-fill ~/wallpapers/cloud-vertical.jpg &"
-      spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --rate 75 --pos 1920x0 --rate 75 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --rate 144 --output DP-1 --off &"
-    else do
-      spawn "/usr/bin/feh --bg-fill ~/wallpapers/tarantula_nebula.png &"
-      return ()
-
-      
+myStartupHook isDesktop =
+  spawn "picom &"
+    >> spawn "nvidia-settings --load-config-only &"
+    >> spawn "xss-lock -- i3lock -n -i ~/wallpapers/city.png &"
+    >> setDefaultCursor xC_left_ptr
+    >> setWMName "HVWM"
+    >> specificStartup isDesktop
