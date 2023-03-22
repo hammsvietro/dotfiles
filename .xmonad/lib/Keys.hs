@@ -77,6 +77,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) =
       ((modm .|. shiftMask, xK_Print), spawn "flameshot screen -p ~/Pictures"),
       -- screenshot crop mode
       ((modm .|. shiftMask, xK_s), spawn "flameshot gui"),
+      -- toggle keyboard layout
+      ((modm .|. shiftMask, xK_p), spawn "~/.local/bin/toggle_kb_layout"),
       -- close focused window
       ((modm .|. shiftMask, xK_q), kill),
       -- Rotate through the available layout algorithms
