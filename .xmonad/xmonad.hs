@@ -113,6 +113,7 @@ myManageHook =
       className =? "notion-app" --> doShift (myWorkspaces !! 6),
       className =? "Steam" --> doShift (myWorkspaces !! 7),
       className =? "Stremio" --> doShift (myWorkspaces !! 8),
+      className =? "tidal-hifi" --> doShift (myWorkspaces !! 4),
       resource =? "kdesktop" --> doIgnore
     ]
 
@@ -120,7 +121,6 @@ myHandleEventHook =
   dynamicPropertyChange "WM_NAME" $
     composeAll
       [ className =? "Spotify" --> doShift (myWorkspaces !! 4),
-        className =? "tidal-hifi" --> doShift (myWorkspaces !! 4),
         className =? "Steam" --> doShift (myWorkspaces !! 7),
         className =? "Stremio" --> doShift (myWorkspaces !! 8)
       ]

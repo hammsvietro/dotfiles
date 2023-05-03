@@ -2,6 +2,8 @@
   "coc.preferences.formatOnSave": true,
   "html.format.enable": false,
   "diagnostic.refreshOnInsertMode": true,
+  "yaml.enable": true,
+  "yaml.format.enable": true,
   "diagnostic.checkCurrentLine": true,
   "css.validate": false,
   "diagnostic.enable": true,
@@ -11,17 +13,16 @@
   "javascript.format.enable": false,
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.procMacro.attributes.enable": true,
+  "zig.enabled": true,
+  "zig.startUpMessage": true,
+  "zig.path": "zls",
+  "zig.debugLog": false,
   "languageserver": {
     "elixir": {
       "command": "~/lsp/elixir-ls/language_server.sh",
-      "filetypes": [
-        "elixir",
-        "eelixir"
-      ],
+      "filetypes": ["elixir", "eelixir"],
       "trace.server": "verbose",
-      "rootPatterns": [
-        "mix.exs"
-      ],
+      "rootPatterns": ["mix.exs"],
       "initializationOptions": {},
       "settings": {
         "elixirLS": {
@@ -31,9 +32,7 @@
     },
     "haskell": {
       "command": "haskell-language-server-wrapper",
-      "args": [
-        "--lsp"
-      ],
+      "args": ["--lsp"],
       "rootPatterns": [
         ".stack.yaml",
         ".hie-bios",
@@ -41,11 +40,7 @@
         "cabal.config",
         "package.yaml"
       ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ]
+      "filetypes": ["hs", "lhs", "haskell"]
     }
   }
 }
