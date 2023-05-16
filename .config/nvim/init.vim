@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'alvan/vim-closetag'
   Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+  Plug 'rmehri01/onenord.nvim', { 'branch': 'main' }
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'mxw/vim-jsx'
