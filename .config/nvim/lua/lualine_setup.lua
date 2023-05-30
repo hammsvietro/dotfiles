@@ -1,5 +1,16 @@
 require('lualine').setup {
   sections = {
+    lualine_b = {
+      {
+        'diagnostics',
+        symbols = {
+          error = ' ',
+          warn = ' ',
+          info = ' ',
+          hint = ' '
+        },
+      }
+    },
     lualine_c = {
       {
         'filename',
@@ -10,7 +21,7 @@ require('lualine').setup {
                                  -- 2: Absolute path
                                  -- 3: Absolute path, with tilde as the home directory
 
-        shortinasidjasidjg_target = 40,    -- Shortens path to leave 40 spaces in the window
+        shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
                                  -- for other components. (terrible name, any suggestions?)
         symbols = {
           modified = '[+]',      -- Text to show when the file is modified.

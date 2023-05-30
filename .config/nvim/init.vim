@@ -4,7 +4,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'nvim-lua/plenary.nvim'
   Plug 'sindrets/diffview.nvim'
   Plug 'lewis6991/gitsigns.nvim'
-  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'nvim-tree/nvim-web-devicons'
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'alvan/vim-closetag'
@@ -44,4 +44,5 @@ lua require('lualine_setup')
 lua require('autoclose_setup')
 lua require('todo_comments_setup')
 lua require('presence_setup')
+lua require('devicons_setup')
 lua require('theme_setup')
