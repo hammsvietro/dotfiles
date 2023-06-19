@@ -15,6 +15,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mxw/vim-jsx'
   Plug 'pangloss/vim-javascript'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-context'
   Plug 'm4xshen/autoclose.nvim'
   Plug 'akinsho/bufferline.nvim', { 'tag': 'v3.*' }
   Plug 'norcalli/nvim-colorizer.lua'
