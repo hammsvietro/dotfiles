@@ -1,12 +1,17 @@
 #! /bin/bash
 
-mode=$(echo -e "Select\nFast" | dmenu -p "Select kill mode" -sb '#d79921' -sf '#000' -fn "JetBrainsMono Nerd Font:bold:size:15" )
+mode=$(echo -e "Terminate\nKill\nFast" | dmenu -p "Select kill mode" -sb '#d79921' -sf '#000' -fn "JetBrainsMono Nerd Font:bold:size:15" )
 
-if [[ $mode == "Select" ]]
+if [[ $mode == "Terminate" ]]
 then
 	program=$(ps -u $USER -o %mem,comm| sed -n '1!p'  | sort -r | dmenu -i -sb '#d79921' -sf '#000' -l 10 -fn "JetBrainsMono Nerd Font:bold:size:15" )
 	program=$( echo "$program" | awk '{print $2}' )
 	pkill $program
+elif [[ $mode == "Kill" ]]
+then
+	program=$(ps -u $USER -o %mem,comm| sed -n '1!p'  | sort -r | dmenu -i -sb '#d79921' -sf '#000' -l 10 -fn "JetBrainsMono Nerd Font:bold:size:15" )
+	program=$( echo "$program" | awk '{print $2}' )
+	pkill --signal 9 $program
 elif [[ $mode == "Fast" ]]
 then
 	pkill Discord
