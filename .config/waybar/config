@@ -14,9 +14,9 @@
     "modules-center": ["hyprland/window"],
     "modules-right": [
         "tray",
-        "battery",
-        "backlight",
-        "network",
+        // "battery",
+        // "backlight",
+        // "network",
         "custom/updates",
         // "custom/language",
         "cpu",
