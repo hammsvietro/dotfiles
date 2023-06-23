@@ -13,10 +13,10 @@ import XMonad.Util.SpawnOnce
 
 specificStartup :: Bool -> X ()
 specificStartup True =
-  spawn "/usr/bin/feh --bg-fill ~/wallpapers/tarantula_nebula.png --bg-fill ~/wallpapers/cloud-vertical.jpg &"
+  spawn "/usr/bin/feh --bg-fill ~/wallpapers/patterns.png --bg-fill ~/wallpapers/patterns.png &"
     >> spawnOnce "xrandr --output DVI-D-0 --off --output HDMI-0 --mode 2560x1080 --rate 75 --pos 1920x0 --rate 75 --rotate normal --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --rate 144 --output DP-1 --off &"
 specificStartup False =
-  void $ spawn "/usr/bin/feh --bg-fill ~/wallpapers/tarantula_nebula.png &"
+  void $ spawn "/usr/bin/feh --bg-fill ~/wallpapers/patterns.png &"
 
 myStartupHook isDesktop =
   spawn "picom &"
