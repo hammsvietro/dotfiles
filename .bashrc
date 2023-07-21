@@ -94,3 +94,6 @@ set -o emacs
 
 
 alias make_etc="make format && make lint && make test"
+source ~/secrets.sh
+. /opt/asdf-vm/asdf.sh
+eval $(ssh-agent) > /dev/null
