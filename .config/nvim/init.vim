@@ -34,6 +34,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'f-person/git-blame.nvim'
   Plug 'folke/todo-comments.nvim'
   Plug 'andweeb/presence.nvim'
+  Plug 'nyoom-engineering/oxocarbon.nvim'
+  Plug 'dasupradyumna/midnight.nvim'
 call plug#end()
 
 lua require('treesitter_setup')
