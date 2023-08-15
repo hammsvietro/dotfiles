@@ -8,15 +8,26 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
   -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "tokyonight-night",
     },
+  },
+
+  {
+    "f-person/git-blame.nvim"
+  },
+
+  {
+    "nvim-treesitter/nvim-treesitter-context"
   },
 
   -- change trouble config
@@ -155,6 +166,41 @@ return {
     },
   },
 
+  {
+    "rcarriga/nvim-notify",
+    enabled = false
+  },
+
+  {
+  "folke/noice.nvim",
+  enabled = false,
+  event = "VeryLazy",
+  opts = {
+  lsp = {
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
+  },
+    presets = {
+      bottom_search = true, -- use a classic bottom cmdline for search
+      command_palette = true, -- position the cmdline and popupmenu together
+      long_message_to_split = true, -- long messages will be sent to a split
+      inc_rename = false, -- enables an input dialog for inc-rename.nvim
+    },
+    lsp_doc_border = false, -- add a border to hover docs and signature help
+  },
+  dependencies = {
+    -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+    "MunifTanjim/nui.nvim",
+    -- OPTIONAL:
+    --   `nvim-notify` is only needed, if you want to use the notification view.
+    --   If not available, we use `mini` as the fallback
+    "rcarriga/nvim-notify",
+    }
+},
+
   -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
   -- would overwrite `ensure_installed` with the new value.
   -- If you'd rather extend the default config, use the code below instead:
@@ -203,6 +249,11 @@ return {
         "flake8",
       },
     },
+  },
+
+  {
+    "folke/flash.nvim",
+    enabled = false
   },
 
   -- Use <tab> for completion and snippets (supertab)
