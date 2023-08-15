@@ -19,14 +19,9 @@
   "languageserver": {
     "elixir": {
       "command": "~/lsp/elixir-ls/language_server.sh",
-      "filetypes": [
-        "elixir",
-        "eelixir"
-      ],
+      "filetypes": ["elixir", "eelixir"],
       "trace.server": "verbose",
-      "rootPatterns": [
-        "mix.exs"
-      ],
+      "rootPatterns": ["mix.exs"],
       "initializationOptions": {},
       "settings": {
         "elixirLS": {
@@ -36,9 +31,7 @@
     },
     "haskell": {
       "command": "haskell-language-server-wrapper",
-      "args": [
-        "--lsp"
-      ],
+      "args": ["--lsp"],
       "rootPatterns": [
         ".stack.yaml",
         ".hie-bios",
@@ -46,17 +39,28 @@
         "cabal.config",
         "package.yaml"
       ],
-      "filetypes": [
-        "hs",
-        "lhs",
-        "haskell"
-      ],
+      "filetypes": ["hs", "lhs", "haskell"],
       "settings": {
         "haskell": {
           "formattingProvider": "fourmolu"
         }
       }
+    },
+    "lua": {
+      "command": "lua-language-server",
+      "filetypes": ["lua"],
+      "settings": {
+        "Lua": {
+          "workspace.library": {
+            "/usr/share/nvim/runtime/lua": true,
+            "/usr/share/nvim/runtime/lua/vim": true,
+            "/usr/share/nvim/runtime/lua/vim/lsp": true
+          },
+          "diagnostics": {
+            "globals": ["vim"]
+          }
+        }
+      }
     }
-  },
-  "svelte.enable-ts-plugin": true
+  }
 }

@@ -35,3 +35,10 @@ set guifont=FiraCode\ Nerd\ Font:h12
 
 let g:mix_format_on_save = 1
 let g:mix_format_silent_errors = 1
+
+
+" trigger `autoread` when files changes on disk
+set autoread
+autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
+" notification after file change
+autocmd FileChangedShellPost * echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
