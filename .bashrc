@@ -4,10 +4,9 @@
 
 # get current branch in git repo
 function parse_git_branch() {
-	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
-	if [ ! "${BRANCH}" == "" ]
-	then
-		STAT=`parse_git_dirty`
+	BRANCH=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+	if [ ! "${BRANCH}" == "" ]; then
+		STAT=$(parse_git_dirty)
 		echo "[${BRANCH}${STAT}]"
 	else
 		echo ""
@@ -15,18 +14,36 @@ function parse_git_branch() {
 }
 
 function killpath {
-  kill $(ps aux | grep '$1' | awk '{print $2}')
+	kill $(ps aux | grep '$1' | awk '{print $2}')
 }
 
 # get current status of git repo
 function parse_git_dirty {
-	status=`git status 2>&1 | tee`
-	dirty=`echo -n "${status}" 2> /dev/null | grep "modified:" &> /dev/null; echo "$?"`
-	untracked=`echo -n "${status}" 2> /dev/null | grep "Untracked files" &> /dev/null; echo "$?"`
-	ahead=`echo -n "${status}" 2> /dev/null | grep "Your branch is ahead of" &> /dev/null; echo "$?"`
-	newfile=`echo -n "${status}" 2> /dev/null | grep "new file:" &> /dev/null; echo "$?"`
-	renamed=`echo -n "${status}" 2> /dev/null | grep "renamed:" &> /dev/null; echo "$?"`
-	deleted=`echo -n "${status}" 2> /dev/null | grep "deleted:" &> /dev/null; echo "$?"`
+	status=$(git status 2>&1 | tee)
+	dirty=$(
+		echo -n "${status}" 2>/dev/null | grep "modified:" &>/dev/null
+		echo "$?"
+	)
+	untracked=$(
+		echo -n "${status}" 2>/dev/null | grep "Untracked files" &>/dev/null
+		echo "$?"
+	)
+	ahead=$(
+		echo -n "${status}" 2>/dev/null | grep "Your branch is ahead of" &>/dev/null
+		echo "$?"
+	)
+	newfile=$(
+		echo -n "${status}" 2>/dev/null | grep "new file:" &>/dev/null
+		echo "$?"
+	)
+	renamed=$(
+		echo -n "${status}" 2>/dev/null | grep "renamed:" &>/dev/null
+		echo "$?"
+	)
+	deleted=$(
+		echo -n "${status}" 2>/dev/null | grep "deleted:" &>/dev/null
+		echo "$?"
+	)
 	bits=''
 	if [ "${renamed}" == "0" ]; then
 		bits=">${bits}"
@@ -53,7 +70,6 @@ function parse_git_dirty {
 	fi
 }
 
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -64,11 +80,10 @@ PS1="\[\033[0;37m\]\342\224\214\342\224\200\$([[ \$? != 0 ]] && echo \"[\[\033[0
 force_color_prompt=yes
 source ~/.local/share/icons-in-terminal/icons_bash.sh
 
-
 # node / NPM
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Java
 export CATALINA_HOME="~/programs/tomcat"
@@ -76,26 +91,29 @@ export CATALINA_HOME="~/programs/tomcat"
 # Android
 export ANDROID_SDK_ROOT="/home/hammsvietro/Android/Sdk"
 
-alias emulator="~/Android/Sdk/emulator/emulator" 
+alias emulator="~/Android/Sdk/emulator/emulator"
+
+. "$HOME/.cargo/env"
 
 ### PATH
-if [ -d "$HOME/.bin" ] ;
-  then PATH="$HOME/.bin:$PATH"
+if [ -d "$HOME/.bin" ]; then
+	PATH="$HOME/.bin:$PATH"
 fi
 
-if [ -d "$HOME/.local/bin" ] ;
-  then PATH="$HOME/.local/bin:$PATH"
+if [ -d "$HOME/.local/bin" ]; then
+	PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "$HOME/.ghcup/bin" ]; then
+	PATH="$HOME/.ghcup/bin:$PATH"
+fi
 
 shopt -s extglob
 set -o emacs
-. "$HOME/.cargo/env"
-
 
 export TSAI_DISABLE_CSP=True
 alias make_etc="make format && make lint && make test"
 
 source ~/secrets.sh
 . /opt/asdf-vm/asdf.sh
-eval $(ssh-agent) > /dev/null
+eval $(ssh-agent) >/dev/null
