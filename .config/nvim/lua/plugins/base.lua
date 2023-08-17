@@ -9,7 +9,7 @@
 -- * override the configuration of LazyVim plugins
 return {
   {
-    "folke/tokyonight.nvim",
+    "ellisonleao/gruvbox.nvim",
     lazy = false,
     priority = 1000,
     opts = {},
@@ -18,7 +18,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "tokyonight-night",
+      colorscheme = "gruvbox",
     },
   },
 
