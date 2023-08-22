@@ -38,6 +38,11 @@ return {
       ---@type lspconfig.options
       servers = {
         -- tsserver will be automatically installed with mason and loaded with lspconfig
+        pyright = {
+          settings = {
+            filetypes = { "python" },
+          },
+        },
         tsserver = {},
         hls = {
           settings = {
