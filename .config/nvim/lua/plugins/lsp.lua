@@ -11,6 +11,7 @@ return {
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.mix,
         nls.builtins.formatting.rustfmt,
+        nls.builtins.formatting.elm_format
       })
     end,
     dependencies = {
@@ -33,11 +34,9 @@ return {
         end)
       end,
     },
-    ---@class PluginLspOpts
     opts = {
-      ---@type lspconfig.options
       servers = {
-        -- tsserver will be automatically installed with mason and loaded with lspconfig
+        elmls = {},
         pyright = {
           settings = {
             filetypes = { "python" },
@@ -53,7 +52,6 @@ return {
           },
         },
       },
-      ---@type table<string, fun(server:string, opts:_.lspconfig.options):boolean?>
       setup = {
         tsserver = function(_, opts)
           require("typescript").setup({ server = opts })

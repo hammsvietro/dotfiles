@@ -1,5 +1,6 @@
 return {
   { "echasnovski/mini.indentscope", enabled = false },
+  { "williamboman/mason-lspconfig.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },
   { "echasnovski/mini.surround", enabled = false },
   {
