@@ -9,7 +9,7 @@
 -- * override the configuration of LazyVim plugins
 return {
   {
-    "ellisonleao/gruvbox.nvim",
+    "rebelot/kanagawa.nvim",
     lazy = false,
     priority = 1000,
     opts = {},
@@ -18,7 +18,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "kanagawa",
     },
   },
 
