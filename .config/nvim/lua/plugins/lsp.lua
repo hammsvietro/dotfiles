@@ -11,14 +11,17 @@ return {
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.mix,
         nls.builtins.formatting.rustfmt,
-        nls.builtins.formatting.elm_format
+        nls.builtins.formatting.elm_format,
       })
     end,
     dependencies = {
       "mason.nvim",
       opts = function(_, opts)
         opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(opts.ensure_installed, { "black", "black", "prettierd", "shfmt", "stylua", "ormolu" })
+        vim.list_extend(
+          opts.ensure_installed,
+          { "black", "black", "prettierd", "shfmt", "stylua", "ormolu", "elixir-ls" }
+        )
       end,
     },
   },
@@ -37,6 +40,15 @@ return {
     opts = {
       servers = {
         elmls = {},
+        elixirls = {
+          cmd = { "elixir-ls" },
+          settings = {
+            elixirLS = {
+              dialyzerEnabled = false,
+            },
+          },
+        },
+        clangd = {},
         pyright = {
           settings = {
             filetypes = { "python" },
