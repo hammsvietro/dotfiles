@@ -20,7 +20,7 @@ return {
         opts.ensure_installed = opts.ensure_installed or {}
         vim.list_extend(
           opts.ensure_installed,
-          { "black", "black", "prettierd", "shfmt", "stylua", "ormolu", "elixir-ls" }
+          { "black", "black", "prettierd", "shfmt", "stylua", "ormolu", "elixir-ls", "typescript-language-server" }
         )
       end,
     },
@@ -52,6 +52,14 @@ return {
         pyright = {
           settings = {
             filetypes = { "python" },
+            python = {
+              exclude = { "venv" },
+              analysis = {
+                autoSearchPaths = true,
+                diagnosticMode = "openFilesOnly",
+                useLibraryCodeForTypes = true,
+              },
+            },
           },
         },
         tsserver = {},

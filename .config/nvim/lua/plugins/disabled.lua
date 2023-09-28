@@ -3,6 +3,9 @@ return {
   { "williamboman/mason-lspconfig.nvim", enabled = false },
   { "rcarriga/nvim-notify", enabled = false },
   { "echasnovski/mini.surround", enabled = false },
+  { "nvim-treesitter-textobjects", enabled = false },
+  { "folke/persistence.nvim", enabled = false },
+  { "folke/neodev.nvim", enabled = false },
   {
     "hrsh7th/nvim-cmp",
     enalbed = false,

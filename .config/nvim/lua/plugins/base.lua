@@ -30,10 +30,6 @@ return {
     "f-person/git-blame.nvim"
   },
 
-  {
-    "nvim-treesitter/nvim-treesitter-context"
-  },
-
   -- change trouble config
   {
     "folke/trouble.nvim",
