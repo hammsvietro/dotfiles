@@ -1,6 +1,6 @@
 return {
   {
-    "jose-elias-alvarez/null-ls.nvim",
+    "nvimtools/none-ls.nvim",
     opts = function(_, opts)
       local nls = require("null-ls")
       opts.sources = opts.sources or {}
@@ -20,8 +20,17 @@ return {
         opts.ensure_installed = opts.ensure_installed or {}
         vim.list_extend(
           opts.ensure_installed,
-          { "black", "black", "prettierd", "shfmt", "stylua", "ormolu", "elixir-ls", "typescript-language-server",
-            "gopls" }
+          {
+            "black",
+            "black",
+            "prettierd",
+            "shfmt",
+            "stylua",
+            "ormolu",
+            "elixir-ls",
+            "typescript-language-server",
+            "gopls",
+          }
         )
       end,
     },
