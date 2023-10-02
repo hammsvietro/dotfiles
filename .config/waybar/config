@@ -8,17 +8,14 @@
     "height": 0,
     "modules-left": [
         "clock",
-        "custom/weather",
         "wlr/workspaces"
     ],
     "modules-center": ["hyprland/window"],
     "modules-right": [
         "tray",
-        // "battery",
-        // "backlight",
-        // "network",
+        "battery",
+        "backlight",
         "custom/updates",
-        // "custom/language",
         "cpu",
         "memory",
         "pulseaudio",
@@ -44,7 +41,6 @@
             "7": "7 - org",
             "8": "8 - game",
             "9": "9 - video",
-            "0": "pivot",
           }
     },
     "cpu": {
@@ -92,7 +88,7 @@
         	},
         	"format": "{icon} {capacity}%",
         	"format-charging": " {capacity}%",
-        	"format-plugged": "{capacity}%",
+        	"format-plugged": " {capacity}%",
         	"format-alt": "{icon} {time}",
         	"format-full": " {capacity}%",
         	"format-icons": ["", "", " "]
