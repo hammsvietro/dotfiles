@@ -49,6 +49,7 @@ return {
     enabled = false,
   },
   { "saadparwaiz1/cmp_luasnip", enabled = false },
+  { "stevearc/dressing.nvim", enabled = false },
   { "hrsh7th/cmp-path", enabled = false },
   { "hrsh7th/cmp-emoji", enabled = false },
   { "hrsh7th/cmp-buffer", enabled = false },
