@@ -9,16 +9,15 @@
 -- * override the configuration of LazyVim plugins
 return {
   {
-    "rebelot/kanagawa.nvim",
+    "nyoom-engineering/oxocarbon.nvim",
     lazy = false,
     priority = 1000,
-    opts = {},
+    -- opts = {},
   },
-  -- Configure LazyVim to load gruvbox
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "oxocarbon",
     },
   },
 
