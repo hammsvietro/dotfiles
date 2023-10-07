@@ -18,20 +18,17 @@ return {
       "mason.nvim",
       opts = function(_, opts)
         opts.ensure_installed = opts.ensure_installed or {}
-        vim.list_extend(
-          opts.ensure_installed,
-          {
-            "black",
-            "black",
-            "prettierd",
-            "shfmt",
-            "stylua",
-            "ormolu",
-            "elixir-ls",
-            "typescript-language-server",
-            "gopls",
-          }
-        )
+        vim.list_extend(opts.ensure_installed, {
+          "black",
+          "black",
+          "prettierd",
+          "shfmt",
+          "stylua",
+          "ormolu",
+          "elixir-ls",
+          "typescript-language-server",
+          "gopls",
+        })
       end,
     },
   },
@@ -74,6 +71,7 @@ return {
           },
         },
         tsserver = {},
+        rust_analyzer = {},
         hls = {
           settings = {
             haskell = {
