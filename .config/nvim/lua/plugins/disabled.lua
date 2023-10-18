@@ -54,4 +54,5 @@ return {
   { "hrsh7th/cmp-emoji", enabled = false },
   { "hrsh7th/cmp-buffer", enabled = false },
   { "RRethy/vim-illuminate", enabled = false },
+  { "nvim-treesitter/nvim-treesitter-context", enabled = false },
 }

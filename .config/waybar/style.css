@@ -1,7 +1,9 @@
 * {
   border: none;
   border-radius: 0;
-  font-family: Cartograph CF Nerd Font, monospace;
+  font-family:
+    Cartograph CF Nerd Font,
+    monospace;
   font-weight: bold;
   font-size: 14px;
   min-height: 0;
@@ -44,7 +46,7 @@ tooltip {
 
 #workspaces button:hover {
   background: #11111b;
-  color: #ABB2BF;
+  color: #abb2bf;
   border-radius: 10px;
 }
 
@@ -99,7 +101,6 @@ tooltip {
   border-left: 0px;
   border-right: 0px;
   border-radius: 10px 0px 0px 10px;
-  ;
 }
 
 #window {
@@ -122,13 +123,13 @@ tooltip {
 }
 
 #pulseaudio {
-  color: #61AFEF;
+  color: #61afef;
   border-left: 0px;
   border-right: 0px;
 }
 
 #pulseaudio.microphone {
-  color: #61AFEF;
+  color: #61afef;
   margin-right: 5px;
   border-radius: 0 10px 10px 0;
 }
