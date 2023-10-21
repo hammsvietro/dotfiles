@@ -93,8 +93,6 @@ return {
       -- refer to the configuration section below
     }
   },
-
-  -- add more treesitter parsers
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -102,8 +100,13 @@ return {
         "bash",
         "html",
         "javascript",
+        "elixir",
+        "go",
+        "c",
+        "cpp",
         "json",
         "lua",
+        "haskell",
         "markdown",
         "markdown_inline",
         "python",

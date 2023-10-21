@@ -26,6 +26,7 @@ return {
           "stylua",
           "ormolu",
           "elixir-ls",
+          "clangd",
           "typescript-language-server",
           "gopls",
         })
