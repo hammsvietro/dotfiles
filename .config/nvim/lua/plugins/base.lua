@@ -9,15 +9,13 @@
 -- * override the configuration of LazyVim plugins
 return {
   {
-    "nyoom-engineering/oxocarbon.nvim",
+    "EdenEast/nightfox.nvim",
     lazy = false,
-    priority = 1000,
-    -- opts = {},
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "oxocarbon",
+      colorscheme = "nightfox",
     },
   },
 

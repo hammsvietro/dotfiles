@@ -62,7 +62,7 @@ return {
           settings = {
             filetypes = { "python" },
             python = {
-              exclude = { "venv" },
+              exclude = { "**/venv/**", "**/__pycache__/**" },
               analysis = {
                 autoSearchPaths = true,
                 diagnosticMode = "openFilesOnly",
