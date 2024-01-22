@@ -9,16 +9,14 @@
 -- * override the configuration of LazyVim plugins
 return {
   {
-    "EdenEast/nightfox.nvim",
-    lazy = false,
+    "nvim-treesitter/nvim-treesitter", build = ':TSUpdate'
   },
   {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "duskfox",
-    },
+    "ellisonleao/gruvbox.nvim", priority = 1000 , config = function(plugin)
+      vim.o.background = "dark"
+      vim.cmd([[colorscheme gruvbox]])
+    end
   },
-
   {
     "sindrets/diffview.nvim"
   },
