@@ -23,7 +23,7 @@ import System.Environment
 import System.Exit
 import XMonad
 import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.DynamicProperty
+import XMonad.Hooks.OnPropertyChange
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -119,7 +119,7 @@ myManageHook =
     ]
 
 myHandleEventHook =
-  dynamicPropertyChange "WM_NAME" $
+  onXPropertyChange "WM_NAME" $
     composeAll
       [ className =? "Spotify" --> doShift (myWorkspaces !! 4),
         className =? "Stremio" --> doShift (myWorkspaces !! 8)
