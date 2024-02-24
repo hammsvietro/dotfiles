@@ -108,6 +108,10 @@ if [ -d "$HOME/.ghcup/bin" ]; then
 	PATH="$HOME/.ghcup/bin:$PATH"
 fi
 
+if [ -d "$HOME/.config/emacs/bin" ]; then
+	PATH="$HOME/.config/emacs/bin:$PATH"
+fi
+
 shopt -s extglob
 set -o emacs
 
