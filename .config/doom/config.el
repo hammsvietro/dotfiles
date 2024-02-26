@@ -32,7 +32,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-molokai)
+(setq doom-theme 'doom-one)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -106,6 +106,56 @@
 	    ))
 
 
+;; Open file tree
 (map! :leader
       :desc "Toggle Treemacs"
       "f x" #'treemacs)
+
+;; Open project ibuffer
+(map! :leader
+      :desc "Toggle Treemacs"
+      "b P" #'projectile-ibuffer)
+
+;; Check type definition
+(map! :leader
+      :desc "Peek the docs"
+      "c g" #'lsp-ui-doc-glance)
+
+
+;; make 's' behave like vim
+(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
+
+(setq evil-insert-state-cursor 'box)
+
+(setq! evil-want-Y-yank-to-eol nil)
+
+;; avoid truncating strings
+(advice-add '+emacs-lisp-truncate-pin :override (lambda () ()) )
+
+(setq fancy-splash-image "~/.config/doom/images/knight.png")
+
+;; increase ibuffer column widths
+(setq ibuffer-formats
+      '((mark modified read-only " "
+         (name 35 35 :left :elide) ; change: 30s were originally 18s
+         " "
+         (size 9 -1 :right)
+         " "
+         (mode 16 16 :left :elide)
+         " " filename-and-process)
+        (mark " "
+              (name 16 -1)
+              " " filename)))
+
+;; Make _ treated as part of the word
+(defadvice evil-inner-word (around underscore-as-word activate)
+  (let ((table (copy-syntax-table (syntax-table))))
+    (modify-syntax-entry ?_ "w" table)
+    (with-syntax-table table
+      ad-do-it)))
+
+(setq doom-modeline-vcs-max-length 30)
+
+(company-quickhelp-mode)
+
+(evil-set-undo-system 'undo-redo)
