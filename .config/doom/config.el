@@ -1,36 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-;; Place your private configuration here! Remember, you do not need to run 'doom
-;; sync' after modifying this file!
-
-
-;; Some functionality uses this to identify you, e.g. GPG configuration, email
-;; clients, file templates and snippets. It is optional.
-;; (setq user-full-name "John Doe"
-;;       user-mail-address "john@doe.com")
-
-;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
-;; - `doom-font' -- the primary font to use
-;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
-;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
-;;   presentations or streaming.
-;; - `doom-symbol-font' -- for symbols
-;; - `doom-serif-font' -- for the `fixed-pitch-serif' face
-;;
-;; See 'C-h v doom-font' for documentation and more examples of what they
-;; accept. For example:
-;;
-;;(setq doom-font (font-spec :family "Fira Code" :size 12 :weight 'semi-light)
-;;      doom-variable-pitch-font (font-spec :family "Fira Sans" :size 13))
-;;
-;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
-;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
-;; refresh your font settings. If Emacs still can't find your font, it likely
-;; wasn't installed correctly. Font issues are rarely Doom issues!
-
-;; There are two ways to load a theme. Both assume the theme is installed and
-;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-one)
 
@@ -79,33 +48,6 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(use-package! lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp)))
-  :config
-  (setq lsp-pyright-auto-search-paths t))
-
-(add-hook 'lsp-mode-hook
-	  (lambda ()
-	    (if (file-exists-p (concat (lsp--workspace-root (cl-first (lsp-workspaces))) "/pyrightconfig.json"))
-		(progn
-		  (setq lsp-enable-file-watchers t)
-		  (setq lsp-file-watch-ignored-directories (eval (car (get 'lsp-file-watch-ignored-directories 'standard-value))))
-		  (require 'json)
-		  (let* ((json-object-type 'hash-table)
-			 (json-array-type 'list)
-			 (json-key-type 'string)
-			 (json (json-read-file (concat (lsp--workspace-root (cl-first (lsp-workspaces))) "/pyrightconfig.json")))
-			 (exclude (gethash "exclude" json)))
-		    (dolist (exclud exclude)
-		      (push exclud lsp-file-watch-ignored))))
-	      (setq lsp-enable-file-watchers 'nil)
-	      (setq lsp-file-watch-ignored-directories (eval (car (get 'lsp-file-watch-ignored-directories 'standard-value)))))
-	    ))
-
-
 ;; Open file tree
 (map! :leader
       :desc "Toggle Treemacs"
@@ -113,21 +55,9 @@
 
 ;; Open project ibuffer
 (map! :leader
-      :desc "Toggle Treemacs"
+      :desc "Open project ibuffer"
       "b P" #'projectile-ibuffer)
 
-;; Check type definition
-(map! :leader
-      :desc "Peek the docs"
-      "c g" #'lsp-ui-doc-glance)
-
-
-;; make 's' behave like vim
-(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
-
-(setq evil-insert-state-cursor 'box)
-
-(setq! evil-want-Y-yank-to-eol nil)
 
 ;; avoid truncating strings
 (advice-add '+emacs-lisp-truncate-pin :override (lambda () ()) )
@@ -147,15 +77,7 @@
               (name 16 -1)
               " " filename)))
 
-;; Make _ treated as part of the word
-(defadvice evil-inner-word (around underscore-as-word activate)
-  (let ((table (copy-syntax-table (syntax-table))))
-    (modify-syntax-entry ?_ "w" table)
-    (with-syntax-table table
-      ad-do-it)))
-
 (setq doom-modeline-vcs-max-length 30)
 
-(company-quickhelp-mode)
-
-(evil-set-undo-system 'undo-redo)
+(load! "+lsp.el")
+(load! "+evil.el")
