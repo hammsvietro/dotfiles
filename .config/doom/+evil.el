@@ -1,45 +1,23 @@
-;;; $DOOMDIR/modules/+lsp.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/+evil.el -*- lexical-binding: t; -*-
 
-(use-package! lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright)
-                         (lsp)))
-  :config
-  (setq lsp-pyright-auto-search-paths t))
+;; Make _ as part of the word
+(modify-syntax-entry ?_ "w")
 
-(add-hook 'lsp-mode-hook
-	  (lambda ()
-	    (if (file-exists-p (concat (lsp--workspace-root (cl-first (lsp-workspaces))) "/pyrightconfig.json"))
-		(progn
-		  (setq lsp-enable-file-watchers t)
-		  (setq lsp-file-watch-ignored-directories (eval (car (get 'lsp-file-watch-ignored-directories 'standard-value))))
-		  (require 'json)
-		  (let* ((json-object-type 'hash-table)
-			 (json-array-type 'list)
-			 (json-key-type 'string)
-			 (json (json-read-file (concat (lsp--workspace-root (cl-first (lsp-workspaces))) "/pyrightconfig.json")))
-			 (exclude (gethash "exclude" json)))
-		    (dolist (exclud exclude)
-		      (push exclud lsp-file-watch-ignored))))
-	      (setq lsp-enable-file-watchers 'nil)
-	      (setq lsp-file-watch-ignored-directories (eval (car (get 'lsp-file-watch-ignored-directories 'standard-value)))))
-	    ))
+(defadvice evil-inner-word (around underscore-as-word activate)
+  (let ((table (copy-syntax-table (syntax-table))))
+    (modify-syntax-entry ?_ "w" table)
+    (with-syntax-table table
+      ad-do-it)))
+
+;; restore vim 'Y' functionality (yank rest of the line)
+(setq! evil-want-Y-yank-to-eol nil)
 
 
+;; Block cursor on insert mode
+(setq evil-insert-state-cursor 'box)
 
-;; Check type definition
-(map! :leader
-      :desc "Peek docs"
-      "c g" #'lsp-ui-doc-glance)
+;; restore vim 's' functionality (substitute)
+(remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 
-(map! :leader
-      :desc "View docs"
-      "c G" #'lsp-describe-thing-at-point)
-
-(setq lsp-ui-doc-max-height 50)
-
-(company-quickhelp-mode)
-(setq company-quickhelp-delay 0)
-
--(setq evil-insert-state-cursor 'box)
+;; Fix undo system
+(evil-set-undo-system 'undo-redo)

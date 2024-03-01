@@ -1,4 +1,4 @@
-;;; lsp.el -*- lexical-binding: t; -*-
+;;; $DOOMDIR/+lsp.el -*- lexical-binding: t; -*-
 
 (use-package! lsp-pyright
   :ensure t
@@ -25,13 +25,14 @@
 	      (setq lsp-enable-file-watchers 'nil)
 	      (setq lsp-file-watch-ignored-directories (eval (car (get 'lsp-file-watch-ignored-directories 'standard-value)))))
 	    ))
+
 (map! :leader
       :desc "Peek the docs"
       "c g" #'lsp-ui-doc-glance)
 
 (map! :leader
-      :desc "Peek the docs"
-      "c g" #'lsp-describe-thing-at-point)
+      :desc "Open docs in minibuffer"
+      "c G" #'lsp-describe-thing-at-point)
 
 (company-quickhelp-mode)
 (setq company-quickhelp-delay 0)

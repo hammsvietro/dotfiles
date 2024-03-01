@@ -20,9 +20,17 @@ tooltip {
   border-color: #11111b;
 }
 
+#custom-notification {
+  border-radius: 0 10px 10px 0;
+}
+
 #workspaces button {
   padding: 5px;
   color: #313244;
+  margin-right: 5px;
+}
+
+.modules-right {
   margin-right: 5px;
 }
 
@@ -52,6 +60,7 @@ tooltip {
 #custom-updates,
 #custom-caffeine,
 #custom-weather,
+#custom-notification,
 #window,
 #clock,
 #battery,
@@ -70,14 +79,16 @@ tooltip {
 
 #tray {
   border-radius: 10px;
-  margin-right: 10px;
+  border-left: 0px;
+  border-right: 0px;
+  border-radius: 10px 0px 0px 10px;
 }
 
 #workspaces {
   background: rgba(40, 44, 52, 0.9);
   border-radius: 10px;
   margin-left: 10px;
-  padding-right: 0px;
+  padding-right: 5px;
   padding-left: 5px;
 }
 
@@ -96,15 +107,10 @@ tooltip {
 
 #custom-updates {
   color: #f5c2e7;
-  border-left: 0px;
-  border-right: 0px;
-  border-radius: 10px 0px 0px 10px;
 }
 
 #window {
   border-radius: 10px;
-  margin-left: 60px;
-  margin-right: 60px;
 }
 
 #clock {
@@ -128,8 +134,6 @@ tooltip {
 
 #pulseaudio.microphone {
   color: #61afef;
-  margin-right: 5px;
-  border-radius: 0 10px 10px 0;
 }
 
 #battery {
