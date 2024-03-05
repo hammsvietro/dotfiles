@@ -83,3 +83,5 @@
 (load! "+evil.el")
 
 (setq frame-title-format "Emacs")
+(setq treemacs-git-mode 'deferred)
+(setq projectile-track-known-projects-automatically nil)
