@@ -10,7 +10,7 @@ return {
         nls.builtins.formatting.shfmt,
         nls.builtins.formatting.stylua,
         nls.builtins.formatting.mix,
-        nls.builtins.formatting.rustfmt,
+        nls.builtins.formatting.rust_analyzer,
         nls.builtins.formatting.elm_format,
       })
     end,

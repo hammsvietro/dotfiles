@@ -1,38 +1,29 @@
--- since this is just an example spec, don't actually load anything here and return an empty spec
--- stylua: ignore
-
--- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
---
--- In your plugin files, you can:
--- * add extra plugins
--- * disable/enabled LazyVim plugins
--- * override the configuration of LazyVim plugins
 return {
   {
-    "nvim-treesitter/nvim-treesitter", build = ':TSUpdate'
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
   },
   {
-    "ellisonleao/gruvbox.nvim", priority = 1000 , config = function(plugin)
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
+    config = function(plugin)
       vim.o.background = "dark"
       vim.cmd([[colorscheme gruvbox]])
-    end
+    end,
   },
   {
-    "sindrets/diffview.nvim"
+    "sindrets/diffview.nvim",
   },
 
   {
-    "f-person/git-blame.nvim"
+    "f-person/git-blame.nvim",
   },
 
-  -- change trouble config
   {
     "folke/trouble.nvim",
-    -- opts will be merged with the parent spec
     opts = { use_diagnostic_signs = true },
   },
 
-  -- add symbols-outline
   {
     "simrat39/symbols-outline.nvim",
     cmd = "SymbolsOutline",
@@ -40,19 +31,17 @@ return {
     config = true,
   },
 
-  -- change some telescope options and a keymap to browse plugin files
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      -- add a keymap to browse plugin files
-      -- stylua: ignore
       {
         "<leader>fp",
-        function() require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root }) end,
+        function()
+          require("telescope.builtin").find_files({ cwd = require("lazy.core.config").options.root })
+        end,
         desc = "Find Plugin File",
       },
     },
-    -- change some options
     opts = {
       defaults = {
         layout_strategy = "horizontal",
@@ -63,7 +52,6 @@ return {
     },
   },
 
-  -- add telescope-fzf-native
   {
     "telescope.nvim",
     dependencies = {
@@ -75,7 +63,6 @@ return {
     },
   },
 
-
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
@@ -83,11 +70,7 @@ return {
       vim.o.timeout = true
       vim.o.timeoutlen = 600
     end,
-    opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
-    }
+    opts = {},
   },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -116,8 +99,6 @@ return {
     },
   },
 
-
-  -- add any tools you want to have installed below
   {
     "williamboman/mason.nvim",
     opts = {
@@ -131,27 +112,23 @@ return {
   },
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    version = "*",
     event = "VeryLazy",
     config = function()
       require("nvim-surround").setup()
-    end
+    end,
   },
-  -- Use <tab> for completion and snippets (supertab)
-  -- first: disable default <tab> and <s-tab> behavior in LuaSnip
   {
     "L3MON4D3/LuaSnip",
     keys = function()
       return {}
     end,
   },
-  -- then: setup supertab in cmp
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji",
     },
-    ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()
         unpack = unpack or table.unpack
@@ -166,8 +143,6 @@ return {
         ["<Tab>"] = cmp.mapping(function(fallback)
           if cmp.visible() then
             cmp.select_next_item()
-            -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-            -- this way you will only jump inside the snippet region
           elseif luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
           elseif has_words_before() then
@@ -202,5 +177,5 @@ return {
         },
       }
     end,
-  }
+  },
 }
