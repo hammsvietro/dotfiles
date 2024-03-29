@@ -51,3 +51,5 @@
 ;;
 
 (package! company-quickhelp)
+
+(package! elcord)

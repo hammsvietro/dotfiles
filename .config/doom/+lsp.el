@@ -34,5 +34,9 @@
       :desc "Open docs in minibuffer"
       "c G" #'lsp-describe-thing-at-point)
 
+(map! :leader
+      :desc "Explain error at point"
+      "e" #'flycheck-explain-error-at-point)
+
 (company-quickhelp-mode)
 (setq company-quickhelp-delay 0)

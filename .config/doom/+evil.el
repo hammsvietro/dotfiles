@@ -21,3 +21,8 @@
 
 ;; Fix undo system
 (evil-set-undo-system 'undo-redo)
+
+;; Open project ibuffer
+(map! :leader
+      :desc "Go to definition on split"
+      "g d" #'xref-find-definitions-other-window)

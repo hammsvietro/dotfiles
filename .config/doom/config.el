@@ -1,7 +1,7 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-old-hope)
+(setq doom-theme 'doom-ir-black)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -85,3 +85,8 @@
 (setq frame-title-format "Emacs")
 (setq treemacs-git-mode 'deferred)
 (setq projectile-track-known-projects-automatically nil)
+
+;; Discord presence
+(require 'elcord)
+(elcord-mode)
+(setq elcord-editor-icon "emacs_icon")
