@@ -88,5 +88,7 @@
 
 ;; Discord presence
 (require 'elcord)
-(elcord-mode)
 (setq elcord-editor-icon "emacs_icon")
+(map! :leader
+      :desc "Toggle discord rich presence integration"
+      "d" #'elcord-mode)
