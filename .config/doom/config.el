@@ -85,6 +85,7 @@
 (setq frame-title-format "Emacs")
 (setq treemacs-git-mode 'deferred)
 (setq projectile-track-known-projects-automatically nil)
+(setq projectile-enable-caching nil)
 
 ;; Discord presence
 (require 'elcord)
@@ -92,3 +93,14 @@
 (map! :leader
       :desc "Toggle discord rich presence integration"
       "d" #'elcord-mode)
+
+;; Copilot
+(use-package! copilot
+  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word)))
+
+(copilot-mode)
