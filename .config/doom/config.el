@@ -7,6 +7,7 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
@@ -81,9 +82,9 @@
 
 (load! "+lsp.el")
 (load! "+evil.el")
+(load! "+treemacs.el")
 
 (setq frame-title-format "Emacs")
-(setq treemacs-git-mode 'deferred)
 (setq projectile-track-known-projects-automatically nil)
 (setq projectile-enable-caching nil)
 
@@ -104,3 +105,6 @@
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
 (copilot-mode)
+
+;; Launch emacsclient without creating new workspace
+(setq persp-emacsclient-init-frame-behaviour-override "main")
