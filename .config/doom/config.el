@@ -107,4 +107,5 @@
 (copilot-mode)
 
 ;; Launch emacsclient without creating new workspace
-(setq persp-emacsclient-init-frame-behaviour-override "main")
+(after! persp-mode
+  (setq persp-emacsclient-init-frame-behaviour-override "main"))
