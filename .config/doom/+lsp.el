@@ -40,3 +40,6 @@
 
 (company-quickhelp-mode)
 (setq company-quickhelp-delay 0)
+
+(setq lsp-rust-features "all")
+(setq lsp-rust-all-features 't)

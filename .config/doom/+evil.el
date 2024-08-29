@@ -22,7 +22,7 @@
 ;; Fix undo system
 (evil-set-undo-system 'undo-redo)
 
-;; Open project ibuffer
+;; Open definition in other window
 (map! :leader
       :desc "Go to definition on split"
       "g d" #'xref-find-definitions-other-window)

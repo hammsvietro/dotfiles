@@ -116,7 +116,6 @@ shopt -s extglob
 set -o emacs
 
 export TSAI_DISABLE_CSP=True
-alias make_etc="make format && make lint && make test"
 
 source ~/secrets.sh
 . /opt/asdf-vm/asdf.sh
