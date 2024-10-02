@@ -16,6 +16,9 @@
 ;; Block cursor on insert mode
 (setq evil-insert-state-cursor 'box)
 
+;; Similar to vim's 'scrolloff'
+(setq scroll-margin 7)
+
 ;; restore vim 's' functionality (substitute)
 (remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 
