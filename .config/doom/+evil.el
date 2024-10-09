@@ -9,10 +9,6 @@
     (with-syntax-table table
       ad-do-it)))
 
-;; restore vim 'Y' functionality (yank rest of the line)
-(setq! evil-want-Y-yank-to-eol nil)
-
-
 ;; Block cursor on insert mode
 (setq evil-insert-state-cursor 'box)
 
@@ -24,6 +20,9 @@
 
 ;; Fix undo system
 (evil-set-undo-system 'undo-redo)
+
+
+(map! :n "TAB" #'better-jumper-jump-forward)
 
 ;; Open definition in other window
 (map! :leader

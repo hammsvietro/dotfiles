@@ -1,158 +1,94 @@
 {
-    "layer": "top",
-    "position": "top",
-    "mod": "dock",
-    "exclusive": true,
-    "passtrough": false,
-    "gtk-layer-shell": true,
-    "height": 0,
-    "modules-left": [
-        "clock",
-        "hyprland/workspaces"
-    ],
-    "modules-center": ["hyprland/window"],
-    "modules-right": [
-        "tray",
-        "battery",
-        "backlight",
-        "custom/updates",
-        "cpu",
-        "memory",
-        "pulseaudio",
-        "pulseaudio#microphone",
-        "custom/notification",
-    ],
-
-    "hyprland/window": {
-        "format": "{}"
-    },
-    "hyprland/workspaces": {
-        "on-scroll-up": "hyprctl dispatch workspace e+1",
-        "on-scroll-down": "hyprctl dispatch workspace e-1",
-        "all-outputs": true,
-        "on-click": "activate",
-        "format": "{icon}",
-        "format-icons": {
-            "1": "1 - sup",
-            "2": "2 - www",
-            "3": "3 - code",
-            "4": "4 - term",
-            "5": "5 - mus",
-            "6": "6 - chat",
-            "7": "7 - org",
-            "8": "8 - game",
-            "9": "9 - video",
-          }
-    },
-    "cpu": {
-        "interval": 10,
-        "format": " {}%",
-        "max-length": 10,
-        "on-click": ""
-    },
-    "memory": {
-        "interval": 30,
-        "format": " {}%",
-        "format-alt":" {used:0.1f}G",
-        "max-length": 10
-    },
-    "custom/updates": {
-        "exec": "checkupdates | wc -l",
-        "interval": 600,
-        "signal": 10,
-        "format": " {}",
-    },
-    "custom/language": {
-        "exec": "cat /tmp/kb_layout",
-        "interval": 3,
-        "format": " {}",
-        "tooltip": false
-    },
-    "tray": {
-        "icon-size": 13,
-        "tooltip": false,
-        "spacing": 10
-    },
-    "backlight": {
-        "device": "intel_backlight",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""]
-    },
-    "clock": {
-        "format": " {:%H:%M  %d/%m}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-              "mode"          : "year",
-              "mode-mon-col"  : 3,
-              "on-scroll"     : 1,
-              "on-click-right": "mode",
-              "format": {
-                "months":     "<span color='#ffead3'><b>{}</b></span>",
-                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
-                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
-                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
-                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
-              }
-            },
-    },
-    "battery": {
-        	"states": {
-            		"warning": 30,
-            		"critical": 15
-        	},
-        	"format": "{icon} {capacity}%",
-        	"format-charging": " {capacity}%",
-        	"format-plugged": " {capacity}%",
-        	"format-alt": "{icon} {time}",
-        	"format-full": " {capacity}%",
-        	"format-icons": ["", "", " "]
-    },
-    "network": {
-        	"format-wifi": "  {essid}",
-        	"format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        	"format-linked": "{ifname} (No IP) ",
-        	"format-disconnected": " Disconnected",
-        	"format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
-    "pulseaudio": {
-        "format": "{icon}  {volume}%",
-        "tooltip": false,
-        "format-muted": " Muted",
-        "on-click": "pavucontrol",
-        "on-scroll-up": "pamixer -i 5",
-        "on-scroll-down": "pamixer -d 5",
-        "scroll-step": 5,
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        }
-    },
-    "pulseaudio#microphone": {
-        "format": "{format_source}",
-        "tooltip": false,
-        "format-source": " {volume}%",
-        "format-source-muted": " Muted",
-        "on-click": "pavucontrol",
-        "on-scroll-up": "pamixer --default-source -i 5",
-        "on-scroll-down": "pamixer --default-source -d 5",
-        "scroll-step": 5
-    },
-    "custom/audio_idle_inhibitor": {
+  "layer": "top",
+  "height": 36,
+  "margin": "6, 12, 6, 12",
+  "position": "top",
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "bluetooth",
+    "network",
+    "custom/updates",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "clock",
+    "custom/notification",
+  ],
+  "custom/launcher":{
+    "format": " ",
+    "tooltip": false,
+    "on-click": "rofi -show drun",
+    "on-click-right": "killall rofi"
+  },
+  "hyprland/workspaces": {
     "format": "{icon}",
-    "exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
-    "exec-if": "which sway-audio-idle-inhibit",
-    "return-type": "json",
     "format-icons": {
-      "output": "",
-      "input": "",
-      "output-input": "  ",
-      "none": ""
+      "active": "",
+      "default": ""
     }
+  },
+  "hyprland/window": {
+    "max-length": 100
+  },
+  "clock": {
+    "format": "{:%I:%M %p}",
+    "tooltip-format": "{}"
+  },
+  "bluetooth": {
+    "format-on": "<span foreground=\"#98d3ee\"></span>",
+    "format-off": "<span foreground=\"#98d3ee\">󰂲</span>",
+    "format-disabled": "<span foreground=\"#98d3ee\"></span>",
+    "format-connected": "<span foreground=\"#98d3ee\">󰂱</span>",
+    "on-click": "blueman-manager",
+    "tooltip-format-connected": "{device_alias}"
+  },
+  "network": {
+    "format-wifi": "<span foreground=\"#87eab8\">{icon}</span>",
+    "format-disconnected": "󰤮",
+    "format-icons": [ "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "{essid}",
+    "on-click": "nm-connection-editor"
+  },
+  "custom/updates":{
+    "tooltip": false,
+    "format": "<span foreground=\"#f1d8a5\">󰮯</span>",
+    "on-click": "kitty -e yay -Syu && notify-send -a 'System' 'The system has been updated' "
+  },
+  "pulseaudio": {
+    "tooltip": false,
+    "format": "<span foreground=\"#98d3ee\">{icon}</span>  {volume} |",
+    "format-muted": "<span foreground=\"#98d3ee\"></span>  |",
+    "on-click-right":"pactl set-sink-mute 0 toggle",
+    "on-click":"pavucontrol",
+    "format-icons": {
+      "headphone": "",
+      "default": ""
+    }
+  },
+  "backlight": {
+    "tooltip": false,
+    "format": "<span foreground=\"#f1d8a5\">󰃠</span>  {}  |",
+    "interval":1,
+    "on-scroll-up": "light -A 5",
+    "on-scroll-down": "light -U 5"
+  },
+  "battery": {
+    "states": {
+      "good": 80,
+      "warning": 30,
+      "critical": 20
+    },
+    "tooltip": false,
+    "format": "<span foreground=\"#c296eb\">{icon}</span>   {capacity}",
+    "format-charging": "<span foreground=\"#c296eb\"></span>   {capacity}",
+    "format-plugged":"<span foreground=\"#c296eb\"></span>   {capacity}",
+    "format-alt": "<span foreground=\"#c296eb\">{icon}</span>   {time}",
+    "format-icons": ["", "", "", "", ""]
   },
   "custom/notification": {
     "tooltip": false,
@@ -174,5 +110,9 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
+  "custom/power":{
+    "tooltip": false,
+    "format": "",
+    "on-click": "$HOME/scripts/leave.sh"
+  }
 }
-
