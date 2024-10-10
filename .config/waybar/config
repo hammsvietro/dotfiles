@@ -10,6 +10,7 @@
     "hyprland/window"
   ],
   "modules-right": [
+    "tray",
     "bluetooth",
     "network",
     "custom/updates",
@@ -38,6 +39,11 @@
   "clock": {
     "format": "{:%I:%M %p}",
     "tooltip-format": "{}"
+  },
+  "tray": {
+    "icon-size": 13,
+    "tooltip": false,
+    "spacing": 6
   },
   "bluetooth": {
     "format-on": "<span foreground=\"#98d3ee\"></span>",

@@ -15,10 +15,15 @@ window#waybar {
   margin-left: 5px;
 }
 
+#tray {
+  margin-right: 6px;
+}
+
 #workspaces button {
   color: #86aaec;
   margin-left: 4px;
   background-color: transparent;
+  border-color: transparent;
 }
 
 #workspaces button.hover {
