@@ -38,7 +38,25 @@
   },
   "clock": {
     "format": "{:%I:%M %p}",
-    "tooltip-format": "{}"
+    "tooltip-format": "\n<span size='9pt' font='JetBrainsMono Nerd Font'>{calendar}</span>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "on-scroll": 1,
+      "format": {
+        "months":     "<span color='#ffead3'>{}</span>",
+        "days":       "<span color='#ecc6d9'>{}</span>",
+        "weekdays":   "<span color='#ffcc66'>{}</span>",
+        "today":      "<span color='#ff2800'><u>{}</u></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-click-forward": "tz_up",
+      "on-click-backward": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
   },
   "tray": {
     "icon-size": 13,
