@@ -15,6 +15,7 @@
     "network",
     "custom/updates",
     "pulseaudio",
+    "memory",
     "backlight",
     "battery",
     "clock",
@@ -57,6 +58,11 @@
       "on-scroll-up": "shift_up",
       "on-scroll-down": "shift_down"
     }
+  },
+  "memory": {
+      "format": "{used} | ",
+      "tooltip": true,
+      "interval": 5
   },
   "tray": {
     "icon-size": 13,

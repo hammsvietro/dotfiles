@@ -21,7 +21,6 @@ window#waybar {
 
 #workspaces button {
   color: #86aaec;
-  margin-left: 4px;
   background-color: transparent;
   border-color: transparent;
 }
@@ -41,6 +40,11 @@ window#waybar {
 
 #bluetooth {
   margin-right: 8px;
+  color: #dee1e6;
+}
+
+#memory {
+  margin-right: 12px;
   color: #dee1e6;
 }
 
