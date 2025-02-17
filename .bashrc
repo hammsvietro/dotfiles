@@ -118,7 +118,6 @@ set -o emacs
 export TSAI_DISABLE_CSP=True
 
 source ~/secrets.sh
-. /opt/asdf-vm/asdf.sh
 eval $(ssh-agent) >/dev/null
 
 QT_QPA_PLATFORM="wayland;xcb"
