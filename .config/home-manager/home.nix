@@ -58,6 +58,11 @@
   };
 
   home.file = {
+    "shells" = {
+      source = config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/dotfiles/shells";
+      recursive = true;
+    };
     "wallpapers" = {
       source = config.lib.file.mkOutOfStoreSymlink
         "${config.home.homeDirectory}/dotfiles/wallpapers";
