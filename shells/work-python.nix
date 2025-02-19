@@ -7,12 +7,9 @@ in with pkgs;
 mkShell {
   nativeBuildInputs = [ pkg-config pythonPackages.cython pythonPackages.wheel ];
   buildInputs = [
-    krb5
-    krb5.dev
-    krb5.lib
-
     pythonPackages.gssapi
     pythonPackages.setuptools
+    ruff
     nodejs
     pythonPackages.virtualenv
   ];
@@ -25,6 +22,7 @@ mkShell {
     source $VENV/bin/activate
     export MAKEFLAGS="SHELL=$SHELL"
     export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${lib-path}"
+    export PATH=${lib.makeBinPath [ ruff ]}:$PATH
   '';
   packages = [
     (writeShellScriptBin "tsai-disable" ''

@@ -5,6 +5,7 @@
   imports = [
     (builtins.path { path = ./modules/dev-tools.nix; })
     (builtins.path { path = ./modules/apps.nix; })
+    (builtins.path { path = ./modules/hyprland.nix; })
   ];
 
   home.stateVersion = "24.11";
@@ -17,22 +18,30 @@
     neofetch
     htop
     tmux
-    alacritty
     fd
     ripgrep
     gnutls
-
+    bash
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
   nixpkgs.config.allowUnfree = true;
+
+  programs.zsh.enable = false; # Disable Zsh
+  programs.bash = {
+    enable = true; # Enable Bash
+    bashrcExtra = ''
+      # Source your custom bashrc
+      if [ -f ~/dotfiles.bashrc ]; then
+        source ~/dotfiles.bashrc
+      fi
+    '';
+  };
 
   programs.git = {
     enable = true;
     userName = "Pedro Vietro";
     userEmail = "hammsvietro@gmail.com";
   };
-
-  programs.zsh.enable = true;
 
   xdg.configFile = {
     "doom" = {
@@ -68,5 +77,11 @@
         "${config.home.homeDirectory}/dotfiles/wallpapers";
       recursive = true;
     };
+    ".tmux.conf" = {
+      source = config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/dotfiles/.tmux.conf";
+    };
   };
+
+  home.sessionVariables = { OZONE_PLATFORM = "wayland"; };
 }

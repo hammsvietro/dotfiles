@@ -16,6 +16,7 @@
     python312Packages.pip
     python312Packages.virtualenv
     python312Packages.setuptools
+    black
 
     # Rust
     rustup
@@ -38,7 +39,6 @@
   ];
 
   programs.git.enable = true;
-  programs.zsh.enable = true;
   programs.starship.enable = true;
 
   programs.direnv.enable = true;
