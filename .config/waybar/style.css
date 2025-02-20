@@ -15,6 +15,10 @@ window#waybar {
   margin-left: 5px;
 }
 
+#workspaces button {
+  padding-left: 3px;
+}
+
 #tray {
   margin-right: 6px;
 }
@@ -95,6 +99,10 @@ window#waybar {
 
 #custom-notification {
   margin-right: 12px;
+}
+
+#language {
+    margin-right: 12px;
 }
 
 #custom-power {

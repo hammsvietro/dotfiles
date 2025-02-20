@@ -83,5 +83,9 @@
     };
   };
 
-  home.sessionVariables = { OZONE_PLATFORM = "wayland"; };
+  home.sessionVariables = {
+    OZONE_PLATFORM = "wayland";
+    CHROME_USE_GL = "desktop";
+    NIXOS_OZONE_WL = "1";
+  };
 }

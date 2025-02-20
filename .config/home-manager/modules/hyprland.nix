@@ -8,5 +8,7 @@
     copyq
     grim
     grimblast
+    wlr-randr
   ];
+
 }

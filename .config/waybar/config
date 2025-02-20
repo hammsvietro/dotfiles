@@ -13,7 +13,7 @@
     "tray",
     "bluetooth",
     "network",
-    "custom/updates",
+    "hyprland/language",
     "pulseaudio",
     "memory",
     "backlight",
@@ -84,11 +84,6 @@
     "tooltip-format-wifi": "{essid}",
     "on-click": "nm-connection-editor"
   },
-  "custom/updates":{
-    "tooltip": false,
-    "format": "<span foreground=\"#f1d8a5\">󰮯</span>",
-    "on-click": "kitty -e yay -Syu && notify-send -a 'System' 'The system has been updated' "
-  },
   "pulseaudio": {
     "tooltip": false,
     "format": "<span foreground=\"#98d3ee\">{icon}</span>  {volume} |",
@@ -144,5 +139,11 @@
     "tooltip": false,
     "format": "",
     "on-click": "$HOME/scripts/leave.sh"
+  },
+  "hyprland/language": {
+      "format": "{}",
+      "format-en": "en",
+      "format-ru": "ru",
+      "format-pt": "br",
   }
 }

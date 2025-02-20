@@ -9,6 +9,7 @@
     ripgrep
     fd
     jq
+    sqlite-interactive
 
     # Python
     python312Packages.gssapi
