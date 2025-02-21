@@ -22,8 +22,8 @@ mkShell {
     source $VENV/bin/activate
     export MAKEFLAGS="SHELL=$SHELL"
     export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${lib-path}"
-    TSAI_DISABLE_CSRF=True
-    TSAI_DISABLE_CSP=True
+    export TSAI_DISABLE_CSRF=True
+    export TSAI_DISABLE_CSP=True
     export PATH=${lib.makeBinPath [ ruff ]}:$PATH
   '';
   packages = [

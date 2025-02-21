@@ -6,6 +6,7 @@
     (builtins.path { path = ./modules/dev-tools.nix; })
     (builtins.path { path = ./modules/apps.nix; })
     (builtins.path { path = ./modules/hyprland.nix; })
+    (builtins.path { path = ./modules/games.nix; })
   ];
 
   home.stateVersion = "24.11";
