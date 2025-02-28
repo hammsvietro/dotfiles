@@ -6,14 +6,16 @@
     stremio
     discord
     pavucontrol
+    (pkgs.callPackage (builtins.fetchGit {
+      url = "https://github.com/pyproject-nix/uv2nix";
+      ref = "master";
+    }) { })
 
-    # Google Chrome override (using `override` instead of `overrideAttrs`)
     (google-chrome.override {
       commandLineArgs =
-        "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+        "--disable-gpu-compositing --enable-features=UseOzonePlatform --ozone-platform=wayland";
     })
 
-    # Obsidian override (using `overrideAttrs`)
     (obsidian.overrideAttrs (old: {
       postFixup = (old.postFixup or "") + ''
         wrapProgram $out/bin/obsidian \

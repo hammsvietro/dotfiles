@@ -43,3 +43,6 @@
 
 (setq lsp-rust-features "all")
 (setq lsp-rust-all-features 't)
+
+(after! company
+  (setq company-backends (remove 'company-capf company-backends)))
