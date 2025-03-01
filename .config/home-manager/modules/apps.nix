@@ -6,10 +6,7 @@
     stremio
     discord
     pavucontrol
-    (pkgs.callPackage (builtins.fetchGit {
-      url = "https://github.com/pyproject-nix/uv2nix";
-      ref = "master";
-    }) { })
+    uv
 
     (google-chrome.override {
       commandLineArgs =
