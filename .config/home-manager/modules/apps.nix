@@ -5,8 +5,11 @@
     spotify
     stremio
     discord
+    notion-app-enhanced
     pavucontrol
     uv
+    zip
+    unzip
 
     (google-chrome.override {
       commandLineArgs =

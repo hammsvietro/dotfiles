@@ -38,11 +38,12 @@
       :desc "Explain error at point"
       "e" #'flycheck-explain-error-at-point)
 
-(company-quickhelp-mode)
-(setq company-quickhelp-delay 0)
-
 (setq lsp-rust-features "all")
 (setq lsp-rust-all-features 't)
 
-(after! company
-  (setq company-backends (remove 'company-capf company-backends)))
+;; Disable ESLint in LSP and Flycheck
+(after! lsp-mode
+  (setq lsp-disabled-clients '(pylsp eslint)))  ;; ESLint disabled properly
+
+(after! flycheck
+  (setq-default flycheck-disabled-checkers '(javascript-eslint typescript-tslint)))

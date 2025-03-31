@@ -32,6 +32,9 @@
     enable = true; # Enable Bash
     bashrcExtra = ''
       # Source your custom bashrc
+      if [ -f ~/.secrets.sh ]; then
+        source ~/.secrets.sh
+      fi
       if [ -f ~/dotfiles.bashrc ]; then
         source ~/dotfiles.bashrc
       fi

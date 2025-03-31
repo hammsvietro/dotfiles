@@ -10,12 +10,12 @@ in pkgs.mkShell {
     pythonPackages.cython
     pythonPackages.wheel
     pythonPackages.setuptools
-    pkgs.uv # Using uv for dependency management
+    pkgs.uv
   ];
 
   buildInputs = [
-    pythonPackages.gssapi # Ensure gssapi is installed via Nix
-    pythonPackages.krb5 # Use Python's krb5 package instead of system-wide krb5
+    pythonPackages.gssapi
+    pythonPackages.krb5
     pythonPackages.virtualenv
     pkgs.libuuid
     pkgs.gcc
@@ -31,7 +31,6 @@ in pkgs.mkShell {
     export MAKEFLAGS="SHELL=$SHELL"
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${lib-path}"
 
-    # Ensure proper headers for Kerberos
     export CFLAGS="-I${pythonPackages.krb5}/include"
     export LDFLAGS="-L${pythonPackages.krb5}/lib"
     export CC=gcc
@@ -50,7 +49,6 @@ in pkgs.mkShell {
       fi
       source $VENV/bin/activate
 
-      # Install dependencies excluding gssapi
       grep -v '^gssapi' requirements.txt > filtered-requirements.txt
       uv pip sync filtered-requirements.txt
       rm filtered-requirements.txt

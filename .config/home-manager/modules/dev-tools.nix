@@ -1,47 +1,72 @@
 { config, pkgs, ... }: {
   home.packages = with pkgs; [
+    # Core utilities
     coreutils
-
     bash
-
     gnumake
     fzf
     ripgrep
     fd
     jq
     sqlite-interactive
+    tree-sitter # Syntax tree parsing for Doom Emacs
 
-    # Python
+    # Python Development
     python312Packages.gssapi
-    (python312.withPackages (ps: with ps; [ gssapi ]))
-    python312Packages.pip
-    python312Packages.virtualenv
-    python312Packages.setuptools
-    black
+    (python312.withPackages (ps:
+      with ps; [
+        pyright
+        python-lsp-server
+        python-lsp-ruff
+        ruff-lsp
+        black
+        isort
+        mypy
+        pip
+        virtualenv
+        setuptools
+      ]))
+    pyright
+    ruff
+    ruff-lsp
 
-    # Rust
+    # Rust Development
     rustup
 
-    # TypeScript / JavaScript
-    nodejs_20
+    # JavaScript / TypeScript / React Development
+    nodejs
+    nodePackages.pnpm
+    nodePackages.yarn
+    nodePackages.npm
 
-    # Tools
+    # JavaScript & TypeScript Development
+    nodePackages.eslint
+    nodePackages.prettier
+    nodePackages.typescript
+    nodePackages.typescript-language-server
+    nodePackages.vscode-langservers-extracted # LSP for eslint, json, css, etc.
+
+    # Docker
     docker
     docker-compose
+
+    # Nix Development
     nixfmt
     nixpkgs-fmt
-    direnv
     nil # Nix LSP
 
+    # Doom Emacs dependencies
     git
-    krb5.dev
     gcc
     pkg-config
+    krb5.dev
   ];
 
+  # Enable Git
   programs.git.enable = true;
-  programs.starship.enable = true;
 
+  programs.starship.enable = true;
+  # Enable Direnv (for automatic environment management)
   programs.direnv.enable = true;
   programs.direnv.nix-direnv.enable = true;
 }

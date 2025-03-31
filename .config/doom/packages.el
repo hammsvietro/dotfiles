@@ -50,8 +50,6 @@
 ;; (unpin! t)
 ;;
 
-(package! company-quickhelp)
-
 (package! elcord)
 
 (package! copilot
