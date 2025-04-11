@@ -7,6 +7,7 @@
     discord
     notion-app-enhanced
     pavucontrol
+    thunderbird
     uv
     zip
     unzip

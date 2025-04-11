@@ -10,6 +10,7 @@
     jq
     sqlite-interactive
     tree-sitter # Syntax tree parsing for Doom Emacs
+    lsof
 
     # Python Development
     python312Packages.gssapi
@@ -27,8 +28,6 @@
         setuptools
       ]))
     pyright
-    ruff
-    ruff-lsp
 
     # Rust Development
     rustup

@@ -29,7 +29,6 @@ mkShell {
     pythonPackages.pytest
     pythonPackages.pandas
     pythonPackages.mypy
-    ruff
     zlib
     nodejs
     pythonPackages.virtualenv
@@ -92,7 +91,7 @@ mkShell {
 
       rm filtered-requirements.txt
 
-      uv pip install pytest mypy types-PyYAML types-python-dateutil types-requests
+      uv pip install pytest mypy types-PyYAML types-python-dateutil types-requests ruff profilehooks
       echo "✅ Dependencies installed!"
     '')
     (pkgs.writeShellScriptBin "uv" ''
