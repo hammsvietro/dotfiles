@@ -85,11 +85,12 @@ mkShell {
 
 
       export EXTRA_INDEX_URL="https://$NEXUS_USERNAME:$NEXUS_PASSWORD@nexus.dev.timeseer.ai/repository/timeseer/simple"
-      grep -v '^gssapi' requirements.txt > filtered-requirements.txt
+      uv pip freeze > unfiltered-requirements.txt
+      grep -v '^gssapi' unfiltered-requirements.txt > filtered-requirements.txt
 
       uv pip sync --extra-index-url="$EXTRA_INDEX_URL" --reinstall filtered-requirements.txt
 
-      rm filtered-requirements.txt
+      rm filtered-requirements.txt unfiltered-requirements.txt
 
       uv pip install pytest mypy types-PyYAML types-python-dateutil types-requests ruff profilehooks
       echo "✅ Dependencies installed!"
