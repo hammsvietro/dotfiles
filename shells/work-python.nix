@@ -18,6 +18,7 @@ mkShell {
   nativeBuildInputs = [
     pkg-config
     pythonPackages.cython
+    pythonPackages.tomli-w
     pythonPackages.wheel
     pythonPackages.setuptools
     pkgs.uv
@@ -26,6 +27,7 @@ mkShell {
   buildInputs = [
     pythonPackages.gssapi
     pythonPackages.setuptools
+    pythonPackages.tomli-w
     pythonPackages.pytest
     pythonPackages.pandas
     pythonPackages.mypy
@@ -76,25 +78,36 @@ mkShell {
       FLASK_APP=timeseer.web FLASK_DEBUG=1 python -m flask run
     '')
     (pkgs.writeShellScriptBin "install-deps" ''
-      set -e
+      set -euo pipefail
 
       if [ -z "$NEXUS_USERNAME" ] || [ -z "$NEXUS_PASSWORD" ]; then
         echo "❌ Please set NEXUS_USERNAME and NEXUS_PASSWORD in your environment."
         exit 1
       fi
 
-
       export EXTRA_INDEX_URL="https://$NEXUS_USERNAME:$NEXUS_PASSWORD@nexus.dev.timeseer.ai/repository/timeseer/simple"
-      uv pip freeze > unfiltered-requirements.txt
-      grep -v '^gssapi' unfiltered-requirements.txt > filtered-requirements.txt
 
-      uv pip sync --extra-index-url="$EXTRA_INDEX_URL" --reinstall filtered-requirements.txt
+      LOCK_FILE="uv.lock"
+      BACKUP_LOCK="uv.lock.bak"
+      FILTERED_LOCK="uv.lock.filtered"
+      PACKAGE_TO_REMOVE="gssapi"
 
-      rm filtered-requirements.txt unfiltered-requirements.txt
+      uv pip install tomli-w
+      echo "🔍 Filtering out '$PACKAGE_TO_REMOVE' from $LOCK_FILE using filter_packages.py..."
+      PACKAGE_TO_REMOVE="$PACKAGE_TO_REMOVE" python /home/hammsvietro/shells/filter_packages.py
 
+      echo "📦 Syncing dependencies without '$PACKAGE_TO_REMOVE'..."
+      mv "$LOCK_FILE" "$BACKUP_LOCK"
+      mv "$FILTERED_LOCK" "$LOCK_FILE"
+      uv sync --extra-index-url="$EXTRA_INDEX_URL" --frozen
+      mv "$BACKUP_LOCK" "$LOCK_FILE"
+
+      echo "📥 Installing dev tools..."
       uv pip install pytest mypy types-PyYAML types-python-dateutil types-requests ruff profilehooks
+
       echo "✅ Dependencies installed!"
     '')
+
     (pkgs.writeShellScriptBin "uv" ''
       export PATH="$PWD/.venv/bin:$PATH"
       exec ${pkgs.uv}/bin/uv "$@"
