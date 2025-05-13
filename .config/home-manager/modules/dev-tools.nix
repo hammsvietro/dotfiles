@@ -13,21 +13,22 @@
     lsof
 
     # Python Development
-    python312Packages.gssapi
+    pyright
     (python312.withPackages (ps:
       with ps; [
         pyright
         python-lsp-server
         python-lsp-ruff
-        ruff-lsp
+        ruff
         black
         isort
         mypy
         pip
         virtualenv
         setuptools
+        gssapi
+        uv
       ]))
-    pyright
 
     # Rust Development
     rustup
@@ -37,6 +38,7 @@
     nodePackages.pnpm
     nodePackages.yarn
     nodePackages.npm
+    deno
 
     # JavaScript & TypeScript Development
     nodePackages.eslint

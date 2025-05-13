@@ -8,9 +8,10 @@
     notion-app-enhanced
     pavucontrol
     thunderbird
-    uv
     zip
     unzip
+    kitty
+    pciutils
 
     (google-chrome.override {
       commandLineArgs =

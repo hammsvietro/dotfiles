@@ -9,6 +9,7 @@
     grim
     grimblast
     wlr-randr
+    networkmanagerapplet
   ];
 
 }

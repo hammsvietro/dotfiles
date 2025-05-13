@@ -23,7 +23,7 @@
     ripgrep
     gnutls
     bash
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
   ];
   nixpkgs.config.allowUnfree = true;
 

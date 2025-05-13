@@ -21,7 +21,6 @@ mkShell {
     pythonPackages.tomli-w
     pythonPackages.wheel
     pythonPackages.setuptools
-    pkgs.uv
   ];
 
   buildInputs = [
@@ -31,6 +30,7 @@ mkShell {
     pythonPackages.pytest
     pythonPackages.pandas
     pythonPackages.mypy
+    nodePackages.webpack
     zlib
     nodejs
     pythonPackages.virtualenv
@@ -48,6 +48,7 @@ mkShell {
     source $VENV/bin/activate
     export PATH="$PWD/$VENV/bin:$PATH"
 
+    export NODE_OPTIONS="--max-old-space-size=2048"
     export MAKEFLAGS="SHELL=$SHELL"
     export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${lib-path}"
 
