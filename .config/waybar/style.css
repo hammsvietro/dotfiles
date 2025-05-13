@@ -30,12 +30,12 @@ window#waybar {
 }
 
 #workspaces button.hover {
- background-color: transparent;
+  background-color: transparent;
 }
 
 #workspaces button.active {
- color: #c296eb;
- background-color: transparent;
+  color: #c296eb;
+  background-color: transparent;
 }
 
 #custom-player {
@@ -102,7 +102,7 @@ window#waybar {
 }
 
 #language {
-    margin-right: 12px;
+  margin-right: 12px;
 }
 
 #custom-power {

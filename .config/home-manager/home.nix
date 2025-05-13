@@ -23,9 +23,9 @@
     ripgrep
     gnutls
     bash
-    nerd-fonts.jetbrains-mono
-  ];
+  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
   nixpkgs.config.allowUnfree = true;
+  fonts.fontconfig.enable = true;
 
   programs.zsh.enable = false; # Disable Zsh
   programs.bash = {
