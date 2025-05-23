@@ -14,6 +14,7 @@
 
     # Python Development
     pyright
+    maturin
     (python312.withPackages (ps:
       with ps; [
         pyright

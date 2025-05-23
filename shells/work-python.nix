@@ -60,7 +60,6 @@ mkShell {
     export CC=gcc
     export CXX=g++
     export UV_NO_SYNC=1
-    export UV_NO_BUILD=1
 
     echo "Environment is set up!"
   '';
@@ -106,6 +105,7 @@ mkShell {
       echo "📥 Installing dev tools..."
       uv pip install pytest mypy types-PyYAML types-python-dateutil types-requests ruff profilehooks
 
+      make deps-typescript
       echo "✅ Dependencies installed!"
     '')
 
