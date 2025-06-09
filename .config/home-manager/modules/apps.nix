@@ -7,6 +7,7 @@
     discord
     notion-app-enhanced
     pavucontrol
+    insomnia
     thunderbird
     zip
     unzip

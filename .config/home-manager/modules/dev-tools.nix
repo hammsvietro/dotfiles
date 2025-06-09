@@ -12,6 +12,10 @@
     tree-sitter # Syntax tree parsing for Doom Emacs
     lsof
 
+    # Golang
+    go
+    gopls
+
     # Python Development
     pyright
     maturin
@@ -62,6 +66,9 @@
     gcc
     pkg-config
     krb5.dev
+
+    # Elixir
+    elixir
   ];
 
   # Enable Git
