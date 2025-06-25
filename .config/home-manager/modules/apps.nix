@@ -8,11 +8,15 @@
     notion-app-enhanced
     pavucontrol
     insomnia
+    ffmpeg
+    vlc
+    wl-clipboard
     thunderbird
     zip
     unzip
     kitty
     pciutils
+    qbittorrent
 
     (google-chrome.override {
       commandLineArgs =

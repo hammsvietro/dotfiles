@@ -43,7 +43,6 @@
     nodePackages.pnpm
     nodePackages.yarn
     nodePackages.npm
-    deno
 
     # JavaScript & TypeScript Development
     nodePackages.eslint
@@ -66,6 +65,8 @@
     gcc
     pkg-config
     krb5.dev
+
+    jq
 
     # Elixir
     elixir
