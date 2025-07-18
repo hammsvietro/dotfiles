@@ -36,7 +36,7 @@
   services.desktopManager.plasma6.enable = true;
   services.printing.enable = true;
 
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -77,6 +77,7 @@
     kitty
     dunst
     desktop-file-utils
+    ntfs3g
   ];
 
   environment.sessionVariables = {
@@ -117,17 +118,21 @@
     extraPackages32 = with pkgs.pkgsi686Linux; [ vulkan-loader libvdpau ];
   };
 
-  services.xserver.videoDrivers = [ "nvidia" ];
-
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   nix.extraOptions = ''
     trusted-users = root hammsvietro
   '';
+
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 1d";
+  };
 }

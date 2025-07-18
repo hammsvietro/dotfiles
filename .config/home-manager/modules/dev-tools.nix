@@ -8,7 +8,8 @@
     ripgrep
     fd
     jq
-    sqlite-interactive
+    sqlite
+    sqlitebrowser
     tree-sitter # Syntax tree parsing for Doom Emacs
     lsof
 
@@ -39,10 +40,7 @@
     rustup
 
     # JavaScript / TypeScript / React Development
-    nodejs
-    nodePackages.pnpm
-    nodePackages.yarn
-    nodePackages.npm
+    nodejs_22
 
     # JavaScript & TypeScript Development
     nodePackages.eslint

@@ -10,6 +10,7 @@
     protontricks # Manage Proton dependencies
     libstrangle # FPS limiter
     goverlay # GUI for MangoHud, vkBasalt, etc.
+    fuse2
   ];
 
   # NVIDIA and Steam Optimizations
