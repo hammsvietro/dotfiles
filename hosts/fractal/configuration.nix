@@ -50,7 +50,11 @@
     isNormalUser = true;
     description = "Pedro Hamms Vietro";
     shell = pkgs.bash;
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     packages = with pkgs; [ kdePackages.kate ];
   };
 
@@ -78,6 +82,8 @@
     dunst
     desktop-file-utils
     ntfs3g
+    anydesk
+    tree
   ];
 
   environment.sessionVariables = {
@@ -115,7 +121,10 @@
       libvdpau
       nvidia-vaapi-driver
     ];
-    extraPackages32 = with pkgs.pkgsi686Linux; [ vulkan-loader libvdpau ];
+    extraPackages32 = with pkgs.pkgsi686Linux; [
+      vulkan-loader
+      libvdpau
+    ];
   };
 
   hardware.nvidia = {
@@ -133,6 +142,11 @@
   nix.gc = {
     automatic = true;
     dates = "daily";
-    options = "--delete-older-than 1d";
+    options = "--delete-older-than 1h";
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
   };
 }
