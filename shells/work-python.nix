@@ -2,7 +2,8 @@ let
   pkgs = import <nixpkgs> { };
   python = pkgs.python312;
   pythonPackages = python.pkgs;
-  lib-path = with pkgs;
+  lib-path =
+    with pkgs;
     lib.makeLibraryPath [
       openssl
       stdenv.cc.cc
@@ -13,7 +14,8 @@ let
       gcc # C compiler (in case it’s missing)
       zlib
     ];
-in with pkgs;
+in
+with pkgs;
 mkShell {
   nativeBuildInputs = [
     pkg-config
@@ -29,6 +31,7 @@ mkShell {
     pythonPackages.tomli-w
     pythonPackages.pytest
     pythonPackages.pandas
+    pythonPackages.tzdata
     pythonPackages.mypy
     nodePackages.webpack
     zlib
@@ -47,6 +50,8 @@ mkShell {
     fi
     source $VENV/bin/activate
     export PATH="$PWD/$VENV/bin:$PATH"
+    export TZDIR=${pkgs.tzdata}/share/zoneinfo
+
 
     export NODE_OPTIONS="--max-old-space-size=2048"
     export MAKEFLAGS="SHELL=$SHELL"

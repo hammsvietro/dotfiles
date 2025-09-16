@@ -84,6 +84,22 @@
     ntfs3g
     anydesk
     tree
+    gnupg
+    spotify
+    discord
+    notion-app-enhanced
+    pavucontrol
+    insomnia
+    ffmpeg
+    vlc
+    wl-clipboard
+    thunderbird
+    zip
+    unzip
+    kitty
+    pciutils
+    qbittorrent
+    tig
   ];
 
   environment.sessionVariables = {
@@ -94,6 +110,11 @@
   };
 
   programs.hyprland.enable = true;
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-qt;
+  };
   services.envfs.enable = true;
   services.dbus.enable = true;
   virtualisation.docker.enable = true;
