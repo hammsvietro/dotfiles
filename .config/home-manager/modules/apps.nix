@@ -1,9 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   home.packages = with pkgs; [
     spotify
-    stremio
     discord
     notion-app-enhanced
     pavucontrol
@@ -19,8 +23,7 @@
     qbittorrent
 
     (google-chrome.override {
-      commandLineArgs =
-        "--disable-gpu-compositing --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      commandLineArgs = "--disable-gpu-compositing --enable-features=UseOzonePlatform --ozone-platform=wayland";
     })
 
     (obsidian.overrideAttrs (old: {
