@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> { };
-  python = pkgs.python312;
+  python = pkgs.python313;
   pythonPackages = python.pkgs;
   lib-path =
     with pkgs;

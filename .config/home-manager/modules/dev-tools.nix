@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   home.packages = with pkgs; [
     # Core utilities
     coreutils
@@ -8,8 +9,8 @@
     ripgrep
     fd
     jq
-    sqlite
     sqlitebrowser
+    sqlite-interactive
     tree-sitter # Syntax tree parsing for Doom Emacs
     lsof
 
@@ -20,8 +21,8 @@
     # Python Development
     pyright
     maturin
-    (python312.withPackages (ps:
-      with ps; [
+    (python313.withPackages (
+      ps: with ps; [
         pyright
         python-lsp-server
         python-lsp-ruff
@@ -34,7 +35,8 @@
         setuptools
         gssapi
         uv
-      ]))
+      ]
+    ))
 
     # Rust Development
     rustup
