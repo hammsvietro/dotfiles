@@ -58,7 +58,6 @@
     packages = with pkgs; [ kdePackages.kate ];
   };
 
-  programs.firefox.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
@@ -100,13 +99,23 @@
     pciutils
     qbittorrent
     tig
+    firefox-bin
+    libva-utils
+    zed-editor
   ];
 
+  services.xserver.videoDrivers = [ "nvidia" ];
   environment.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/var/lib";
     XDG_CACHE_HOME = "$HOME/var/cache";
     LIBVA_DRIVER_NAME = "nvidia";
+    NVD_BACKEND = "direct";
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+    LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
   };
 
   programs.hyprland.enable = true;
@@ -148,11 +157,17 @@
     ];
   };
 
+  hardware.opengl = {
+    enable = true;
+  };
+
+  nixpkgs.config.nvidia.acceptLicense = true;
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = true;
     open = false;
     nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   nix.extraOptions = ''

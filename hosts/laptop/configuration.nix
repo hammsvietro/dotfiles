@@ -93,9 +93,6 @@
     ];
   };
 
-  # Install firefox.
-  programs.firefox.enable = true;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -123,6 +120,7 @@
     mako
     kitty
     dunst
+    firefox-bin
   ];
 
   environment.sessionVariables = {
