@@ -5,6 +5,7 @@ let
   lib-path =
     with pkgs;
     lib.makeLibraryPath [
+      pythonPackages.python
       openssl
       stdenv.cc.cc
       unixODBC
@@ -23,6 +24,7 @@ mkShell {
     pythonPackages.tomli-w
     pythonPackages.wheel
     pythonPackages.setuptools
+    pythonPackages.python
   ];
 
   buildInputs = [
@@ -41,12 +43,13 @@ mkShell {
     libkrb5 # Kerberos headers
     libuuid # UUID support (sometimes required)
     gcc # C compiler (in case it’s missing)
+    pythonPackages.python
   ];
 
   shellHook = ''
     VENV=.venv
     if [ ! -d "$VENV" ]; then
-      uv venv --python=python3.12
+      uv venv
     fi
     source $VENV/bin/activate
     export PATH="$PWD/$VENV/bin:$PATH"
