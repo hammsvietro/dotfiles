@@ -102,9 +102,9 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     vim
-    emacs
     wget
     git
+    emacs
     ripgrep
     coreutils
     fd
@@ -113,14 +113,35 @@
     psmisc
     bash
     docker
-    gtk3
     waybar
     hyprpaper
     wofi
     mako
     kitty
     dunst
+    desktop-file-utils
+    ntfs3g
+    anydesk
+    tree
+    gnupg
+    spotify
+    discord
+    notion-app-enhanced
+    pavucontrol
+    insomnia
+    ffmpeg
+    vlc
+    wl-clipboard
+    thunderbird
+    zip
+    unzip
+    kitty
+    pciutils
+    qbittorrent
+    tig
     firefox-bin
+    libva-utils
+    zed-editor
   ];
 
   environment.sessionVariables = {
@@ -157,4 +178,31 @@
     enable = true;
     setSocketVariable = true;
   };
+
+  programs.gnupg.agent = {
+    enable = true;
+    enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-qt;
+  };
+
+  nix.settings.auto-optimise-store = true;
+  nix.gc = {
+    automatic = true;
+    dates = "daily";
+    options = "--delete-older-than 1h";
+  };
+
+  nix.optimise = {
+    automatic = true;
+    dates = [ "weekly" ];
+  };
+
+  environment.variables = {
+    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    GBM_BACKEND = "nvidia-drm";
+    LIBVA_DRIVER_NAME = "nvidia";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
+
 }
