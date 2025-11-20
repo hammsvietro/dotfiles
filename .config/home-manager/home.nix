@@ -71,10 +71,6 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/waybar";
       recursive = true;
     };
-    "kitty" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/kitty";
-      recursive = true;
-    };
   };
 
   home.file = {
@@ -89,11 +85,5 @@
     ".tmux.conf" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.tmux.conf";
     };
-  };
-
-  home.sessionVariables = {
-    OZONE_PLATFORM = "wayland";
-    CHROME_USE_GL = "desktop";
-    NIXOS_OZONE_WL = "1";
   };
 }
