@@ -35,7 +35,6 @@ mkShell {
     pythonPackages.pandas
     pythonPackages.tzdata
     pythonPackages.mypy
-    nodePackages.webpack
     zlib
     nodejs
     pythonPackages.virtualenv

@@ -31,9 +31,8 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
   services.printing.enable = true;
 
   services.pulseaudio.enable = false;
@@ -77,7 +76,6 @@
     hyprpaper
     wofi
     mako
-    kitty
     dunst
     desktop-file-utils
     ntfs3g
@@ -95,7 +93,6 @@
     thunderbird
     zip
     unzip
-    kitty
     pciutils
     qbittorrent
     tig
@@ -104,18 +101,18 @@
     zed-editor
   ];
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.flatpak.enable = true;
   environment.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/var/lib";
     XDG_CACHE_HOME = "$HOME/var/cache";
-    LIBVA_DRIVER_NAME = "nvidia";
-    NVD_BACKEND = "direct";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-    LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
+    # LIBVA_DRIVER_NAME = "nvidia";
+    # NVD_BACKEND = "direct";
+    # __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+    # GBM_BACKEND = "nvidia-drm";
+    # WLR_NO_HARDWARE_CURSORS = "1";
+    # NIXOS_OZONE_WL = "1";
+    # LD_LIBRARY_PATH = "/run/opengl-driver/lib:/run/opengl-driver-32/lib";
   };
 
   programs.hyprland.enable = true;
@@ -128,15 +125,19 @@
   services.dbus.enable = true;
   virtualisation.docker.enable = true;
 
-  environment.variables = {
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    GBM_BACKEND = "nvidia-drm";
-    LIBVA_DRIVER_NAME = "nvidia";
-    WLR_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-  };
+  # environment.variables = {
+  #   __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  #   GBM_BACKEND = "nvidia-drm";
+  #   LIBVA_DRIVER_NAME = "nvidia";
+  #   WLR_NO_HARDWARE_CURSORS = "1";
+  #   NIXOS_OZONE_WL = "1";
+  # };
 
-  nix.settings.experimental-features = [ "nix-command" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
+  nix.settings.flake-registry = "/etc/nix/registry.json";
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [ ruff ];
 
@@ -157,17 +158,12 @@
     ];
   };
 
-  hardware.opengl = {
-    enable = true;
-  };
-
   nixpkgs.config.nvidia.acceptLicense = true;
   hardware.nvidia = {
     modesetting.enable = true;
-    powerManagement.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 
   nix.extraOptions = ''
@@ -178,11 +174,11 @@
   nix.gc = {
     automatic = true;
     dates = "daily";
-    options = "--delete-older-than 1h";
+    options = "--delete-older-than 2d";
   };
 
   nix.optimise = {
     automatic = true;
-    dates = [ "weekly" ];
+    dates = [ "daily" ];
   };
 }

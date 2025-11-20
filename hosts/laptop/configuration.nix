@@ -117,7 +117,6 @@
     hyprpaper
     wofi
     mako
-    kitty
     dunst
     desktop-file-utils
     ntfs3g
@@ -135,7 +134,6 @@
     thunderbird
     zip
     unzip
-    kitty
     pciutils
     qbittorrent
     tig
