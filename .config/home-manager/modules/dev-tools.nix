@@ -38,9 +38,6 @@
       ]
     ))
 
-    # Rust Development
-    rustup
-
     # JavaScript / TypeScript / React Development
     nodejs_22
 

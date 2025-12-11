@@ -8,7 +8,6 @@
 {
   home.packages = with pkgs; [
     spotify
-    discord
     notion-app-enhanced
     pavucontrol
     insomnia

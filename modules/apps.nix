@@ -1,0 +1,49 @@
+{ config, pkgs, ... }:
+
+{
+  environment.systemPackages = with pkgs; [
+    gnome-tweaks
+    vim
+    wget
+    git
+    emacs
+    ripgrep
+    coreutils
+    alacritty
+    fd
+    home-manager
+    os-prober
+    psmisc
+    bash
+    docker
+    waybar
+    hyprpaper
+    wofi
+    mako
+    dunst
+    desktop-file-utils
+    ntfs3g
+    anydesk
+    tree
+    gnupg
+    spotify
+    notion-app-enhanced
+    pavucontrol
+    insomnia
+    ffmpeg
+    vlc
+    wl-clipboard
+    thunderbird
+    zip
+    unzip
+    pciutils
+    qbittorrent
+    tig
+    firefox-bin
+    libva-utils
+    zed-editor
+    rustup
+    whatsapp-electron
+  ];
+
+}
