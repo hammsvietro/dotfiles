@@ -3,7 +3,7 @@
 {
   time.timeZone = "America/Sao_Paulo";
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "pt_BR.UTF-8";
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "pt_BR.UTF-8";
     LC_IDENTIFICATION = "pt_BR.UTF-8";

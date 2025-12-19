@@ -47,3 +47,7 @@
 
 (after! flycheck
   (setq-default flycheck-disabled-checkers '(javascript-eslint typescript-tslint)))
+
+(after! rustic
+  (setq lsp-rust-analyzer-cargo-extraEnv
+        '(("CFLAGS" . "-O2 -D_FORTIFY_SOURCE=0"))))

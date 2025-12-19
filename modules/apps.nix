@@ -7,6 +7,9 @@
     wget
     git
     emacs
+    jemalloc
+    openssl
+    pkg-config
     ripgrep
     coreutils
     alacritty
@@ -44,6 +47,7 @@
     zed-editor
     rustup
     whatsapp-electron
+    qpwgraph
   ];
 
 }
