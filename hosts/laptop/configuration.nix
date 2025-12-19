@@ -1,13 +1,23 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-configuration.nix ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/base.nix
+    ../../modules/apps.nix
+    ../../modules/audio.nix
+    ../../modules/boot.nix
+    ../../modules/laptop-gpu.nix
+    ../../modules/desktop/plasma.nix
+    ../../modules/desktop/hyprland.nix
+    ../../modules/users/hammsvietro.nix
+  ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "laptop"; # Define your hostname.
+  networking.hostName = "laptop";
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -155,18 +165,6 @@
   services.dbus.enable = true;
   virtualisation.docker.enable = true;
   system.stateVersion = "24.11"; # Did you read the comment?
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    powerManagement.enable = true;
-    powerManagement.finegrained = false;
-    prime = {
-      sync.enable = false;
-      offload.enable = true;
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
-  };
 
   swapDevices = [ { device = "/swapfile"; } ];
   programs.nix-ld.enable = true;

@@ -13,4 +13,5 @@
     ../../modules/users/hammsvietro.nix
   ];
 
+  networking.hostName = "fractal";
 }
