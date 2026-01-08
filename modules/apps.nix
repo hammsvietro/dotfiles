@@ -30,7 +30,6 @@
     tree
     gnupg
     spotify
-    notion-app-enhanced
     pavucontrol
     insomnia
     ffmpeg
