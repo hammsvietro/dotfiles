@@ -110,6 +110,11 @@ mkShell {
       mv "$LOCK_FILE" "$BACKUP_LOCK"
       mv "$FILTERED_LOCK" "$LOCK_FILE"
       uv sync --extra-index-url="$EXTRA_INDEX_URL" --frozen
+
+      cd packages/core && uv sync --frozen
+      cd ../..
+      cd packages/modules && uv sync --frozen
+      cd ../..
       mv "$BACKUP_LOCK" "$LOCK_FILE"
 
       echo "📥 Installing dev tools..."

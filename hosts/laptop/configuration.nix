@@ -13,6 +13,8 @@
     ../../modules/users/hammsvietro.nix
   ];
 
+  hardware.bluetooth.enable = true;
+
   networking.hostName = "hammsvietro-laptop";
 
 }
