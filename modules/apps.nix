@@ -3,7 +3,8 @@
 {
   environment.systemPackages = with pkgs; [
     gnome-tweaks
-    vim
+    neovim
+    zed-editor
     wget
     git
     emacs
@@ -43,7 +44,6 @@
     tig
     firefox-bin
     libva-utils
-    zed-editor
     rustup
     whatsapp-electron
     qpwgraph

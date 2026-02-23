@@ -1,3 +1,4 @@
+local util = require("lspconfig.util")
 return {
   {
     "nvimtools/none-ls.nvim",
@@ -19,7 +20,7 @@ return {
       opts = function(_, opts)
         opts.ensure_installed = opts.ensure_installed or {}
         vim.list_extend(opts.ensure_installed, {
-          "black",
+          "pyright",
           "black",
           "prettierd",
           "shfmt",
@@ -59,17 +60,32 @@ return {
         gopls = {},
         clangd = {},
         pyright = {
-          settings = {
-            filetypes = { "python" },
-            python = {
-              exclude = { "**/venv/**", "**/__pycache__/**" },
-              analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "openFilesOnly",
-                useLibraryCodeForTypes = true,
-              },
+            root_dir = util.root_pattern("pyproject.toml", "setup.py", "requirements.txt", ".git"),
+            before_init = function(_, config)
+                local root = config.root_dir
+                local candidates = {
+                root .. "/.venv/bin/python",
+                root .. "/venv/bin/python",
+                }
+                for _, p in ipairs(candidates) do
+                if vim.loop.fs_stat(p) then
+                    config.settings = config.settings or {}
+                    config.settings.python = config.settings.python or {}
+                    config.settings.python.pythonPath = p
+                    return
+                end
+                end
+            end,
+            settings = {
+                python = {
+                analysis = {
+                    autoSearchPaths = true,
+                    diagnosticMode = "openFilesOnly",
+                    useLibraryCodeForTypes = true,
+                    exclude = { "**/venv/**", "**/__pycache__/**", "**/.venv/**" },
+                },
+                },
             },
-          },
         },
         tsserver = {},
         rust_analyzer = {},

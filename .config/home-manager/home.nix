@@ -30,7 +30,14 @@
   nixpkgs.config.allowUnfree = true;
   fonts.fontconfig.enable = true;
 
-  programs.zsh.enable = false; # Disable Zsh
+  programs.zsh.enable = true;
+  home.sessionPath = [
+    "$HOME/.cargo/bin"
+  ];
+  home.sessionVariables = {
+    CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG = "true";
+  };
+
   programs.bash = {
     enable = true; # Enable Bash
     bashrcExtra = ''
@@ -43,7 +50,6 @@
       fi
     '';
   };
-
   programs.git = {
     enable = true;
     userName = "Pedro Vietro";
@@ -59,6 +65,10 @@
   };
 
   xdg.configFile = {
+    "nvim" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/nvim";
+      recursive = true;
+    };
     "doom" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/doom";
       recursive = true;
