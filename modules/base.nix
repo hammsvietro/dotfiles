@@ -28,6 +28,8 @@
     SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
   };
 
+  hardware.bluetooth.enable = true;
+
   services.envfs.enable = true;
   services.dbus.enable = true;
 
