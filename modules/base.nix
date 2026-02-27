@@ -26,6 +26,7 @@
     XDG_DATA_HOME = "$HOME/var/lib";
     XDG_CACHE_HOME = "$HOME/var/cache";
     SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };
 
   hardware.bluetooth.enable = true;
