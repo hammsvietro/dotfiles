@@ -48,5 +48,6 @@
     whatsapp-electron
     qpwgraph
   ];
+  programs.kdeconnect.enable = true;
 
 }

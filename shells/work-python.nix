@@ -1,6 +1,6 @@
 let
   pkgs = import <nixpkgs> { };
-  python = pkgs.python313;
+  python = pkgs.python314;
   pythonPackages = python.pkgs;
   lib-path =
     with pkgs;
@@ -9,10 +9,10 @@ let
       openssl
       stdenv.cc.cc
       unixODBC
-      krb5 # MIT Kerberos libraries
-      libkrb5 # Kerberos headers
-      libuuid # UUID support (sometimes required)
-      gcc # C compiler (in case it’s missing)
+      krb5
+      libkrb5
+      libuuid
+      gcc
       zlib
     ];
 in
@@ -38,10 +38,10 @@ mkShell {
     zlib
     nodejs
     pythonPackages.virtualenv
-    krb5 # MIT Kerberos libraries
-    libkrb5 # Kerberos headers
-    libuuid # UUID support (sometimes required)
-    gcc # C compiler (in case it’s missing)
+    krb5
+    libkrb5
+    libuuid
+    gcc
     pythonPackages.python
   ];
 

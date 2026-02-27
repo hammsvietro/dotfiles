@@ -28,3 +28,16 @@
 (map! :leader
       :desc "Go to definition on split"
       "g d" #'xref-find-definitions-other-window)
+
+(defun my/downcase-upper-only (beg end)
+  "Downcase all completely UPPERCASE words in the active region."
+  (interactive "r")
+  (save-excursion
+    (save-restriction
+      (narrow-to-region beg end)
+      (goto-char (point-min))
+      (while (re-search-forward "\\w+" nil t)
+        (let ((word (match-string 0)))
+          (when (and (string= word (upcase word))
+                     (not (string= word (downcase word))))
+            (replace-match (downcase word) t t)))))))
