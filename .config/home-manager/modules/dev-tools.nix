@@ -21,7 +21,7 @@
     # Python Development
     pyright
     maturin
-    (python313.withPackages (
+    (python314.withPackages (
       ps: with ps; [
         pyright
         python-lsp-server
@@ -35,6 +35,7 @@
         setuptools
         gssapi
         uv
+        pyflakes
       ]
     ))
 

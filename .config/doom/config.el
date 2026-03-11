@@ -12,9 +12,9 @@
 ;; change `org-directory'. It must be set before org loads!
 ;; (setq org-directory "~/org/")
 
-(setq doom-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
-      doom-variable-pitch-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 15)
-      doom-big-font (font-spec :family "JetBrainsMono Nerd Font Mono" :size 24))
+(setq doom-font (font-spec :family "ZedMono Nerd Font" :size 17)
+      doom-variable-pitch-font (font-spec :family "ZedMono Nerd Font" :size 17)
+      doom-big-font (font-spec :family "ZedMono Nerd Font" :size 24))
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
