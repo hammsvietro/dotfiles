@@ -18,7 +18,7 @@
   home.packages =
     with pkgs;
     [
-      neofetch
+      fastfetch
       htop
       tmux
       fd

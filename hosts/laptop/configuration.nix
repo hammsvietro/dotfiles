@@ -6,8 +6,9 @@
     ../../modules/base.nix
     ../../modules/apps.nix
     ../../modules/audio.nix
-    ../../modules/boot.nix
     ../../modules/laptop-gpu.nix
+    ../../modules/boot.nix
+    ../../modules/fonts.nix
     ../../modules/desktop/plasma.nix
     ../../modules/desktop/hyprland.nix
     ../../modules/users/hammsvietro.nix

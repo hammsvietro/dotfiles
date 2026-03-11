@@ -8,6 +8,7 @@
     ../../modules/audio.nix
     ../../modules/gpu.nix
     ../../modules/boot.nix
+    ../../modules/fonts.nix
     ../../modules/desktop/plasma.nix
     ../../modules/desktop/hyprland.nix
     ../../modules/users/hammsvietro.nix
