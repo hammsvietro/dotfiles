@@ -67,7 +67,6 @@ mkShell {
     export CC=gcc
     export CXX=g++
     export UV_NO_SYNC=1
-    export TZDIR=${pkgs.tzdata}/share/zoneinfo
 
 
     echo "Environment is set up!"

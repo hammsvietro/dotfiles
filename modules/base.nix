@@ -23,8 +23,8 @@
 
   environment.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
-    XDG_DATA_HOME = "$HOME/var/lib";
-    XDG_CACHE_HOME = "$HOME/var/cache";
+    XDG_DATA_HOME = "$HOME/.local/share";
+    XDG_CACHE_HOME = "$HOME/.cache";
     SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };

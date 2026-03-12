@@ -14,7 +14,7 @@ function parse_git_branch() {
 }
 
 function killpath {
-	kill $(ps aux | grep '$1' | awk '{print $2}')
+	kill $(ps aux | grep "$1" | awk '{print $2}')
 }
 
 # get current status of git repo
@@ -86,7 +86,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Java
-export CATALINA_HOME="~/programs/tomcat"
+export CATALINA_HOME="$HOME/programs/tomcat"
 
 # Android
 export ANDROID_SDK_ROOT="/home/hammsvietro/Android/Sdk"
@@ -117,7 +117,9 @@ set -o emacs
 
 export TSAI_DISABLE_CSP=True
 
-source ~/secrets.sh
+if [ -f ~/secrets.sh ]; then
+	source ~/secrets.sh
+fi
 eval $(ssh-agent) >/dev/null
 
 QT_QPA_PLATFORM="wayland;xcb"
