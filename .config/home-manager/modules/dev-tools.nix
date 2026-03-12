@@ -64,8 +64,6 @@
     pkg-config
     krb5.dev
 
-    jq
-
     # Elixir
     elixir
   ];

@@ -8,7 +8,14 @@
   };
 
   outputs = { self, nixpkgs, home-manager, ... }:
-    let system = "x86_64-linux";
+    let
+      system = "x86_64-linux";
+      hmModule = {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.users.hammsvietro =
+          import ./.config/home-manager/home.nix;
+      };
     in {
       nixosConfigurations = {
         fractal = nixpkgs.lib.nixosSystem {
@@ -16,12 +23,7 @@
           modules = [
             ./hosts/fractal/configuration.nix
             home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.hammsvietro =
-                import ./.config/home-manager/home.nix;
-            }
+            hmModule
           ];
         };
 
@@ -30,12 +32,7 @@
           modules = [
             ./hosts/laptop/configuration.nix
             home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users.hammsvietro =
-                import ./.config/home-manager/home.nix;
-            }
+            hmModule
           ];
         };
       };

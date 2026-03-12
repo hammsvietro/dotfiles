@@ -30,22 +30,16 @@
     anydesk
     tree
     gnupg
-    spotify
     pavucontrol
-    insomnia
     ffmpeg
-    vlc
     wl-clipboard
-    thunderbird
     zip
     unzip
     pciutils
-    qbittorrent
     tig
     firefox-bin
     libva-utils
     rustup
-    whatsapp-electron
     qpwgraph
   ];
   programs.kdeconnect.enable = true;
