@@ -7,6 +7,8 @@
     ../../modules/apps.nix
     ../../modules/audio.nix
     ../../modules/gpu.nix
+    ../../modules/dev.nix
+    ../../modules/games.nix
     ../../modules/boot.nix
     ../../modules/fonts.nix
     ../../modules/desktop/plasma.nix

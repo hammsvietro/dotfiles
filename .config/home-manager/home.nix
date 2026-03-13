@@ -2,35 +2,20 @@
 
 {
 
-  imports = [
-    (builtins.path { path = ./modules/dev-tools.nix; })
-    (builtins.path { path = ./modules/apps.nix; })
-    (builtins.path { path = ./modules/hyprland.nix; })
-    (builtins.path { path = ./modules/games.nix; })
-  ];
-
   home.stateVersion = "24.11";
   home.username = "hammsvietro";
   home.homeDirectory = "/home/hammsvietro";
   programs.home-manager.enable = true;
 
-  # Install packages
-  home.packages =
-    with pkgs;
-    [
-      fastfetch
-      htop
-      tmux
-      fd
-      ripgrep
-      gnutls
-      bash
-    ]
-    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
-  nixpkgs.config.allowUnfree = true;
-  fonts.fontconfig.enable = true;
+  home.packages = with pkgs; [
+    fastfetch
+    htop
+    tmux
+  ];
 
   programs.zsh.enable = true;
+  programs.starship.enable = true;
+
   home.sessionPath = [
     "$HOME/.cargo/bin"
   ];
@@ -39,9 +24,8 @@
   };
 
   programs.bash = {
-    enable = true; # Enable Bash
+    enable = true;
     bashrcExtra = ''
-      # Source your custom bashrc
       if [ -f ~/.secrets.sh ]; then
         source ~/.secrets.sh
       fi
@@ -52,16 +36,20 @@
   };
   programs.git = {
     enable = true;
-    userName = "Pedro Vietro";
-    userEmail = "hammsvietro@gmail.com";
+    settings = {
+      user = {
+        name = "Pedro Vietro";
+        email = "hammsvietro@gmail.com";
+      };
+      gpg = {
+        format = "ssh";
+      };
+    };
     signing = {
       signByDefault = true;
       key = "~/.ssh/id_rsa.pub";
     };
 
-    extraConfig = {
-      gpg.format = "ssh";
-    };
   };
 
   xdg.configFile = {

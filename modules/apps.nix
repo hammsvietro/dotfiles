@@ -2,52 +2,80 @@
 
 {
   environment.systemPackages = with pkgs; [
-    gnome-tweaks
-    neovim
-    zed-editor
+    # Editors
+    emacs-pgtk
+    vim
+
+    # Core CLI
     wget
     git
-    emacs
-    jemalloc
-    openssl
-    pkg-config
     ripgrep
     coreutils
-    alacritty
     fd
-    home-manager
-    os-prober
+    tree
+    jq
+    tig
+    lsof
+    gnumake
     psmisc
     bash
-    docker
+    gnupg
+
+    # Terminal emulators
+    alacritty
+    kitty
+
+    # Desktop / Wayland
     waybar
     hyprpaper
     wofi
-    mako
-    dunst
     desktop-file-utils
-    ntfs3g
-    anydesk
-    tree
-    gnupg
-    spotify
-    pavucontrol
-    insomnia
+    wl-clipboard
+
+    # Notifications (pick one — you have both mako AND dunst)
+    dunst
+
+    # Media
     ffmpeg
     vlc
-    wl-clipboard
+    pavucontrol
+    qpwgraph
+
+    # Apps
+    spotify
     thunderbird
+    firefox-bin
+    qbittorrent
+    insomnia
+    anydesk
+    whatsapp-electron
+
+    # Archive / filesystem
     zip
     unzip
+    ntfs3g
     pciutils
-    qbittorrent
-    tig
-    firefox-bin
-    libva-utils
-    rustup
-    whatsapp-electron
-    qpwgraph
-  ];
-  programs.kdeconnect.enable = true;
 
+    # Dev infra
+    docker
+    rustup
+    libva-utils
+    os-prober
+    home-manager
+
+    # Wayland-native Electron apps
+    (google-chrome.override {
+      commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+    })
+
+    (obsidian.overrideAttrs (old: {
+      postFixup = (old.postFixup or "") + ''
+        wrapProgram $out/bin/obsidian \
+          --set NIXOS_OZONE_WL 1 \
+          --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland"
+      '';
+    }))
+
+    notion-app-enhanced
+  ];
 }
