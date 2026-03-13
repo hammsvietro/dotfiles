@@ -57,15 +57,3 @@
 
 ;; Raise GC threshold during heavy operations
 (setq gc-cons-threshold (* 100 1024 1024)) ;; 100MB (Doom sets this, but verify)
-
-;; Reduce LSP UI noise
-(after! lsp-mode
-  (setq lsp-idle-delay 0.5
-        lsp-log-io nil
-        lsp-enable-symbol-highlighting nil
-        lsp-headerline-breadcrumb-enable nil
-        lsp-lens-enable nil))
-
-(after! lsp-ui
-  (setq lsp-ui-doc-enable nil
-        lsp-ui-sideline-enable nil))
