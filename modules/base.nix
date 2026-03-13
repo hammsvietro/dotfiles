@@ -24,9 +24,15 @@
   environment.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
-    XDG_CACHE_HOME = "should be $HOME/.cache";
+    XDG_CACHE_HOME = "$HOME/.cache";
     SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
     PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
+  };
+
+  environment.variables = {
+    XMODIFIERS = "@im=none";
+    GTK_IM_MODULE = "";
+    QT_IM_MODULE = "";
   };
 
   hardware.bluetooth.enable = true;
