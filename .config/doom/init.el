@@ -25,7 +25,8 @@
        ;; (ivy +fuzzy)               ; a search engine for love and life
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (vertico +icons)           ; the search engine of the future
+       (vertico +icons +fuzzy)           ; the search engine of the future
+       (corfu +icons)
 
        :ui
        ;;deft              ; notational velocity for Emacs

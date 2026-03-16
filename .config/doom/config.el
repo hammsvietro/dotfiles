@@ -107,3 +107,13 @@
 ;; Launch emacsclient without creating new workspace
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
+
+(use-package! vertico-repeat
+  :after vertico
+  :config
+  (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
+  (map! :leader "'" #'vertico-repeat))
+
+(after! orderless
+  (setq completion-styles '(orderless flex basic)
+        completion-category-overrides '((file (styles flex partial-completion)))))
