@@ -1,21 +1,9 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
 
-(setq doom-theme 'doom-dracula)
-(setq doom-themes-enable-bold t
-      doom-themes-enable-italic nil)
-
-(setq display-line-numbers-type 'relative
-      doom-themes-enable-italic nil)
-
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 ;; (setq org-directory "~/org/")
-
-(setq doom-font (font-spec :family "ZedMono Nerd Font" :size 17)
-      doom-variable-pitch-font (font-spec :family "ZedMono Nerd Font" :size 17)
-      doom-big-font (font-spec :family "ZedMono Nerd Font" :size 24))
-
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -63,7 +51,7 @@
 ;; avoid truncating strings
 (advice-add '+emacs-lisp-truncate-pin :override (lambda () ()) )
 
-(setq fancy-splash-image "~/.config/doom/images/knight.png")
+;; (setq fancy-splash-image "~/.config/doom/images/knight.png")
 
 ;; increase ibuffer column widths
 (setq ibuffer-formats
@@ -82,6 +70,7 @@
 
 (load! "+lsp.el")
 (load! "+evil.el")
+(load! "+theme.el")
 (load! "+treemacs.el")
 
 (setq frame-title-format "Emacs")
@@ -115,8 +104,7 @@
   (map! :leader "'" #'vertico-repeat))
 
 (after! orderless
-  (setq completion-styles '(orderless flex basic)
-        completion-category-overrides '((file (styles flex partial-completion)))))
-
-(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
-(load-theme 'noctalia t)
+  (setq orderless-matching-styles
+        '(orderless-flex
+          orderless-literal
+          orderless-regexp)))
