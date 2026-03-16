@@ -1,113 +1,117 @@
 * {
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 14px;
-  min-height: 0;
-  min-width: 0;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    min-width: 0;
 }
 
 window#waybar {
-  border-radius: 12px;
-  background-color: #171b20;
-  margin-bottom: 10px;
+    background-color: rgba(23, 27, 32, 0.85); /* Smooth translucency */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    color: #dee1e6;
+}
+
+/* Add breathing room to the edges */
+.modules-left {
+    padding-left: 12px;
+}
+.modules-right {
+    padding-right: 12px;
 }
 
 #workspaces {
-  margin-left: 5px;
+    margin: 6px 0;
+}
+/* Interactive Hover Effects */
+#custom-launcher,
+#pulseaudio,
+#network,
+#bluetooth,
+#battery,
+#backlight,
+#memory,
+#clock,
+#custom-notification {
+    padding: 0 10px;
+    margin: 6px 2px; /* 6px top and bottom squishes them into centered pills */
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
 
+#workspaces button:hover,
+#custom-launcher:hover,
+#pulseaudio:hover,
+#network:hover,
+#bluetooth:hover,
+#battery:hover,
+#backlight:hover,
+#memory:hover,
+#clock:hover,
+#custom-notification:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Workspaces Configuration */
 #workspaces button {
-  padding-left: 3px;
+    padding: 0 10px;
+    margin: 0 2px; /* Only horizontal spacing needed here */
+    border-radius: 8px;
+    transition: all 0.2s ease;
 }
-
-#tray {
-  margin-right: 6px;
-}
-
-#workspaces button {
-  color: #86aaec;
-  background-color: transparent;
-  border-color: transparent;
-}
-
-#workspaces button.hover {
-  background-color: transparent;
-}
-
 #workspaces button.active {
-  color: #c296eb;
-  background-color: transparent;
+    color: #c296eb;
+    background-color: rgba(194, 150, 235, 0.15); /* Soft active pill */
 }
 
-#custom-player {
-  margin-left: 16px;
+/* Specific Colors and Adjustments */
+#custom-launcher {
+    color: #86aaec;
+    font-size: 16px;
+    margin-right: 8px;
 }
 
 #bluetooth {
-  margin-right: 8px;
-  color: #dee1e6;
+    color: #98d3ee;
 }
-
-#memory {
-  margin-right: 12px;
-  color: #dee1e6;
-}
-
 #network {
-  margin-right: 13px;
+    color: #87eab8;
 }
-
-#custom-updates {
-  margin-right: 12px;
-  color: #dee1e6;
-}
-
 #pulseaudio {
-  margin-right: 12px;
-  color: #dee1e6;
+    color: #98d3ee;
 }
-
 #backlight {
-  margin-right: 12px;
-  color: #dee1e6;
+    color: #f1d8a5;
 }
-
 #battery {
-  margin-right: 12px;
-  color: #dee1e6;
-  background: transparent;
+    color: #c296eb;
 }
 
 #battery.critical:not(.charging) {
-  color: #dee1e6;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+    color: #e26c7c;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 @keyframes blink {
-  to {
-    color: #e26c7c;
-  }
-}
-
-#clock {
-  color: #dee1e6;
-  margin-right: 12px;
-}
-
-#custom-notification {
-  margin-right: 12px;
-}
-
-#language {
-  margin-right: 12px;
+    to {
+        color: rgba(226, 108, 124, 0.5);
+    }
 }
 
 #custom-power {
-  font-size: 20px;
-  margin-right: 22px;
-  color: #e26c7c;
-  background: transparent;
+    font-size: 16px;
+    margin-left: 8px;
+    color: #e26c7c;
+    padding: 0 8px;
+    transition: all 0.2s ease;
+}
+
+#custom-power:hover {
+    color: #ff2800;
 }
