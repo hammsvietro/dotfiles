@@ -1,9 +1,9 @@
 {
   "layer": "top",
-  "height": 36,
-  "margin": "6, 12, 6, 12",
+  "margin": "6 12 6 12",
   "position": "top",
   "modules-left": [
+    "custom/launcher",
     "hyprland/workspaces"
   ],
   "modules-center": [
@@ -12,7 +12,6 @@
   "modules-right": [
     "tray",
     "bluetooth",
-    "network",
     "hyprland/language",
     "pulseaudio",
     "memory",
@@ -20,9 +19,10 @@
     "battery",
     "clock",
     "custom/notification",
+    "custom/power"
   ],
-  "custom/launcher":{
-    "format": " ",
+  "custom/launcher": {
+    "format": "",
     "tooltip": false,
     "on-click": "rofi -show drun",
     "on-click-right": "killall rofi"
@@ -32,14 +32,18 @@
     "format-icons": {
       "active": "",
       "default": ""
+    },
+    "persistent-workspaces": {
+      "*": 3
     }
   },
   "hyprland/window": {
-    "max-length": 100
+    "max-length": 50,
+    "separate-outputs": true
   },
   "clock": {
     "format": "{:%I:%M %p}",
-    "tooltip-format": "\n<span size='9pt' font='JetBrainsMono Nerd Font'>{calendar}</span>",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
     "calendar": {
       "mode": "year",
       "mode-mon-col": 3,
@@ -60,64 +64,64 @@
     }
   },
   "memory": {
-      "format": "{used} | ",
-      "tooltip": true,
-      "interval": 5
+    "format": "󰘚 {}%",
+    "tooltip": true,
+    "interval": 5
   },
   "tray": {
-    "icon-size": 13,
+    "icon-size": 16,
     "tooltip": false,
-    "spacing": 6
+    "spacing": 8
   },
   "bluetooth": {
-    "format-on": "<span foreground=\"#98d3ee\"></span>",
-    "format-off": "<span foreground=\"#98d3ee\">󰂲</span>",
-    "format-disabled": "<span foreground=\"#98d3ee\"></span>",
-    "format-connected": "<span foreground=\"#98d3ee\">󰂱</span>",
+    "format-on": "",
+    "format-off": "󰂲",
+    "format-disabled": "󰂲",
+    "format-connected": "󰂱",
     "on-click": "blueman-manager",
     "tooltip-format-connected": "{device_alias}"
   },
   "network": {
-    "format-wifi": "<span foreground=\"#87eab8\">{icon}</span>",
+    "format-wifi": "{icon}",
     "format-disconnected": "󰤮",
-    "format-icons": [ "󰤟", "󰤢", "󰤥", "󰤨"],
+    "format-icons": ["󰤟", "󰤢", "󰤥", "󰤨"],
     "tooltip-format-wifi": "{essid}",
     "on-click": "nm-connection-editor"
   },
   "pulseaudio": {
     "tooltip": false,
-    "format": "<span foreground=\"#98d3ee\">{icon}</span>  {volume} |",
-    "format-muted": "<span foreground=\"#98d3ee\"></span>  |",
-    "on-click-right":"pactl set-sink-mute 0 toggle",
-    "on-click":"pavucontrol",
+    "format": "{icon} {volume}%",
+    "format-muted": "",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click": "pavucontrol",
     "format-icons": {
       "headphone": "",
-      "default": ""
+      "default": ["", "", ""]
     }
   },
   "backlight": {
     "tooltip": false,
-    "format": "<span foreground=\"#f1d8a5\">󰃠</span>  {}  |",
-    "interval":1,
-    "on-scroll-up": "light -A 5",
-    "on-scroll-down": "light -U 5"
+    "format": "󰃠 {}%",
+    "interval": 1,
+    "on-scroll-up": "brightnessctl set 5%+",
+    "on-scroll-down": "brightnessctl set 5%-"
   },
   "battery": {
     "states": {
       "good": 80,
       "warning": 30,
-      "critical": 20
+      "critical": 15
     },
     "tooltip": false,
-    "format": "<span foreground=\"#c296eb\">{icon}</span>   {capacity}",
-    "format-charging": "<span foreground=\"#c296eb\"></span>   {capacity}",
-    "format-plugged":"<span foreground=\"#c296eb\"></span>   {capacity}",
-    "format-alt": "<span foreground=\"#c296eb\">{icon}</span>   {time}",
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-alt": "{icon} {time}",
     "format-icons": ["", "", "", "", ""]
   },
   "custom/notification": {
     "tooltip": false,
-    "format": "{} {icon} ",
+    "format": "{icon}",
     "format-icons": {
       "notification": "<span foreground='red'><sup></sup></span>",
       "none": "",
@@ -135,15 +139,15 @@
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },
-  "custom/power":{
+  "custom/power": {
     "tooltip": false,
     "format": "",
     "on-click": "$HOME/scripts/leave.sh"
   },
   "hyprland/language": {
-      "format": "{}",
-      "format-en": "en",
-      "format-ru": "ru",
-      "format-pt": "br",
+    "format": "{}",
+    "format-en": "en",
+    "format-ru": "ru",
+    "format-pt": "br"
   }
 }

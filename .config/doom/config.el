@@ -117,3 +117,6 @@
 (after! orderless
   (setq completion-styles '(orderless flex basic)
         completion-category-overrides '((file (styles flex partial-completion)))))
+
+(add-to-list 'custom-theme-load-path "~/.config/emacs/themes/")
+(load-theme 'noctalia t)

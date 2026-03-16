@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   programs.hyprland.enable = true;
@@ -20,5 +25,9 @@
     grimblast
     wlr-randr
     networkmanagerapplet
+    hyprpolkitagent
+
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pywalfox-native
   ];
 }
