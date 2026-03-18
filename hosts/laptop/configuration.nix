@@ -11,6 +11,7 @@
     ../../modules/fonts.nix
     ../../modules/dev.nix
     ../../modules/games.nix
+    ../../modules/performance.nix
     ../../modules/desktop/plasma.nix
     ../../modules/desktop/hyprland.nix
     ../../modules/users/hammsvietro.nix

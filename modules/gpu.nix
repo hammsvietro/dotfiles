@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   hardware.graphics = {
     enable = true;
@@ -8,6 +7,7 @@
     extraPackages = with pkgs; [
       vulkan-loader
       vulkan-validation-layers
+      vulkan-tools
       libvdpau
       nvidia-vaapi-driver
     ];
@@ -28,4 +28,10 @@
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  environment.variables = {
+    __GL_SYNC_TO_VBLANK = "0";
+    __GL_MaxFramesAllowed = "1";
+    DXVK_ASYNC = "1";
+  };
 }
