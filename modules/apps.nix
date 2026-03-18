@@ -77,5 +77,6 @@
     }))
 
     notion-app-enhanced
+    pinentry-qt
   ];
 }

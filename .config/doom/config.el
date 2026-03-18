@@ -51,7 +51,7 @@
 ;; avoid truncating strings
 (advice-add '+emacs-lisp-truncate-pin :override (lambda () ()) )
 
-;; (setq fancy-splash-image "~/.config/doom/images/knight.png")
+(setq fancy-splash-image "~/.config/doom/images/knight.png")
 
 ;; increase ibuffer column widths
 (setq ibuffer-formats

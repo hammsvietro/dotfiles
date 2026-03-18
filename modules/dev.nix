@@ -8,6 +8,10 @@
     sqlite-interactive
     tree-sitter
 
+    # C / C++
+    cmake
+    libtool
+
     # Golang
     go
     gopls
