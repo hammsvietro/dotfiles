@@ -1,7 +1,7 @@
 ;;; ../../dotfiles/.config/doom/+theme.el -*- lexical-binding: t; -*-
-;;; 
-;; (require 'filenotify)
 
+
+;; (require 'filenotify)
 ;; (let ((theme-dir (expand-file-name "~/.config/emacs/themes/")))
 ;;   (file-notify-add-watch
 ;;    theme-dir
@@ -13,7 +13,8 @@
 ;;        ;; Use 'no-confirm' to prevent Emacs from asking if the theme is "safe"
 ;;        (load-theme 'noctalia t)))))
 
-(setq doom-theme 'doom-gruvbox)
+;; (setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'catppuccin)
 
 
 (setq doom-themes-enable-bold t
