@@ -1,5 +1,4 @@
 { config, pkgs, ... }:
-
 {
   users.users.hammsvietro = {
     isNormalUser = true;
@@ -9,6 +8,9 @@
       "networkmanager"
       "wheel"
       "docker"
+      "audio"
+      "gamemode"
+      "input"
     ];
     packages = with pkgs; [
       kdePackages.kate
