@@ -3,7 +3,6 @@
   programs.steam = {
     enable = true;
     gamescopeSession.enable = true;
-    extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
 
   programs.gamemode = {
@@ -33,7 +32,6 @@
     goverlay
     fuse2
     mangohud
-    gamemode
   ];
 
   environment.sessionVariables = {
