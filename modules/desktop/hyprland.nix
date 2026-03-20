@@ -6,7 +6,10 @@
 }:
 
 {
-  programs.hyprland.enable = true;
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
 
   environment.variables = {
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
