@@ -97,14 +97,9 @@
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))
 
-(use-package! vertico-repeat
-  :after vertico
-  :config
-  (add-hook 'minibuffer-setup-hook #'vertico-repeat-save)
-  (map! :leader "'" #'vertico-repeat))
-
-(after! orderless
-  (setq orderless-matching-styles
-        '(orderless-flex
-          orderless-literal
-          orderless-regexp)))
+(after! ivy
+  (setq ivy-re-builders-alist
+        '((projectile-find-file . ivy--regex-ignore-order)
+          (+ivy/projectile-find-file . ivy--regex-ignore-order)
+          (counsel-rg . ivy--regex-ignore-order) ; Good idea for project search too!
+          (t . ivy--regex-plus)))) ; The default for everything else

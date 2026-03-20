@@ -22,10 +22,10 @@
 
        :completion
        ;; company           ; the ultimate code completion backend
-       ;; (ivy +fuzzy)               ; a search engine for love and life
+       (ivy +fuzzy)               ; a search engine for love and life
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
-       (vertico +icons +fuzzy)           ; the search engine of the future
+       ;; vertico           ; the search engine of the future
        (corfu +icons)
 
        :ui
