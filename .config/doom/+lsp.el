@@ -42,8 +42,8 @@
 (setq lsp-rust-all-features 't)
 
 ;; Disable ESLint in LSP and Flycheck
-(after! lsp-mode
-  (setq lsp-disabled-clients '(pylsp eslint)))  ;; ESLint disabled properly
+;; (after! lsp-mode
+;;   (setq lsp-disabled-clients '(pylsp eslint)))
 
 (after! flycheck
   (setq-default flycheck-disabled-checkers '(javascript-eslint typescript-tslint)))
@@ -61,3 +61,6 @@
 
 (after! corfu
   (setq corfu-preselect 'first))
+
+(setq-hook! '(typescript-ts-mode-hook tsx-ts-mode-hook)
+  typescript-ts-mode-indent-offset 4)

@@ -21,7 +21,7 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = true;
+    open = false;
     nvidiaSettings = true;
     powerManagement.enable = true;
     # package = config.boot.kernelPackages.nvidiaPackages.beta;
@@ -31,7 +31,6 @@
 
   environment.variables = {
     __GL_SYNC_TO_VBLANK = "0";
-    __GL_MaxFramesAllowed = "1";
     DXVK_ASYNC = "1";
   };
 }

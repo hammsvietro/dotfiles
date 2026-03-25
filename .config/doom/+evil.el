@@ -70,3 +70,17 @@
 (map! :leader
       :desc "Toggle window split"
       "w t" #'toggle-window-split)
+
+(defun my/shift-tab ()
+  (interactive)
+  (indent-rigidly (line-beginning-position) (line-end-position) (- tab-width)))
+
+(map! :i "TAB" #'tab-to-tab-stop
+      :i "<tab>" #'tab-to-tab-stop
+      :i "<backtab>" #'my/shift-tab)
+
+(after! corfu
+  (map! :map corfu-map
+        "TAB" #'tab-to-tab-stop
+        "<tab>" #'tab-to-tab-stop
+        "<backtab>" #'my/shift-tab))
