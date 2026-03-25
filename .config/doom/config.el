@@ -101,5 +101,5 @@
   (setq ivy-re-builders-alist
         '((projectile-find-file . ivy--regex-ignore-order)
           (+ivy/projectile-find-file . ivy--regex-ignore-order)
-          (counsel-rg . ivy--regex-ignore-order) ; Good idea for project search too!
-          (t . ivy--regex-plus)))) ; The default for everything else
+          (counsel-rg . ivy--regex-ignore-order)
+          (t . ivy--regex-plus))))
