@@ -3,8 +3,6 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
-(setq org-roam-directory "~/org/roam/")
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
@@ -41,7 +39,7 @@
 ;; Open file tree
 (map! :leader
       :desc "Toggle Treemacs"
-      "f x" #'treemacs)
+      "f x" #'+treemacs/toggle)
 
 ;; Open project ibuffer
 (map! :leader
@@ -70,6 +68,7 @@
 (setq doom-modeline-vcs-max-length 30)
 
 (load! "+lsp.el")
+(load! "+org.el")
 (load! "+evil.el")
 (load! "+theme.el")
 (load! "+treemacs.el")
@@ -104,11 +103,4 @@
           (+ivy/projectile-find-file . ivy--regex-ignore-order)
           (counsel-rg . ivy--regex-ignore-order)
           (t . ivy--regex-plus))))
-
-(setq-default gac-automatically-push-p t)
-(setq-default gac-automatically-add-new-files-p t)
-(setq gac-default-message "Auto-commit: Org notes update")
-
-(use-package! git-auto-commit-mode
-  :hook (org-mode . git-auto-commit-mode))
 

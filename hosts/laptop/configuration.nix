@@ -18,5 +18,4 @@
   ];
 
   networking.hostName = "hammsvietro-laptop";
-
 }
