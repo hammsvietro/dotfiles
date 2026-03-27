@@ -56,3 +56,5 @@
   :recipe (:host github :repo "copilot-emacs/copilot.el" :files ("*.el")))
 
 (package! catppuccin-theme)
+
+(package! git-auto-commit-mode)

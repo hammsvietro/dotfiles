@@ -104,3 +104,11 @@
           (+ivy/projectile-find-file . ivy--regex-ignore-order)
           (counsel-rg . ivy--regex-ignore-order)
           (t . ivy--regex-plus))))
+
+(setq-default gac-automatically-push-p t)
+(setq-default gac-automatically-add-new-files-p t)
+(setq gac-default-message "Auto-commit: Org notes update")
+
+(use-package! git-auto-commit-mode
+  :hook (org-mode . git-auto-commit-mode))
+
