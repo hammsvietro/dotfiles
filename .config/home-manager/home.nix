@@ -46,6 +46,7 @@
       };
     };
     signing = {
+      format = null;
       signByDefault = true;
       key = "~/.ssh/id_rsa.pub";
     };

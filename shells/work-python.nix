@@ -50,6 +50,7 @@ mkShell {
     if [ ! -d "$VENV" ]; then
       uv venv
     fi
+    export SOURCE_DATE_EPOCH=$(date +%s)
     source $VENV/bin/activate
     export PATH="$PWD/$VENV/bin:$PATH"
     export TZDIR=${pkgs.tzdata}/share/zoneinfo
