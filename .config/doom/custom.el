@@ -23,7 +23,7 @@
      "dd4582661a1c6b865a33b89312c97a13a3885dc95992e2e5fc57456b4c545176"
      "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" default))
  '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
- '(org-agenda-files '("~/org/roam/daily/2026-03-27.org")))
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

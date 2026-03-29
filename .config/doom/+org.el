@@ -1,8 +1,5 @@
 ;;; ../../dotfiles/.config/doom/+org.el -*- lexical-binding: t; -*-
 
-(setq org-directory "~/org/")
-(setq org-roam-directory "~/org/roam/")
-(setq org-agenda-files '("~/org/"))
 
 (setq-default gac-automatically-push-p t)
 (setq-default gac-automatically-add-new-files-p t)
@@ -12,6 +9,11 @@
   :hook (org-mode . git-auto-commit-mode))
 
 (after! org
+
+  (setq org-directory "~/org/")
+  (setq org-roam-directory "~/org/roam/")
+  (setq org-agenda-files (list "~/org/journal.org" 
+                               "~/org/roam/daily/"))
   (setq org-capture-templates
         '(("j" "Journal")
           ("jj" "Quick Journal" entry
