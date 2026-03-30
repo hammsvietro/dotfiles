@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   environment.systemPackages = with pkgs; [
@@ -53,8 +58,12 @@
     openssl
 
     elixir
+
+    rust-bin.stable.latest.default
+
   ];
 
+  nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ];
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;

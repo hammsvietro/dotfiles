@@ -39,6 +39,10 @@
 
   programs.git = {
     enable = true;
+    extraConfig = {
+      init.defaultBranch = "main";
+      core.editor = "vim";
+    };
     settings = {
       user = {
         name = "Pedro Vietro";
