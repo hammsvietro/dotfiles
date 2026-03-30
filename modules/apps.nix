@@ -18,8 +18,8 @@
     lsof
     gnumake
     psmisc
-    bash
     gnupg
+    zsh
 
     # Terminal emulators
     alacritty

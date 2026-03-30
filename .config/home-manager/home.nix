@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
   home.stateVersion = "24.11";
   home.username = "hammsvietro";
   home.homeDirectory = "/home/hammsvietro";
@@ -13,27 +12,31 @@
     tmux
   ];
 
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+
+    envExtra = ''
+      export PATH="${config.home.homeDirectory}/.cargo/bin:$PATH"
+    '';
+
+    initContent = ''
+      # TODO: Use sops-nix to manage secrets instead of sourcing a separate file
+           if [ -f ~/.secrets.sh ]; then
+             source ~/.secrets.sh
+           fi
+    '';
+  };
+
   programs.starship.enable = true;
 
   home.sessionPath = [
-    "$HOME/.cargo/bin"
+    "${config.home.homeDirectory}/.cargo/bin"
   ];
+
   home.sessionVariables = {
     CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG = "true";
   };
 
-  programs.bash = {
-    enable = true;
-    bashrcExtra = ''
-      if [ -f ~/.secrets.sh ]; then
-        source ~/.secrets.sh
-      fi
-      if [ -f ~/dotfiles.bashrc ]; then
-        source ~/dotfiles.bashrc
-      fi
-    '';
-  };
   programs.git = {
     enable = true;
     settings = {
@@ -50,7 +53,6 @@
       signByDefault = true;
       key = "~/.ssh/id_rsa.pub";
     };
-
   };
 
   xdg.configFile = {
@@ -64,10 +66,6 @@
     };
     "hypr" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/hypr";
-      recursive = true;
-    };
-    "quickshell" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/quickshell";
       recursive = true;
     };
   };

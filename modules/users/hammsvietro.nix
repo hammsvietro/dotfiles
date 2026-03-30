@@ -1,9 +1,12 @@
 { config, pkgs, ... }:
 {
+  programs.zsh.enable = true;
+  networking.networkmanager.enable = true;
+
   users.users.hammsvietro = {
     isNormalUser = true;
     description = "Pedro Hamms Vietro";
-    shell = pkgs.bash;
+    shell = pkgs.zsh;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -11,11 +14,11 @@
       "audio"
       "gamemode"
       "input"
+      "kvm"
     ];
     packages = with pkgs; [
       kdePackages.kate
     ];
   };
 
-  networking.networkmanager.enable = true;
 }

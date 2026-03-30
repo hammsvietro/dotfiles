@@ -29,8 +29,8 @@
     wlr-randr
     networkmanagerapplet
     hyprpolkitagent
+    noctalia-shell
 
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
     pywalfox-native
   ];
 }
