@@ -103,4 +103,3 @@
           (+ivy/projectile-find-file . ivy--regex-ignore-order)
           (counsel-rg . ivy--regex-ignore-order)
           (t . ivy--regex-plus))))
-
