@@ -64,3 +64,12 @@
 
 (setq-hook! '(typescript-ts-mode-hook tsx-ts-mode-hook)
   typescript-ts-mode-indent-offset 4)
+
+
+(after! apheleia
+  (add-to-list 'apheleia-mode-alist '(js-ts-mode . lsp))
+  (add-to-list 'apheleia-mode-alist '(typescript-ts-mode . lsp))
+  (add-to-list 'apheleia-mode-alist '(tsx-ts-mode . lsp)))
+
+(setq-default +format-with-lsp t)
+(setq-hook! '(js-ts-mode-hook typescript-mode-hook typescript-ts-mode-hook tsx-ts-mode-hook) +format-with-lsp t)

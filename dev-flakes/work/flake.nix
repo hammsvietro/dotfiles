@@ -76,6 +76,8 @@
           ];
 
           shellHook = ''
+            unset SOURCE_DATE_EPOCH
+
             VENV=.venv
             if [ ! -d "$VENV" ]; then
               uv venv
