@@ -15,15 +15,26 @@
   programs.zsh = {
     enable = true;
 
+    history = {
+      size = 10000;
+      save = 10000;
+      path = "${config.xdg.dataHome}/zsh/history";
+      ignoreDups = true;
+      share = false;
+    };
+
     envExtra = ''
       export PATH="${config.home.homeDirectory}/.cargo/bin:$PATH"
     '';
 
-    initContent = ''
+    initExtra = ''
+      bindkey "^[[1;5D" backward-word
+      bindkey "^[[1;5C" forward-word
+
       # TODO: Use sops-nix to manage secrets instead of sourcing a separate file
-           if [ -f ~/.secrets.sh ]; then
-             source ~/.secrets.sh
-           fi
+      if [ -f ~/.secrets.sh ]; then
+        source ~/.secrets.sh
+      fi
     '';
   };
 
