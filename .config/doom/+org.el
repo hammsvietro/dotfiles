@@ -10,7 +10,7 @@
 (after! org
   (setq org-directory "~/org/")
   (setq org-roam-directory "~/org/roam/")
-  (setq org-agenda-files (list "~/org/journal.org" 
+  (setq org-agenda-files (list "~/org/" 
                                "~/org/roam/daily/"))
   (setq org-capture-templates
         '(("j" "Journal")
