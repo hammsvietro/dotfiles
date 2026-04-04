@@ -13,8 +13,7 @@
 ;;        ;; Use 'no-confirm' to prevent Emacs from asking if the theme is "safe"
 ;;        (load-theme 'noctalia t)))))
 
-(setq doom-theme 'doom-gruvbox)
-;; (setq doom-theme 'catppuccin)
+(setq doom-theme 'doom-nord-aurora)
 
 
 (setq doom-themes-enable-bold t
@@ -23,9 +22,9 @@
 (setq display-line-numbers-type 'relative
       doom-themes-enable-italic nil)
 
-(setq doom-font (font-spec :family "ZedMono Nerd Font" :size 17)
-      doom-variable-pitch-font (font-spec :family "ZedMono Nerd Font" :size 17)
-      doom-big-font (font-spec :family "ZedMono Nerd Font" :size 24))
+(setq doom-font (font-spec :family "RobotoMono Nerd Font" :size 17)
+      doom-variable-pitch-font (font-spec :family "RobotoMono Nerd Font" :size 17)
+      doom-big-font (font-spec :family "RobotoMono Nerd Font" :size 24))
 
 (defun toggle-emacs-opacity-90 ()
   "Toggle background transparency."
