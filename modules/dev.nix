@@ -39,11 +39,11 @@
     ))
 
     nodejs_22
-    nodePackages.eslint
-    nodePackages.prettier
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    nodePackages.vscode-langservers-extracted
+    eslint
+    prettier
+    typescript
+    typescript-language-server
+    vscode-langservers-extracted
 
     docker-compose
 
@@ -59,8 +59,12 @@
 
     elixir
 
-    rust-bin.stable.latest.default
-
+    (rust-bin.stable.latest.default.override {
+      extensions = [
+        "rust-analyzer"
+        "rust-src"
+      ];
+    })
   ];
 
   nixpkgs.overlays = [ inputs.rust-overlay.overlays.default ];

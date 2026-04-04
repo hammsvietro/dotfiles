@@ -33,6 +33,8 @@
   services.blueman.enable = true;
   hardware.bluetooth.powerOnBoot = true;
 
+  services.usbmuxd.enable = true;
+
   services.envfs.enable = true;
   services.dbus.enable = true;
 

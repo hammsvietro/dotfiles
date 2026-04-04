@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   environment.systemPackages = with pkgs; [
@@ -45,6 +50,7 @@
     spotify
     thunderbird
     firefox-bin
+    inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     qbittorrent
     insomnia
     anydesk
@@ -78,5 +84,9 @@
 
     notion-app-enhanced
     pinentry-qt
+
+    # Mobile
+    libimobiledevice
+    ifuse
   ];
 }

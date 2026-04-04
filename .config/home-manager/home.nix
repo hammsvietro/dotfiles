@@ -16,8 +16,6 @@
     enable = true;
 
     history = {
-      size = 10000;
-      save = 10000;
       path = "${config.xdg.dataHome}/zsh/history";
       ignoreDups = true;
       share = false;
@@ -27,7 +25,7 @@
       export PATH="${config.home.homeDirectory}/.cargo/bin:$PATH"
     '';
 
-    initExtra = ''
+    initContent = ''
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;5C" forward-word
 
@@ -50,11 +48,9 @@
 
   programs.git = {
     enable = true;
-    extraConfig = {
+    settings = {
       init.defaultBranch = "main";
       core.editor = "vim";
-    };
-    settings = {
       user = {
         name = "Pedro Vietro";
         email = "hammsvietro@gmail.com";
