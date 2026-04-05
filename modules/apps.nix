@@ -31,8 +31,6 @@
     kitty
 
     # Desktop / Wayland
-    waybar
-    hyprpaper
     wofi
     desktop-file-utils
     wl-clipboard
