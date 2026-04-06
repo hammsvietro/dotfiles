@@ -24,6 +24,7 @@
     envExtra = ''
       export PATH="${config.home.homeDirectory}/.cargo/bin:$PATH"
     '';
+    initExtra = "";
 
     initContent = ''
       bindkey "^[[1;5D" backward-word
@@ -33,6 +34,20 @@
       if [ -f ~/.secrets.sh ]; then
         source ~/.secrets.sh
       fi
+
+
+      function _set_block_cursor() {
+          printf '\e[2 q'
+      }
+
+      function zle-line-init zle-keymap-select {
+          _set_block_cursor
+      }
+
+      zle -N zle-line-init
+      zle -N zle-keymap-select
+
+      _set_block_cursor
     '';
   };
 
@@ -48,21 +63,48 @@
 
   programs.git = {
     enable = true;
+
     settings = {
-      init.defaultBranch = "main";
-      core.editor = "vim";
       user = {
         name = "Pedro Vietro";
         email = "hammsvietro@gmail.com";
       };
-      gpg = {
-        format = "ssh";
-      };
+
+      init.defaultBranch = "main";
+      core.editor = "emacsclient -t -a ''";
     };
+
     signing = {
-      format = null;
+      format = "ssh";
       signByDefault = true;
       key = "~/.ssh/id_rsa.pub";
+    };
+
+  };
+  programs.ghostty = {
+    enable = true;
+    package = pkgs.symlinkJoin {
+      name = "ghostty-wrapped";
+      paths = [ pkgs.ghostty ];
+      buildInputs = [ pkgs.makeWrapper ];
+      postBuild = ''
+        wrapProgram $out/bin/ghostty \
+          --set GTK_IM_MODULE simple
+      '';
+      meta.mainProgram = "ghostty";
+    };
+
+    settings = {
+      cursor-style = "block";
+      cursor-style-blink = false;
+      background-opacity = 0.8;
+      shell-integration = "none";
+
+      working-directory = "home";
+      window-inherit-working-directory = false;
+
+      tab-inherit-working-directory = true;
+      split-inherit-working-directory = true;
     };
   };
 
