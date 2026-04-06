@@ -28,14 +28,13 @@
 
     # Terminal emulators
     alacritty
-    kitty
 
     # Desktop / Wayland
     wofi
     desktop-file-utils
     wl-clipboard
 
-    # Notifications (pick one — you have both mako AND dunst)
+    # Notifications
     dunst
 
     # Media
