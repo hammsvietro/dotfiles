@@ -22,9 +22,12 @@
 (setq display-line-numbers-type 'relative
       doom-themes-enable-italic nil)
 
-(setq doom-font (font-spec :family "RobotoMono Nerd Font" :size 17)
-      doom-variable-pitch-font (font-spec :family "RobotoMono Nerd Font" :size 17)
-      doom-big-font (font-spec :family "RobotoMono Nerd Font" :size 24))
+(let ((my-font-name (if (eq system-type 'windows-nt)
+                        "ZedMono NF"
+                      "RobotoMono Nerd Font")))
+  (setq doom-font (font-spec :family my-font-name :size 17)
+        doom-variable-pitch-font (font-spec :family my-font-name :size 17)
+        doom-big-font (font-spec :family my-font-name :size 24)))
 
 (defun toggle-emacs-opacity-90 ()
   "Toggle background transparency."
