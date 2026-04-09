@@ -124,6 +124,10 @@
   };
 
   home.file = {
+    "org" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Dropbox/org";
+      recursive = true;
+    };
     "shells" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/shells";
       recursive = true;
