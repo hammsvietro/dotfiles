@@ -26,9 +26,6 @@
     gnupg
     zsh
 
-    # Terminal emulators
-    alacritty
-
     # Desktop / Wayland
     wofi
     desktop-file-utils
@@ -42,6 +39,9 @@
     vlc
     pavucontrol
     qpwgraph
+
+    maestral
+    maestral-gui
 
     # Apps
     spotify
@@ -86,4 +86,25 @@
     libimobiledevice
     ifuse
   ];
+
+  systemd.user.services.maestral = {
+    description = "Maestral Dropbox Client";
+
+    wantedBy = [ "graphical-session.target" ];
+    after = [
+      "network-online.target"
+      "graphical-session.target"
+    ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.maestral}/bin/maestral start -f";
+      ExecStop = "${pkgs.maestral}/bin/maestral stop";
+
+      Restart = "on-failure";
+      RestartSec = "10s";
+
+      MemoryHigh = "500M";
+      MemoryMax = "1G";
+    };
+  };
 }
