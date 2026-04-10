@@ -11,6 +11,7 @@
     ../../modules/games.nix
     ../../modules/boot.nix
     ../../modules/fonts.nix
+    ../../modules/services.nix
     ../../modules/performance.nix
     ../../modules/desktop/plasma.nix
     ../../modules/desktop/hyprland.nix
