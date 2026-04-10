@@ -33,7 +33,7 @@
   )
 
 (custom-set-faces!
-  '(org-level-1 :height 1.3 :weight bold)
-  '(org-level-2 :height 1.2 :weight bold)
-  '(org-level-3 :height 1.1 :weight bold)
+  '(org-level-1 :height 1.15 :weight bold)
+  '(org-level-2 :height 1.1 :weight bold)
+  '(org-level-3 :height 1.05 :weight bold)
   '(org-level-3 :height 1.0 :weight bold))

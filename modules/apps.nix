@@ -91,12 +91,11 @@
     description = "Maestral Dropbox Client";
 
     wantedBy = [ "graphical-session.target" ];
-    after = [
-      "network-online.target"
-      "graphical-session.target"
-    ];
+
+    after = [ "graphical-session.target" ];
 
     serviceConfig = {
+      Type = "simple";
       ExecStart = "${pkgs.maestral}/bin/maestral start -f";
       ExecStop = "${pkgs.maestral}/bin/maestral stop";
 

@@ -13,7 +13,10 @@
 ;;        ;; Use 'no-confirm' to prevent Emacs from asking if the theme is "safe"
 ;;        (load-theme 'noctalia t)))))
 
-(setq doom-theme 'doom-nord-aurora)
+(defvar my-light-theme 'doom-nord-light)
+(defvar my-dark-theme 'doom-nord-aurora)
+
+(setq doom-theme my-dark-theme)
 
 
 (setq doom-themes-enable-bold t
@@ -24,7 +27,7 @@
 
 (let ((my-font-name (if (eq system-type 'windows-nt)
                         "ZedMono NF"
-                      "RobotoMono Nerd Font")))
+                      "JetBrainsMono Nerd Font")))
   (setq doom-font (font-spec :family my-font-name :size 17)
         doom-variable-pitch-font (font-spec :family my-font-name :size 17)
         doom-big-font (font-spec :family my-font-name :size 24)))
@@ -55,3 +58,13 @@
       :desc "Toggle editor opacity"
       "w o" #'toggle-emacs-opacity-90)
 
+(defun my/toggle-theme ()
+  (interactive)
+  (if (eq doom-theme my-dark-theme)
+      (setq doom-theme my-light-theme)
+    (setq doom-theme my-dark-theme))
+  (load-theme doom-theme t))
+
+(map! :leader
+      :desc "Toggle light/dark theme"
+      "t d" #'my/toggle-theme)
