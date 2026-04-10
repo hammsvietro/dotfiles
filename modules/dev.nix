@@ -58,6 +58,7 @@
     openssl
 
     elixir
+    elixir-ls
 
     (rust-bin.stable.latest.default.override {
       extensions = [

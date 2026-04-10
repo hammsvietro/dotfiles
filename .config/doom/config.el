@@ -77,13 +77,6 @@
 (setq projectile-track-known-projects-automatically nil)
 (setq projectile-enable-caching nil)
 
-;; Discord presence
-(require 'elcord)
-(setq elcord-editor-icon "emacs_icon")
-(map! :leader
-      :desc "Toggle discord rich presence integration"
-      "d" #'elcord-mode)
-
 ;; Copilot
 (use-package! copilot
   :hook (prog-mode . copilot-mode)
