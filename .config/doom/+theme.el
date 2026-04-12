@@ -13,8 +13,14 @@
 ;;        ;; Use 'no-confirm' to prevent Emacs from asking if the theme is "safe"
 ;;        (load-theme 'noctalia t)))))
 
-(defvar my-light-theme 'doom-nord-light)
-(defvar my-dark-theme 'doom-nord-aurora)
+(let ((custom-theme-path (expand-file-name "~/.config/emacs/.local/straight/repos/emacs/")))
+  ;; Only add the path if the directory actually exists on this machine
+  (when (file-directory-p custom-theme-path)
+    (add-to-list 'custom-theme-load-path custom-theme-path)))
+
+
+(defvar my-dark-theme 'kanagawa-wave)
+(defvar my-light-theme 'kanagawa-lotus)
 
 (setq doom-theme my-dark-theme)
 
