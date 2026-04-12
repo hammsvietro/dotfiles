@@ -4,7 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("f5f80dd6588e59cfc3ce2f11568ff8296717a938edd448a947f9823a4e282b66"
+   '("d2ab3d4f005a9ad4fb789a8f65606c72f30ce9d281a9e42da55f7f4b9ef5bfc6"
+     "f5f80dd6588e59cfc3ce2f11568ff8296717a938edd448a947f9823a4e282b66"
      "2b501400e19b1dd09d8b3708cefcb5227fda580754051a24e8abf3aff0601f87"
      "34cf3305b35e3a8132a0b1bdf2c67623bc2cb05b125f8d7d26bd51fd16d547ec"
      "571661a9d205cb32dfed5566019ad54f5bb3415d2d88f7ea1d00c7c794e70a36"
@@ -23,7 +24,7 @@
      "dd4582661a1c6b865a33b89312c97a13a3885dc95992e2e5fc57456b4c545176"
      "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" default))
  '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
- )
+ '(safe-local-variable-values '((lsp-elixir-project-dir . "server"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
