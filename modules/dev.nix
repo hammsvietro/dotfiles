@@ -15,6 +15,8 @@
     cmake
     libtool
 
+    android-tools
+
     go
     gopls
 
