@@ -20,7 +20,7 @@
 
 
 (defvar my-dark-theme 'kanagawa-wave)
-(defvar my-light-theme 'kanagawa-lotus)
+(defvar my-light-theme 'doom-one-light)
 
 (setq doom-theme my-dark-theme)
 
@@ -65,11 +65,14 @@
       "w o" #'toggle-emacs-opacity-90)
 
 (defun my/toggle-theme ()
+  "Toggle between light and dark themes."
   (interactive)
-  (if (eq doom-theme my-dark-theme)
-      (setq doom-theme my-light-theme)
-    (setq doom-theme my-dark-theme))
-  (load-theme doom-theme t))
+  (let ((new-theme (if (eq doom-theme my-dark-theme)
+                       my-light-theme
+                     my-dark-theme)))
+    (mapc #'disable-theme custom-enabled-themes)
+    (setq doom-theme new-theme)
+    (load-theme doom-theme t)))
 
 (map! :leader
       :desc "Toggle light/dark theme"
