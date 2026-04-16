@@ -45,8 +45,18 @@
 ;; (after! lsp-mode
 ;;   (setq lsp-disabled-clients '(pylsp eslint)))
 
+;; (after! flycheck
+;;   (setq-default flycheck-disabled-checkers '(javascript-eslint typescript-tslint)))
+
 (after! flycheck
-  (setq-default flycheck-disabled-checkers '(javascript-eslint typescript-tslint)))
+  (flycheck-add-mode 'javascript-eslint 'tsx-ts-mode)
+  (flycheck-add-mode 'javascript-eslint 'typescript-ts-mode)
+
+  (defun my-setup-typescript-flycheck-chain ()
+    "Link LSP to ESLint for TypeScript/TSX."
+    (flycheck-add-next-checker 'lsp 'javascript-eslint))
+
+  (add-hook 'lsp-managed-mode-hook #'my-setup-typescript-flycheck-chain))
 
 (after! rustic
   (setq lsp-rust-analyzer-cargo-extraEnv

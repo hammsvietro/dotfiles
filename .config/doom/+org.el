@@ -37,3 +37,14 @@
   '(org-level-2 :height 1.1 :weight bold)
   '(org-level-3 :height 1.05 :weight bold)
   '(org-level-3 :height 1.0 :weight bold))
+
+(setq org-agenda-skip-unavailable-files t)
+(defun my/org-save-all-after-change (&rest _)
+  (org-save-all-org-buffers))
+
+(advice-add 'org-deadline :after #'my/org-save-all-after-change)
+(advice-add 'org-schedule :after #'my/org-save-all-after-change)
+(advice-add 'org-todo :after #'my/org-save-all-after-change)
+
+(add-hook 'org-capture-after-finalize-hook 'org-save-all-org-buffers)
+(add-hook 'org-mode-hook (lambda () (save-place-local-mode -1)))
