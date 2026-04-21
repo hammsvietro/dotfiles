@@ -25,7 +25,28 @@
      "88f7ee5594021c60a4a6a1c275614103de8c1435d6d08cc58882f920e0cec65e" default))
  '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
  '(safe-local-variable-values
-   '((apheleia-formatter . prettier-javascript)
+   '((eval progn
+      (setq-local flycheck-javascript-eslint-executable
+       (expand-file-name "node_modules/.bin/eslint"
+                         (locate-dominating-file default-directory
+                                                 "package.json")))
+      (require 'apheleia nil t)
+      (when (boundp 'apheleia-formatters)
+       (setq-local apheleia-formatters (copy-tree apheleia-formatters))
+       (setf (alist-get 'prettier-with-sorting apheleia-formatters)
+             '("npx" "prettier" "--stdin-filepath" filepath)))
+      (add-hook 'apheleia-post-format-hook #'flycheck-buffer nil t))
+     (apheleia-formatter . prettier-with-sorting)
+     (eval progn
+      (setq-local flycheck-javascript-eslint-executable
+                  (expand-file-name "node_modules/.bin/eslint"
+                                    (locate-dominating-file default-directory
+                                                            "package.json")))
+      (setq-local apheleia-formatters (copy-tree apheleia-formatters))
+      (setf (alist-get 'prettier-with-sorting apheleia-formatters)
+            '("npx" "prettier" "--stdin-filepath" filepath))
+      (add-hook 'apheleia-post-format-hook #'flycheck-buffer nil t))
+     (apheleia-formatter . prettier-javascript)
      (eval setq-local flycheck-javascript-eslint-executable
       (expand-file-name "node_modules/.bin/eslint"
                         (locate-dominating-file default-directory "package.json")))

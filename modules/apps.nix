@@ -46,7 +46,6 @@
     # Apps
     spotify
     thunderbird
-    firefox-bin
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     qbittorrent
     insomnia

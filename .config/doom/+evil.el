@@ -9,6 +9,7 @@
     (with-syntax-table table
       ad-do-it)))
 
+(setq evil-kill-on-visual-paste nil)
 ;; Block cursor on insert mode
 (setq evil-insert-state-cursor 'box)
 
