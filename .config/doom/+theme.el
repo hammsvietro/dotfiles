@@ -19,7 +19,7 @@
     (add-to-list 'custom-theme-load-path custom-theme-path)))
 
 
-(defvar my-dark-theme 'kanagawa-wave)
+(defvar my-dark-theme 'doom-one)
 (defvar my-light-theme 'doom-one-light)
 
 (setq doom-theme my-dark-theme)

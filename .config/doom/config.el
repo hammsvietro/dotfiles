@@ -96,3 +96,18 @@
           (+ivy/projectile-find-file . ivy--regex-ignore-order)
           (counsel-rg . ivy--regex-ignore-order)
           (t . ivy--regex-plus))))
+
+(after! ivy
+  (ivy-add-actions
+   'counsel-find-file
+   '(("v" (lambda (x)
+            (select-window (split-window-right))
+            (find-file x))
+      "Open in vertical split")))
+
+  (ivy-add-actions
+   'ivy-switch-buffer
+   '(("v" (lambda (x)
+            (select-window (split-window-right))
+            (switch-to-buffer x))
+      "Open in vertical split"))))
