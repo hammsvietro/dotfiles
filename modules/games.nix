@@ -65,4 +65,5 @@
       echo "unShaderBackgroundProcessingThreads $STEAM_THREADS" > ~/.steam/steam/steam_dev.cfg
     '';
   };
+  hardware.nvidia.modesetting.enable = true;
 }
