@@ -31,6 +31,8 @@
     desktop-file-utils
     wl-clipboard
 
+    teams-for-linux
+
     # Notifications
     dunst
 

@@ -41,6 +41,9 @@
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1";
     STEAM_GAME_FORCE_GAMEMODE = "1";
+    __GL_GSYNC_ALLOWED = "0";
+    __GL_VRR_ALLOWED = "0";
+    vblank_mode = "0";
   };
 
   systemd.user.services.steam-shader-config = {
