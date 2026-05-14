@@ -41,6 +41,19 @@
     ];
   };
 
+  fileSystems."/mnt/windows-games" = {
+    device = "/dev/disk/by-uuid/C4228D35228D2D8C";
+    fsType = "ntfs-3g";
+    options = [
+      "rw"
+      "uid=1000"
+      "gid=100"
+      "umask=000"
+      "exec"
+      "nofail"
+    ];
+  };
+
   swapDevices = [ { device = "/dev/disk/by-uuid/e33a2895-d454-4348-8be0-89bc04b14a87"; } ];
 
   networking.useDHCP = lib.mkDefault true;

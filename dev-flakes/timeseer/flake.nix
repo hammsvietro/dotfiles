@@ -133,7 +133,7 @@
 
               uv pip install tomli-w
 
-              PACKAGE_TO_REMOVE="$PACKAGE_TO_REMOVE" python ~/dotfiles/dev-flakes/work/filter_packages.py
+              PACKAGE_TO_REMOVE="$PACKAGE_TO_REMOVE" python ~/dotfiles/dev-flakes/timeseer/filter_packages.py
 
               mv "$LOCK_FILE" "$BACKUP_LOCK"
               mv "$FILTERED_LOCK" "$LOCK_FILE"
