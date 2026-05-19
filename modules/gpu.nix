@@ -24,13 +24,11 @@
     open = false;
     nvidiaSettings = true;
     powerManagement.enable = true;
-    # package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
   environment.variables = {
     __GL_SYNC_TO_VBLANK = "0";
-    DXVK_ASYNC = "1";
   };
 }

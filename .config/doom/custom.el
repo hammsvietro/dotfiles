@@ -54,7 +54,8 @@
      (eval setq-local projectile-project-root
       (expand-file-name "mobile/" (projectile-project-root)))
      (prettier-js-args "--config" "mobile/.prettierrc")
-     (lsp-elixir-project-dir . "server"))))
+     (lsp-elixir-project-dir . "server")))
+ '(warning-suppress-log-types '((lsp-mode) (lsp-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
