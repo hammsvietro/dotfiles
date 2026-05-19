@@ -23,6 +23,7 @@
     swaynotificationcenter
     hypridle
     hyprlock
+    hyprshade
     copyq
     grim
     grimblast

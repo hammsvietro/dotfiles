@@ -86,6 +86,8 @@
     # Mobile
     libimobiledevice
     ifuse
+
+    playerctl
   ];
 
   systemd.user.services.maestral = {

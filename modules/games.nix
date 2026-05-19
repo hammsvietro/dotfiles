@@ -30,6 +30,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    gamescope
     vkbasalt
     protontricks
     libstrangle
@@ -41,8 +42,6 @@
   environment.sessionVariables = {
     STEAM_FORCE_DESKTOPUI_SCALING = "1";
     STEAM_GAME_FORCE_GAMEMODE = "1";
-    __GL_GSYNC_ALLOWED = "0";
-    __GL_VRR_ALLOWED = "0";
     vblank_mode = "0";
   };
 
@@ -59,7 +58,6 @@
       THREADS=$(${pkgs.coreutils}/bin/nproc)
       STEAM_THREADS=$((THREADS - 4))
 
-      # Ensure minimum of 4 threads
       if [ $STEAM_THREADS -lt 4 ]; then
         STEAM_THREADS=4
       fi
@@ -68,5 +66,6 @@
       echo "unShaderBackgroundProcessingThreads $STEAM_THREADS" > ~/.steam/steam/steam_dev.cfg
     '';
   };
+
   hardware.nvidia.modesetting.enable = true;
 }
