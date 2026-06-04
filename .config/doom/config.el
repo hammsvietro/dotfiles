@@ -86,6 +86,8 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
+(setenv "NODE_EXTRA_CA_CERTS" "/etc/ssl/certs/ca-certificates.crt")
+
 ;; Launch emacsclient without creating new workspace
 (after! persp-mode
   (setq persp-emacsclient-init-frame-behaviour-override "main"))

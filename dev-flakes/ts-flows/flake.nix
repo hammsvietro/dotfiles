@@ -41,6 +41,8 @@
             pkg-config
             rustc
             cargo
+            clippy
+            rustfmt
             pythonPackages.python
             pythonPackages.setuptools
             pythonPackages.wheel
@@ -60,8 +62,6 @@
             pythonPackages.tomli-w
 
             uv
-            rustc
-            cargo
             clang
 
             zlib
