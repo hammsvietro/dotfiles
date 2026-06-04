@@ -15,6 +15,8 @@
     cmake
     libtool
 
+    protobuf
+
     android-tools
 
     go
