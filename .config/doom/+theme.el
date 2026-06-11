@@ -19,8 +19,8 @@
     (add-to-list 'custom-theme-load-path custom-theme-path)))
 
 
-(defvar my-dark-theme 'doom-one)
-(defvar my-light-theme 'doom-one-light)
+(defvar my-dark-theme 'doom-ayu-dark)
+(defvar my-light-theme 'doom-ayu-light)
 
 (setq doom-theme my-dark-theme)
 
@@ -54,7 +54,7 @@
         (set-frame-parameter nil 'alpha-background 70)
       (set-frame-parameter nil 'alpha-background 100))))
 
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 100))
 
 (map! :leader
       :desc "Toggle editor opacity"
