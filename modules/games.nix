@@ -37,6 +37,7 @@
     goverlay
     fuse2
     mangohud
+    protonup-qt
   ];
 
   environment.sessionVariables = {
