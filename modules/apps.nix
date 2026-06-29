@@ -51,7 +51,6 @@
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
     qbittorrent
     insomnia
-    anydesk
     whatsapp-electron
 
     # Archive / filesystem

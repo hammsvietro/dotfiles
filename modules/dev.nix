@@ -19,6 +19,10 @@
 
     android-tools
 
+    claude-code
+
+    gh
+
     go
     gopls
 

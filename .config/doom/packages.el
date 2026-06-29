@@ -57,3 +57,8 @@
 
 (package! ember-theme
   :recipe (:host github :repo "ember-theme/emacs"))
+
+(package! claude-code
+  :recipe (:host github :repo "stevemolitor/claude-code.el"))
+
+(package! eat)

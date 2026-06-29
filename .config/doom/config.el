@@ -86,6 +86,9 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
+(use-package! claude-code
+  :bind-keymap ("C-c c" . claude-code-command-map))
+
 (setenv "NODE_EXTRA_CA_CERTS" "/etc/ssl/certs/ca-certificates.crt")
 
 ;; Launch emacsclient without creating new workspace
@@ -113,3 +116,4 @@
             (select-window (split-window-right))
             (switch-to-buffer x))
       "Open in vertical split"))))
+

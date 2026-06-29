@@ -10,10 +10,25 @@
   services.flatpak.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+  services.tumbler.enable = true;
+
+  services.gvfs.enable = true;
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
+
+    config = {
+      common = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+      };
+    };
   };
   environment.sessionVariables = {
     XDG_CONFIG_HOME = "$HOME/.config";
@@ -44,6 +59,13 @@
     enable = true;
     enableSSHSupport = true;
     pinentryPackage = pkgs.pinentry-qt;
+  };
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
   };
   services.openssh.enable = true;
   environment.shellInit = ''
