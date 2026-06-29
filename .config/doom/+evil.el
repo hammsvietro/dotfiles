@@ -85,3 +85,24 @@
         "TAB" #'tab-to-tab-stop
         "<tab>" #'tab-to-tab-stop
         "<backtab>" #'my/shift-tab))
+
+(defun my/eat-send-escape ()
+  "Send ESC to the eat terminal."
+  (interactive)
+  (eat-self-input 1 ?\e))
+
+(defun my/eat-send-backtab ()
+  "Send Shift+Tab (backtab) to the eat terminal."
+  (interactive)
+  (eat-self-input 1 ?\e)
+  (eat-self-input 1 ?\[)
+  (eat-self-input 1 ?Z))
+
+
+(map! :map eat-semi-char-mode-map
+      :desc "Send ESC to eat terminal"
+      :nvi "C-c q" #'my/eat-send-escape)
+
+(with-eval-after-load 'evil
+  (evil-define-key '(insert normal emacs) eat-semi-char-mode-map
+    (kbd "<backtab>") #'my/eat-send-backtab))
