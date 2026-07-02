@@ -38,8 +38,6 @@
 
       _set_block_cursor
 
-      # Use the work Claude account under ~/work (recursively), personal elsewhere.
-      # CLAUDE_CONFIG_DIR isolates auth, settings and project history per account.
       claude() {
         case "$PWD/" in
           "$HOME/work/"*)

@@ -1,11 +1,13 @@
+# Hyprland/portal packages come from the system config; noctalia-shell regenerates
+# theme files under ~/.config/hypr at runtime, so only individual files are managed here.
 { ... }:
 
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = null; # Hyprland itself comes from NixOS `programs.hyprland`
-    portalPackage = null; # xdg-desktop-portal-hyprland comes from the system too
-    systemd.enable = true; # start the user session target (services.hypridle binds to it)
+    package = null;
+    portalPackage = null;
+    systemd.enable = true;
 
     settings = {
       "$srcPath" = "$HOME/.config/hypr/scripts";
@@ -42,7 +44,6 @@
         "eDP-2,preferred,auto,1"
       ];
 
-      # `hypridle` intentionally omitted here — now a systemd user service (services.hypridle).
       exec-once = [
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
@@ -93,6 +94,11 @@
         "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         "col.inactive_border" = "rgba(595959aa)";
         layout = "master";
+        allow_tearing = true;
+      };
+
+      render = {
+        direct_scanout = 2;
       };
 
       decoration = {
@@ -130,9 +136,11 @@
         focus_on_activate = false;
         on_focus_under_fullscreen = 1;
         exit_window_retains_fullscreen = true;
+        vrr = 2;
       };
 
       windowrule = [
+        "immediate on, match:class ^(steam_app_.*)$"
         "match:class ^(emacs)$, workspace 3"
         "match:class ^(discord)$, workspace 6"
         "match:class ^(notion-app)$, workspace 7"
@@ -247,8 +255,6 @@
       ];
     };
 
-    # Sourced last so noctalia's runtime-generated colors override the `general` block
-    # above (matching the original file, where this line was near the end).
     extraConfig = ''
       source = /home/hammsvietro/.config/hypr/noctalia/noctalia-colors.conf
     '';
@@ -280,10 +286,6 @@
     };
   };
 
-  # Static files under ~/.config/hypr. Managing individual files (not the whole dir) keeps
-  # ~/.config/hypr a real, writable directory so noctalia-shell can keep regenerating its
-  # runtime theme outputs there (noctalia/noctalia-colors.conf + hyprtoolkit.conf) — those
-  # are intentionally NOT managed here (see noctalia TemplateRegistry).
   xdg.configFile."hypr/scripts/resetscreenshare.sh" = {
     source = ../hypr/scripts/resetscreenshare.sh;
     executable = true;

@@ -17,6 +17,7 @@
     ./programs/apps.nix
     ./programs/dev.nix
     ./programs/games.nix
+    ./programs/audio-production.nix
 
     ./users/hammsvietro.nix
   ];

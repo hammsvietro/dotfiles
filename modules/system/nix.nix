@@ -14,6 +14,9 @@
     ];
   };
 
+  nix.daemonCPUSchedPolicy = "batch";
+  nix.daemonIOSchedClass = "idle";
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
