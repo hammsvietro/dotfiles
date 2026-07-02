@@ -1,119 +1,14 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
+;;;
+;;; Table of contents. Each module below owns its own settings, commands, and
+;;; keybindings. See init.el for enabled Doom modules and packages.el for extra
+;;; packages.
 
-
-;; If you use `org' and don't want your org files in the default location below,
-;; change `org-directory'. It must be set before org loads!
-
-;; Whenever you reconfigure a package, make sure to wrap your config in an
-;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
-;;
-;;   (after! PACKAGE
-;;     (setq x y))
-;;
-;; The exceptions to this rule:
-;;
-;;   - Setting file/directory variables (like `org-directory')
-;;   - Setting variables which explicitly tell you to set them before their
-;;     package is loaded (see 'C-h v VARIABLE' to look up their documentation).
-;;   - Setting doom variables (which start with 'doom-' or '+').
-;;
-;; Here are some additional functions/macros that will help you configure Doom.
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c c k').
-;; This will open documentation for it, including demos of how they are used.
-;; Alternatively, use `C-h o' to look up a symbol (functions, variables, faces,
-;; etc).
-;;
-;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
-;; they are implemented.
-
-;; Open file tree
-(map! :leader
-      :desc "Toggle Treemacs"
-      "f x" #'+treemacs/toggle)
-
-;; Open project ibuffer
-(map! :leader
-      :desc "Open project ibuffer"
-      "b P" #'projectile-ibuffer)
-
-
-;; avoid truncating strings
-(advice-add '+emacs-lisp-truncate-pin :override (lambda () ()) )
-
-(setq fancy-splash-image "~/.config/doom/images/knight.png")
-
-;; increase ibuffer column widths
-(setq ibuffer-formats
-      '((mark modified read-only " "
-         (name 35 35 :left :elide) ; change: 30s were originally 18s
-         " "
-         (size 9 -1 :right)
-         " "
-         (mode 16 16 :left :elide)
-         " " filename-and-process)
-        (mark " "
-              (name 16 -1)
-              " " filename)))
-
-(setq doom-modeline-vcs-max-length 30)
-
-(load! "+lsp.el")
-(load! "+org.el")
-(load! "+evil.el")
-(load! "+theme.el")
-(load! "+treemacs.el")
-
-(setq frame-title-format "Emacs")
-(setq projectile-track-known-projects-automatically nil)
-(setq projectile-enable-caching nil)
-
-;; Copilot
-(use-package! copilot
-  :hook (prog-mode . copilot-mode)
-  :bind (:map copilot-completion-map
-              ("<tab>" . 'copilot-accept-completion)
-              ("TAB" . 'copilot-accept-completion)
-              ("C-TAB" . 'copilot-accept-completion-by-word)
-              ("C-<tab>" . 'copilot-accept-completion-by-word)))
-
-(use-package! claude-code
-  :bind-keymap ("C-c c" . claude-code-command-map))
-
-(setenv "NODE_EXTRA_CA_CERTS" "/etc/ssl/certs/ca-certificates.crt")
-
-;; Launch emacsclient without creating new workspace
-(after! persp-mode
-  (setq persp-emacsclient-init-frame-behaviour-override "main"))
-
-(after! ivy
-  (setq ivy-re-builders-alist
-        '((projectile-find-file . ivy--regex-ignore-order)
-          (+ivy/projectile-find-file . ivy--regex-ignore-order)
-          (counsel-rg . ivy--regex-ignore-order)
-          (t . ivy--regex-plus))))
-
-(after! ivy
-  (ivy-add-actions
-   'counsel-find-file
-   '(("v" (lambda (x)
-            (select-window (split-window-right))
-            (find-file x))
-      "Open in vertical split")))
-
-  (ivy-add-actions
-   'ivy-switch-buffer
-   '(("v" (lambda (x)
-            (select-window (split-window-right))
-            (switch-to-buffer x))
-      "Open in vertical split"))))
-
+(load! "lisp/ui")       ; chrome: splash, ibuffer, modeline, treemacs, workspaces
+(load! "lisp/theme")    ; themes, fonts, line numbers, opacity
+(load! "lisp/editor")   ; evil tweaks + general editing keys/commands
+(load! "lisp/nav")      ; completion (ivy/corfu) + project navigation
+(load! "lisp/lsp")      ; LSP, flycheck, formatting, per-language dev config
+(load! "lisp/emacs-lisp") ; workaround for upstream elisp flycheck-mode bug
+(load! "lisp/ai")       ; Copilot, Claude Code, eat terminal helpers
+(load! "lisp/org")      ; org directories, capture, autosave

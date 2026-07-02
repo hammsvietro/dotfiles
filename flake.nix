@@ -35,34 +35,26 @@
     }:
     let
       system = "x86_64-linux";
+
+      mkHost =
+        hostName:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/${hostName}
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useUserPackages = true;
+              home-manager.users.hammsvietro = import ./.config/home-manager/home.nix;
+            }
+          ];
+        };
     in
     {
       nixosConfigurations = {
-        fractal = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/fractal/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useUserPackages = true;
-              home-manager.users.hammsvietro = import ./.config/home-manager/home.nix;
-            }
-          ];
-        };
-
-        laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./hosts/laptop/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useUserPackages = true;
-              home-manager.users.hammsvietro = import ./.config/home-manager/home.nix;
-            }
-          ];
-        };
+        fractal = mkHost "fractal";
+        laptop = mkHost "laptop";
       };
     };
 }
