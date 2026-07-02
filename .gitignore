@@ -1,10 +1,5 @@
-.xmonad/*
-!.xmonad/xpm
-!.xmonad/xmonad.hs
-!.xmonad/lib/
-
 .local/share
 .local/state
 
 
-.config/hypr/noctalia/*
+.config/hypr/

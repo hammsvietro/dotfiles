@@ -1,0 +1,65 @@
+{ config, ... }:
+
+{
+  xdg.configFile = {
+    # doom stays an out-of-store symlink so it can be edited live without a rebuild.
+    "doom" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/doom";
+      recursive = true;
+    };
+  };
+
+  home.file = {
+    # org is external live-synced data; wallpapers are bulk binaries — both stay symlinks.
+    "org" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Dropbox/org";
+      recursive = true;
+    };
+    "wallpapers" = {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/wallpapers";
+      recursive = true;
+    };
+    # Statusline shared by both Claude accounts; the script shows a WORK badge when
+    # invoked under the work config dir (see the claude() wrapper above).
+    ".claude/statusline.sh" = {
+      source = ./statusline.sh;
+      executable = true;
+    };
+    ".config/claude-work/statusline.sh" = {
+      source = ./statusline.sh;
+      executable = true;
+    };
+    ".tmux.conf".text = ''
+      set -g base-index 1
+      setw -g pane-base-index 1
+      set -g mouse on
+      set -g terminal-overrides 'xterm*:smcup@:rmcup@'
+      set -g default-terminal "tmux-256color"
+      set -ag terminal-overrides ",xterm-256color:RGB"
+
+      set-option -g status-style fg=colour136,bg=colour235
+
+      set -sg escape-time 20
+
+      bind '"' split-window -c "#{pane_current_path}"
+      bind % split-window -h -c "#{pane_current_path}"
+
+
+      set-option -g status-position top
+      set-option -g status-right-length 140
+      set-option -g status-right-style default
+      set-option -g status-right "#[fg=green,bg=default,bright]#(tmux-mem-cpu-load -a 0)"
+      set-option -ag status-right " #[fg=default,bg=default]%a %l:%M:%S %p#[default] #[fg=blue]%Y-%m-%d #[fg=default]#H "
+      set-window-option -g window-status-style fg=colour244
+      set-window-option -g window-status-style bg=default
+      set-window-option -g window-status-current-style fg=colour166
+      set-window-option -g window-status-current-style bg=default
+      set-option -g history-limit 50000
+
+
+      set -Fg 'status-format[1]' '#{status-format[0]}'
+      set -g 'status-format[0]' '''
+      set -g status 2
+    '';
+  };
+}
