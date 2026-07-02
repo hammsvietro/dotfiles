@@ -1,8 +1,8 @@
+# Out-of-store symlinks stay live-editable without a home-manager rebuild.
 { config, ... }:
 
 {
   xdg.configFile = {
-    # doom stays an out-of-store symlink so it can be edited live without a rebuild.
     "doom" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/doom";
       recursive = true;
@@ -10,7 +10,6 @@
   };
 
   home.file = {
-    # org is external live-synced data; wallpapers are bulk binaries — both stay symlinks.
     "org" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Dropbox/org";
       recursive = true;
@@ -19,8 +18,6 @@
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/wallpapers";
       recursive = true;
     };
-    # Statusline shared by both Claude accounts; the script shows a WORK badge when
-    # invoked under the work config dir (see the claude() wrapper above).
     ".claude/statusline.sh" = {
       source = ./statusline.sh;
       executable = true;

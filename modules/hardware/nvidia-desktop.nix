@@ -21,12 +21,14 @@
 
   hardware.nvidia = {
     modesetting.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     powerManagement.enable = true;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
+
+  services.lact.enable = true;
 
   environment.variables = {
     __GL_SYNC_TO_VBLANK = "0";

@@ -4,6 +4,7 @@
     enable = true;
     gamescopeSession.enable = true;
     extraPackages = with pkgs; [ gamemode ];
+    extraCompatPackages = with pkgs; [ proton-ge-bin ];
   };
 
   programs.gamemode = {
@@ -14,13 +15,6 @@
         softrealtime = "auto";
         inhibit_screensaver = 1;
         ioprio = 0;
-      };
-      gpu = {
-        apply_gpu_optimisations = "accept-responsibility";
-        gpu_device = 0;
-        nv_powermizer_mode = 1;
-        nv_core_clock_mhz_offset = 100;
-        nv_mem_clock_mhz_offset = 200;
       };
       cpu = {
         park_cores = "no";

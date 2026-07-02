@@ -48,7 +48,10 @@
   services.envfs.enable = true;
   services.dbus.enable = true;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    enableOnBoot = false;
+  };
 
   programs.gnupg.agent = {
     enable = true;
