@@ -2,4 +2,5 @@
 .local/state
 
 
-.config/hypr/
+.config/hypr/*
+!.config/hypr/hyprland.conf
