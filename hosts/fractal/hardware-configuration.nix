@@ -30,6 +30,7 @@
   fileSystems."/" = {
     device = "/dev/disk/by-uuid/c7b90f81-1d06-4a4f-a873-61cd3620f3fb";
     fsType = "ext4";
+    options = [ "noatime" ];
   };
 
   fileSystems."/boot" = {
@@ -51,6 +52,7 @@
       "umask=000"
       "exec"
       "nofail"
+      "noatime"
     ];
   };
 
