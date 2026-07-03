@@ -48,7 +48,6 @@
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "dbus-update-activation-environment --systemd --all"
-        "hyprshade on vibrance"
         "gpgconf --launch gpg-agent"
         "dbus-update-activation-environment --systemd SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)"
         "gpg-connect-agent updatestartuptty /bye > /dev/null"
@@ -233,7 +232,6 @@
         "$mainMod, mouse_up, workspace, e-1"
         "$mainMod SHIFT,O,movetoworkspace,special"
         "$mainMod, O, togglespecialworkspace"
-        "$mainMod, F8, exec, hyprshade toggle vibrance"
       ];
 
       bindm = [
@@ -287,9 +285,16 @@
   };
 
   xdg.configFile."hypr/scripts/resetscreenshare.sh" = {
-    source = ../hypr/scripts/resetscreenshare.sh;
     executable = true;
+    text = ''
+      #!/usr/bin/env bash
+      sleep 1
+      killall xdg-desktop-portal-hyprland xdg-desktop-portal
+      sleep 1
+      libDir=/run/current-system/sw/libexec
+      $libDir/xdg-desktop-portal-hyprland &
+      sleep 2
+      $libDir/xdg-desktop-portal &
+    '';
   };
-
-  xdg.configFile."hypr/shaders/vibrance.glsl".source = ../hypr/shaders/vibrance.glsl;
 }

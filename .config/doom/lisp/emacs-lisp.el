@@ -1,13 +1,7 @@
 ;;; lisp/emacs-lisp.el -*- lexical-binding: t; -*-
-;;; Workaround for an upstream Doom bug (doomemacs/modules commit 8ee60ce0d):
-;;; a `,(read ...)' unquote was placed outside its backtick in
-;;; `+emacs-lisp--flycheck-non-package-mode', so opening a non-package .el file
-;;; under flycheck signals (void-function \,). That aborts emacs-lisp-mode's
-;;; hook before font-lock is enabled, leaving .el buffers unhighlighted.
-;;;
-;;; Redefine the mode with the quasiquote corrected (condition-case + spliced
-;;; prior check-form wrapped in one backticked progn). Runs after the module's
-;;; buggy definition loads, so it wins. Drop this file once upstream is fixed.
+;;; Redefine +emacs-lisp--flycheck-non-package-mode with its quasiquote fixed;
+;;; upstream (doomemacs/modules 8ee60ce0d) misplaced an unquote, breaking
+;;; font-lock in non-package .el buffers. Drop once fixed upstream.
 
 (with-eval-after-load "modules/lang/emacs-lisp/autoload/emacs-lisp"
   (define-minor-mode +emacs-lisp--flycheck-non-package-mode
