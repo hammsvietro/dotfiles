@@ -1,5 +1,4 @@
 ;;; lisp/ui.el -*- lexical-binding: t; -*-
-;;; Chrome: splash, ibuffer, modeline, treemacs, frame title, workspaces.
 
 (setq fancy-splash-image "~/.config/doom/images/knight.png")
 (setq frame-title-format "Emacs")
@@ -37,13 +36,8 @@
       :desc "Open project ibuffer"
       "b P" #'projectile-ibuffer)
 
-;; FIX: diff-hl's async gutter update spawns a `git diff' process and parses its
-;; output in a process sentinel via `diff-hl-changes-from-buffer'. When a large
-;; file is written/reverted rapidly (e.g. Claude applying edits), overlapping
-;; flydiff refreshes leave the diff buffer without a valid hunk header, so
-;; `diff-beginning-of-hunk' signals "Can't find the beginning of the hunk"
-;; inside the sentinel and the idle timer re-fires it non-stop. Treat an
-;; unparseable diff as "no changes" instead of erroring.
+;; Treat an unparseable diff as "no changes" so rapid file writes don't loop on
+;; diff-hl's "Can't find the beginning of the hunk" error.
 (after! diff-hl
   (advice-add 'diff-hl-changes-from-buffer :around
               (lambda (orig buf)

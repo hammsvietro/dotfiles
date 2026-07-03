@@ -1,6 +1,8 @@
 .local/share
 .local/state
 
+# Nix build symlinks
+result
+result-*
 
 .config/hypr/*
-!.config/hypr/hyprland.conf

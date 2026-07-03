@@ -1,7 +1,6 @@
 ;;; lisp/ai.el -*- lexical-binding: t; -*-
-;;; AI assistants (Copilot, Claude Code) and the eat terminal helpers they use.
 
-;; Node-based tooling (Copilot, Claude Code) needs the system CA bundle for TLS.
+;; Node tooling (Copilot, Claude Code) needs the system CA bundle for TLS.
 (setenv "NODE_EXTRA_CA_CERTS" "/etc/ssl/certs/ca-certificates.crt")
 
 (use-package! copilot
@@ -15,15 +14,11 @@
 (use-package! claude-code-ide
   :bind ("C-c C-'" . claude-code-ide-menu)
   :init
-  ;; Use the pure-elisp `eat` terminal instead of the default `vterm`.
-  ;; Renders the Claude Code TUI more cleanly (no vterm flicker/glitches).
+  ;; `eat` renders the Claude TUI more cleanly than the default `vterm`.
   (setq claude-code-ide-terminal-backend 'eat)
   :config
   (claude-code-ide-emacs-tools-setup)
-  ;; Pick the Claude account by project location: sessions rooted under ~/work
-  ;; use the work account, everything else uses the personal (default) account.
-  ;; CLAUDE_CONFIG_DIR isolates auth/settings/history, mirroring the zsh `claude`
-  ;; wrapper in home-manager so the CLI and Emacs behave identically.
+  ;; Use the work Claude account for sessions under ~/work, personal elsewhere.
   (defun my/claude-work-dir-p (dir)
     "Return non-nil if DIR is within ~/work (recursively)."
     (string-prefix-p (file-name-as-directory (expand-file-name "~/work"))
@@ -37,15 +32,11 @@
                                  process-environment)
                          process-environment)))
                   (apply orig-fn buffer-name working-dir args))))
-  ;; Alt+Enter (M-RET) inserts a newline in the Claude prompt.
-  ;; Upstream only binds S-<return>; add M-<return> in the Claude terminal
-  ;; buffer by extending the package's own key-setup function.
+  ;; M-<return> inserts a newline in the Claude prompt (upstream only binds S-<return>).
   (advice-add 'claude-code-ide--setup-terminal-keybindings :after
               (lambda ()
                 (local-set-key (kbd "M-<return>") #'claude-code-ide-insert-newline)))
-  ;; Doom shows transients below the selected window, which crops the wide
-  ;; Claude menu when it opens beside the Claude side window. Give this prefix
-  ;; its own full-width bottom side window so no columns get truncated.
+  ;; Full-width bottom side window for the menu so no columns get truncated.
   (with-eval-after-load 'claude-code-ide-transient
     (oset (get 'claude-code-ide-menu 'transient--prefix) display-action
           '(display-buffer-in-side-window
@@ -54,7 +45,7 @@
             (dedicated . t)
             (inhibit-same-window . t)))))
 
-;; eat runs the Claude Code terminal; these forward keys the TUI needs.
+;; Forward keys the Claude TUI needs into the eat terminal.
 (defun my/eat-send-escape ()
   "Send ESC to the eat terminal."
   (interactive)
