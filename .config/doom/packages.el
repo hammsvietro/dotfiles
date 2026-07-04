@@ -8,7 +8,6 @@
 (package! ember-theme
   :recipe (:host github :repo "ember-theme/emacs"))
 
-(package! claude-code-ide
-  :recipe (:host github :repo "manzaltu/claude-code-ide.el"))
-
-(package! eat)
+(package! shell-maker)
+(package! acp)
+(package! agent-shell)

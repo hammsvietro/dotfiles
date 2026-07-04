@@ -20,6 +20,7 @@
     android-tools
 
     claude-code
+    claude-agent-acp
 
     gh
 
@@ -65,7 +66,7 @@
     jemalloc
     openssl
 
-    elixir
+    beamPackages.elixir
     elixir-ls
 
     (rust-bin.stable.latest.default.override {

@@ -48,7 +48,6 @@
           ];
 
           buildInputs = with pkgs; [
-            # Python / Web Deps
             pythonPackages.gssapi
             pythonPackages.setuptools
             pythonPackages.tomli-w
@@ -64,11 +63,9 @@
             gcc
             pythonPackages.python
 
-            # Go Deps
             go
             traefik
 
-            # Cypress / Node Deps
             nodejs_22
             steam-run
             nss

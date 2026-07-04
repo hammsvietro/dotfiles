@@ -26,6 +26,34 @@
       source = ./statusline.sh;
       executable = true;
     };
+
+    ".claude/settings.json".text = builtins.toJSON {
+      statusLine = {
+        type = "command";
+        command = "~/.claude/statusline.sh";
+      };
+      enabledPlugins = {
+        "rust-analyzer-lsp@claude-plugins-official" = true;
+        "pyright-lsp@claude-plugins-official" = true;
+      };
+      effortLevel = "high";
+      theme = "dark";
+      model = "opusplan";
+    };
+
+    ".config/claude-work/settings.json".text = builtins.toJSON {
+      statusLine = {
+        type = "command";
+        command = "~/.config/claude-work/statusline.sh";
+      };
+      enabledPlugins = {
+        "pyright-lsp@claude-plugins-official" = true;
+        "typescript-lsp@claude-plugins-official" = true;
+      };
+      effortLevel = "medium";
+      theme = "dark";
+      model = "opusplan";
+    };
     ".tmux.conf".text = ''
       set -g base-index 1
       setw -g pane-base-index 1

@@ -7,11 +7,9 @@
 
 {
   environment.systemPackages = with pkgs; [
-    # Editors
     emacs-pgtk
     vim
 
-    # Core CLI
     wget
     git
     ripgrep
@@ -26,17 +24,14 @@
     gnupg
     zsh
 
-    # Desktop / Wayland
     wofi
     desktop-file-utils
     wl-clipboard
 
     teams-for-linux
 
-    # Notifications
     dunst
 
-    # Media
     ffmpeg
     vlc
     pavucontrol
@@ -45,7 +40,6 @@
     maestral
     maestral-gui
 
-    # Apps
     spotify
     thunderbird
     inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
@@ -53,20 +47,17 @@
     insomnia
     whatsapp-electron
 
-    # Archive / filesystem
     zip
     unzip
     ntfs3g
     pciutils
 
-    # Dev infra
     docker
     rustup
     libva-utils
     os-prober
     home-manager
 
-    # Wayland-native Electron apps
     (google-chrome.override {
       commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
     })
@@ -82,7 +73,6 @@
     notion-app-enhanced
     pinentry-qt
 
-    # Mobile
     libimobiledevice
     ifuse
 

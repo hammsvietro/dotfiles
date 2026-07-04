@@ -19,6 +19,10 @@
       bindkey "^[[1;5D" backward-word
       bindkey "^[[1;5C" forward-word
 
+      # bash-style word boundaries so M-DEL stops at /, ., - rather than the whole path.
+      autoload -Uz select-word-style
+      select-word-style bash
+
       # TODO: Use sops-nix to manage secrets instead of sourcing a separate file
       if [ -f ~/.secrets.sh ]; then
         source ~/.secrets.sh
@@ -59,5 +63,6 @@
 
   home.sessionVariables = {
     CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG = "true";
+    ANTHROPIC_MODEL = "opusplan";
   };
 }

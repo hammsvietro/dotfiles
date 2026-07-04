@@ -1,7 +1,5 @@
 { config, pkgs, ... }:
 {
-  # boot.kernelPackages = pkgs.linuxPackages_zen;
-
   boot.loader.grub = {
     enable = true;
     efiSupport = true;

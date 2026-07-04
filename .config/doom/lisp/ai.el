@@ -11,57 +11,44 @@
               ("C-TAB" . 'copilot-accept-completion-by-word)
               ("C-<tab>" . 'copilot-accept-completion-by-word)))
 
-(use-package! claude-code-ide
-  :bind ("C-c C-'" . claude-code-ide-menu)
-  :init
-  ;; `eat` renders the Claude TUI more cleanly than the default `vterm`.
-  (setq claude-code-ide-terminal-backend 'eat)
+(use-package! agent-shell
+  :defer t
   :config
-  (claude-code-ide-emacs-tools-setup)
-  ;; Use the work Claude account for sessions under ~/work, personal elsewhere.
-  (defun my/claude-work-dir-p (dir)
-    "Return non-nil if DIR is within ~/work (recursively)."
-    (string-prefix-p (file-name-as-directory (expand-file-name "~/work"))
-                     (file-name-as-directory (expand-file-name (or dir default-directory)))))
-  (advice-add 'claude-code-ide--create-terminal-session :around
-              (lambda (orig-fn buffer-name working-dir &rest args)
-                (let ((process-environment
-                       (if (my/claude-work-dir-p working-dir)
-                           (cons (concat "CLAUDE_CONFIG_DIR="
-                                         (expand-file-name "~/.config/claude-work"))
-                                 process-environment)
-                         process-environment)))
-                  (apply orig-fn buffer-name working-dir args))))
-  ;; M-<return> inserts a newline in the Claude prompt (upstream only binds S-<return>).
-  (advice-add 'claude-code-ide--setup-terminal-keybindings :after
-              (lambda ()
-                (local-set-key (kbd "M-<return>") #'claude-code-ide-insert-newline)))
-  ;; Full-width bottom side window for the menu so no columns get truncated.
-  (with-eval-after-load 'claude-code-ide-transient
-    (oset (get 'claude-code-ide-menu 'transient--prefix) display-action
-          '(display-buffer-in-side-window
-            (side . bottom)
-            (slot . 0)
-            (dedicated . t)
-            (inhibit-same-window . t)))))
+  (setq agent-shell-anthropic-authentication
+        (agent-shell-anthropic-make-authentication :login t)))
 
-;; Forward keys the Claude TUI needs into the eat terminal.
-(defun my/eat-send-escape ()
-  "Send ESC to the eat terminal."
+(defun my/claude-work-dir-p (dir)
+  "Return non-nil if DIR is within ~/work (recursively)."
+  (string-prefix-p (file-name-as-directory (expand-file-name "~/work"))
+                   (file-name-as-directory (expand-file-name (or dir default-directory)))))
+
+(defun my/agent-shell-claude ()
+  "Start an agent-shell Claude session.
+Injects CLAUDE_CONFIG_DIR so sessions under ~/work use the work account."
   (interactive)
-  (eat-self-input 1 ?\e))
+  (require 'agent-shell)
+  ;; `agent-shell-anthropic-claude-environment' is read when the ACP subprocess
+  ;; is spawned, so set it (globally) right before launching.
+  (setq agent-shell-anthropic-claude-environment
+        (when (my/claude-work-dir-p default-directory)
+          (list (concat "CLAUDE_CONFIG_DIR="
+                        (expand-file-name "~/.config/claude-work")))))
+  (agent-shell-anthropic-start-claude-code))
 
-(defun my/eat-send-backtab ()
-  "Send Shift+Tab (backtab) to the eat terminal."
-  (interactive)
-  (eat-self-input 1 ?\e)
-  (eat-self-input 1 ?\[)
-  (eat-self-input 1 ?Z))
+(map! "C-c C-'" #'my/agent-shell-claude)
 
-(map! :map eat-semi-char-mode-map
-      :desc "Send ESC to eat terminal"
-      :nvi "C-c q" #'my/eat-send-escape)
+(defun my/agent-shell-work-badge-a (model)
+  "Tag MODEL's project name with WORK for sessions rooted under ~/work."
+  (when-let* (((my/claude-work-dir-p default-directory))
+              (name (map-elt model :project-name)))
+    (setf (map-elt model :project-name) (concat name " [WORK]")))
+  model)
 
-(with-eval-after-load 'evil
-  (evil-define-key '(insert normal emacs) eat-semi-char-mode-map
-    (kbd "<backtab>") #'my/eat-send-backtab))
+(with-eval-after-load 'agent-shell
+  (advice-add 'agent-shell--make-header-model :filter-return #'my/agent-shell-work-badge-a))
+
+(with-eval-after-load 'agent-shell
+(setq agent-shell-anthropic-claude-environment
+      (agent-shell-make-environment-variables
+       :inherit-env t
+       "ANTHROPIC_MODEL" "opusplan")))

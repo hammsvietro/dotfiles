@@ -10,5 +10,5 @@
 (load! "lisp/nav")      ; completion (ivy/corfu) + project navigation
 (load! "lisp/lsp")      ; LSP, flycheck, formatting, per-language dev config
 (load! "lisp/emacs-lisp") ; workaround for upstream elisp flycheck-mode bug
-(load! "lisp/ai")       ; Copilot, Claude Code, eat terminal helpers
+(load! "lisp/ai")       ; Copilot, Claude Code (agent-shell)
 (load! "lisp/org")      ; org directories, capture, autosave
