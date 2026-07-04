@@ -1,6 +1,34 @@
 # Out-of-store symlinks stay live-editable without a home-manager rebuild.
-{ config, ... }:
+{ config, pkgs, lib, ... }:
 
+let
+  claudeSettingsFile = pkgs.writeText "claude-settings.json" (builtins.toJSON {
+    statusLine = {
+      type = "command";
+      command = "~/.claude/statusline.sh";
+    };
+    enabledPlugins = {
+      "rust-analyzer-lsp@claude-plugins-official" = true;
+      "pyright-lsp@claude-plugins-official" = true;
+    };
+    effortLevel = "high";
+    theme = "dark";
+    model = "opusplan";
+  });
+  claudeWorkSettingsFile = pkgs.writeText "claude-work-settings.json" (builtins.toJSON {
+    statusLine = {
+      type = "command";
+      command = "~/.config/claude-work/statusline.sh";
+    };
+    enabledPlugins = {
+      "pyright-lsp@claude-plugins-official" = true;
+      "typescript-lsp@claude-plugins-official" = true;
+    };
+    effortLevel = "medium";
+    theme = "dark";
+    model = "opusplan";
+  });
+in
 {
   xdg.configFile = {
     "doom" = {
@@ -27,33 +55,6 @@
       executable = true;
     };
 
-    ".claude/settings.json".text = builtins.toJSON {
-      statusLine = {
-        type = "command";
-        command = "~/.claude/statusline.sh";
-      };
-      enabledPlugins = {
-        "rust-analyzer-lsp@claude-plugins-official" = true;
-        "pyright-lsp@claude-plugins-official" = true;
-      };
-      effortLevel = "high";
-      theme = "dark";
-      model = "opusplan";
-    };
-
-    ".config/claude-work/settings.json".text = builtins.toJSON {
-      statusLine = {
-        type = "command";
-        command = "~/.config/claude-work/statusline.sh";
-      };
-      enabledPlugins = {
-        "pyright-lsp@claude-plugins-official" = true;
-        "typescript-lsp@claude-plugins-official" = true;
-      };
-      effortLevel = "medium";
-      theme = "dark";
-      model = "opusplan";
-    };
     ".tmux.conf".text = ''
       set -g base-index 1
       setw -g pane-base-index 1
@@ -87,4 +88,11 @@
       set -g status 2
     '';
   };
+
+  home.activation.claudeSettingsWritable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ${pkgs.coreutils}/bin/mkdir -p "$HOME/.claude"
+    ${pkgs.coreutils}/bin/cp --no-preserve=mode --remove-destination "${claudeSettingsFile}" "$HOME/.claude/settings.json"
+    ${pkgs.coreutils}/bin/mkdir -p "$HOME/.config/claude-work"
+    ${pkgs.coreutils}/bin/cp --no-preserve=mode --remove-destination "${claudeWorkSettingsFile}" "$HOME/.config/claude-work/settings.json"
+  '';
 }
