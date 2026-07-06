@@ -11,7 +11,7 @@
     };
 
     envExtra = ''
-      export PATH="${config.home.homeDirectory}/.cargo/bin:$PATH"
+      export PATH="${config.home.homeDirectory}/.cargo/bin:${config.home.homeDirectory}/.config/emacs/bin:$PATH"
     '';
     initExtra = "";
 
@@ -59,6 +59,7 @@
 
   home.sessionPath = [
     "${config.home.homeDirectory}/.cargo/bin"
+    "${config.home.homeDirectory}/.config/emacs/bin"
   ];
 
   home.sessionVariables = {

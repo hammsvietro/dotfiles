@@ -1,5 +1,13 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
+let
+  emacsUpgradeScript = ''
+    pkill -f "emacs --daemon" || true
+    "${config.home.homeDirectory}/.config/emacs/bin/doom" upgrade -!
+    "${config.home.homeDirectory}/.config/emacs/bin/doom" sync
+    emacs --daemon
+  '';
+in
 {
   imports = [
     ./hyprland.nix
@@ -19,5 +27,7 @@
     fastfetch
     htop
     tmux
+    (writeShellScriptBin "emacs-upgrade" emacsUpgradeScript)
+    (writeShellScriptBin "upgrade-emacs" emacsUpgradeScript)
   ];
 }

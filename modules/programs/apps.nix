@@ -27,6 +27,7 @@
     wofi
     desktop-file-utils
     wl-clipboard
+    imagemagick
 
     teams-for-linux
 
