@@ -65,4 +65,28 @@
               #'my/claude-code-ide--skip-ghostel-keys)
   (advice-add 'claude-code-ide :around #'my/claude-code-ide--inject-work-env))
 
+(defvar my/claude-code-ide--fullscreen-config nil
+  "Window configuration to restore when leaving Claude fullscreen.")
+
+(defun my/claude-code-ide-toggle-fullscreen ()
+  "Toggle the current project's Claude window between side window and full frame."
+  (interactive)
+  (if my/claude-code-ide--fullscreen-config
+      (progn
+        (set-window-configuration my/claude-code-ide--fullscreen-config)
+        (setq my/claude-code-ide--fullscreen-config nil))
+    (let ((buffer (get-buffer (claude-code-ide--get-buffer-name))))
+      (unless (buffer-live-p buffer)
+        (user-error "No Claude Code session for this project"))
+      (setq my/claude-code-ide--fullscreen-config (current-window-configuration))
+      ;; A side window can't become the sole window, so drop it before full-framing.
+      (when-let ((win (get-buffer-window buffer)))
+        (when (window-parameter win 'window-side)
+          (delete-window win)))
+      (select-window (display-buffer-full-frame buffer nil)))))
+
+(after! claude-code-ide-transient
+  (transient-append-suffix 'claude-code-ide-menu 'claude-code-ide-toggle-recent
+    '("f" "Toggle fullscreen" my/claude-code-ide-toggle-fullscreen)))
+
 (map! "C-c C-'" #'claude-code-ide-menu)

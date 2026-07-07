@@ -6,8 +6,8 @@
   (when (file-directory-p custom-theme-path)
     (add-to-list 'custom-theme-load-path custom-theme-path)))
 
-(defvar my-dark-theme 'doom-gruvbox)
-(defvar my-light-theme 'doom-gruvbox-light)
+(defvar my-dark-theme 'doom-ir-black)
+(defvar my-light-theme 'doom-nord-light)
 
 (setq doom-theme my-dark-theme)
 
