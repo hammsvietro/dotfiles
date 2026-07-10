@@ -9,7 +9,8 @@
       buildInputs = [ pkgs.makeWrapper ];
       postBuild = ''
         wrapProgram $out/bin/ghostty \
-          --set GTK_IM_MODULE simple
+          --set GTK_IM_MODULE simple \
+          --set GDK_DISABLE dmabuf
       '';
       meta.mainProgram = "ghostty";
     };

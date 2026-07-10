@@ -52,6 +52,10 @@
             ;;
         esac
       }
+
+      pclaude() {
+        CLAUDE_CONFIG_DIR="$HOME/.claude" command claude "$@"
+      }
     '';
   };
 
