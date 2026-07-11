@@ -5,6 +5,7 @@
     ./system/locale.nix
     ./system/core.nix
     ./system/performance.nix
+    ./system/overlays.nix
 
     ./desktop/hyprland.nix
     ./desktop/plasma.nix
