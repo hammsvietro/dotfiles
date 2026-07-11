@@ -1,12 +1,12 @@
 { config, pkgs, ... }:
 {
-  programs.zsh.enable = true;
+  programs.fish.enable = true;
   networking.networkmanager.enable = true;
 
   users.users.hammsvietro = {
     isNormalUser = true;
     description = "Pedro Hamms Vietro";
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     extraGroups = [
       "networkmanager"
       "wheel"

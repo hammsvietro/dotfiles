@@ -22,7 +22,6 @@
     gnumake
     psmisc
     gnupg
-    zsh
 
     wofi
     desktop-file-utils
