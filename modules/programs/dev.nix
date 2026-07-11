@@ -19,6 +19,9 @@
 
     android-tools
 
+    age
+    sops
+
     claude-code
     claude-agent-acp
 

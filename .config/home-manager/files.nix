@@ -54,15 +54,6 @@ in
       source = ./statusline.sh;
       executable = true;
     };
-    ".claude/skills" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/home-manager/claude-skills";
-      recursive = true;
-    };
-    ".config/claude-work/skills" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/home-manager/claude-skills";
-      recursive = true;
-    };
-
     ".tmux.conf".text = ''
       set -g base-index 1
       setw -g pane-base-index 1

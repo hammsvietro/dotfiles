@@ -15,6 +15,7 @@ in
     ./git.nix
     ./terminal.nix
     ./files.nix
+    ./blackwall.nix
     ./mime.nix
   ];
 

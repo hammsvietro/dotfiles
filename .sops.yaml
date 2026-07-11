@@ -1,0 +1,7 @@
+keys:
+  - &hammsvietro age1nhpun0k9y2hfrhn72r6lyt9r3z8d53fx6v6gs2hgw4pzv3dfgucqgef4tk
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env)$
+    key_groups:
+      - age:
+          - *hammsvietro
