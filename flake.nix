@@ -1,5 +1,5 @@
 {
-  description = "Pedro's NixOS and Home Manager config";
+  description = "hammsvietro's NixOS and Home Manager config";
 
   nixConfig = {
     extra-substituters = [ "https://noctalia.cachix.org" ];

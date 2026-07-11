@@ -2,7 +2,7 @@
 
 {
   systemd.user.services.maestral = {
-    description = "Maestral Dropbox Client";
+    description = "Maestral Client <org files sync>";
 
     wantedBy = [
       "graphical-session.target"
