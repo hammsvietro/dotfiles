@@ -54,7 +54,7 @@
     {
       nixosConfigurations = {
         fractal = mkHost "fractal";
-        laptop = mkHost "laptop";
+        mandelbrot = mkHost "mandelbrot";
       };
     };
 }

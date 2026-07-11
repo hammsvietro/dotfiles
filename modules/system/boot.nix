@@ -6,6 +6,10 @@
     device = "nodev";
     useOSProber = true;
     default = "saved";
+    theme = pkgs.callPackage ./grub-theme { };
+    splashImage = null;
+    gfxmodeEfi = "1920x1080";
+    gfxmodeBios = "1920x1080";
   };
   boot.supportedFilesystems = [ "ntfs" ];
 

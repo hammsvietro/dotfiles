@@ -7,5 +7,5 @@
     ../../modules/hardware/nvidia-laptop.nix
   ];
 
-  networking.hostName = "hammsvietro-laptop";
+  networking.hostName = "mandelbrot";
 }

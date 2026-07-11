@@ -4,7 +4,7 @@ Pedro's NixOS + Home Manager + Doom Emacs configuration (flake-based).
 
 ## Layout
 
-- `flake.nix` — entry point. `mkHost` builds `nixosConfigurations.{fractal,laptop}`;
+- `flake.nix` — entry point. `mkHost` builds `nixosConfigurations.{fractal,mandelbrot}`;
   each pulls in Home Manager as a NixOS module for user `hammsvietro`.
 - `hosts/<name>/` — per-machine: `hardware-configuration.nix`, host-specific
   hardware (e.g. `nvidia-desktop.nix`), hostname. Imports `../../modules`.
@@ -22,7 +22,7 @@ Desktop is Hyprland (Wayland) with the noctalia shell; Plasma is also available.
 ## Commands
 
 - Rebuild system: `sudo nixos-rebuild switch --flake ~/dotfiles#fractal`
-  (use `#laptop` on the laptop). Nix changes only take effect after this.
+  (use `#mandelbrot` on the laptop). Nix changes only take effect after this.
 - Emacs packages: `~/.config/emacs/bin/doom sync` after editing `packages.el`,
   then restart Emacs. `doom purge` GCs orphaned build dirs.
 
