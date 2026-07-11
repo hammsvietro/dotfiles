@@ -16,6 +16,7 @@ in
     ./terminal.nix
     ./files.nix
     ./blackwall.nix
+    ./secrets.nix
     ./mime.nix
   ];
 

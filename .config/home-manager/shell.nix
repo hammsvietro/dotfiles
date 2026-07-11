@@ -20,10 +20,10 @@
 
       printf '\e[2 q'
 
-      # TODO: Use sops-nix to manage secrets instead of sourcing a separate file
-      if test -f ~/.secrets.sh
-        bash -c 'source ~/.secrets.sh; env -0' | while read -lz line
-          test -n "$line"; and set -gx (string split -m1 = -- $line)
+      if test -r ${config.sops.templates."construct.env".path}
+        for line in (cat ${config.sops.templates."construct.env".path})
+          set -l kv (string split -m1 = -- $line)
+          test -n "$kv[1]"; and set -gx $kv[1] $kv[2]
         end
       end
     '';

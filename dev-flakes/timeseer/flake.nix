@@ -116,12 +116,7 @@
             (pkgs.writeShellScriptBin "install-deps" ''
               set -euo pipefail
 
-              if [ -z "$NEXUS_USERNAME" ] || [ -z "$NEXUS_PASSWORD" ]; then
-                echo -e "\e[31mPlease set NEXUS_USERNAME and NEXUS_PASSWORD in your environment.\e[0m"
-                exit 1
-              fi
-
-              export EXTRA_INDEX_URL="https://$NEXUS_USERNAME:$NEXUS_PASSWORD@nexus.dev.timeseer.ai/repository/timeseer/simple"
+              export EXTRA_INDEX_URL="https://$nexus_username:$nexus_password@nexus.dev.timeseer.ai/repository/timeseer/simple"
 
               LOCK_FILE="uv.lock"
               BACKUP_LOCK="uv.lock.bak"
