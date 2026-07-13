@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if setxkbmap -print | awk -F"+" '/xkb_symbols/ {print $2}' | grep "us" &> /dev/null ; then
-  setxkbmap br
-else
-  setxkbmap us
-fi
-

@@ -1,0 +1,143 @@
+{
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-5",
+      "enable_thinking": true,
+      "effort": "high"
+    },
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "agent_servers": {
+    "Claude · personal (opus)": {
+      "type": "custom",
+      "command": "claude-agent-acp",
+      "args": [],
+      "env": {
+        "ANTHROPIC_MODEL": "opus"
+      }
+    },
+    "Claude · work (opus)": {
+      "type": "custom",
+      "command": "claude-agent-acp",
+      "args": [],
+      "env": {
+        "CLAUDE_CONFIG_DIR": "/home/hammsvietro/.config/claude-work",
+        "ANTHROPIC_MODEL": "opus"
+      }
+    }
+  },
+  "vim_mode": true,
+  "base_keymap": "Emacs",
+
+  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_size": 16,
+  "ui_font_size": 16,
+
+  "theme": {
+    "mode": "system",
+    "light": "Noctalia Light Transparent",
+    "dark": "Noctalia Dark Transparent"
+  },
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+
+  "relative_line_numbers": "enabled",
+  // Mirrors doom's scroll-margin 7.
+  "vertical_scroll_margin": 7,
+  "cursor_blink": false,
+
+  "vim": {
+    "use_system_clipboard": "always",
+    "toggle_relative_line_numbers": false
+  },
+
+  "format_on_save": "on",
+  "ensure_final_newline_on_save": true,
+  "remove_trailing_whitespace_on_save": true,
+
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "show_edit_predictions": true,
+
+  "inlay_hints": {
+    "enabled": true,
+    "show_parameter_hints": true,
+    "show_type_hints": true
+  },
+
+  "tab_size": 4,
+
+  // Nix owns the package; let it manage updates, not Zed.
+  "auto_update": false,
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/node_modules",
+    "**/target",
+    "**/_build",
+    "**/deps",
+    "**/.direnv",
+    "**/result",
+    "**/result-*",
+    "**/__pycache__",
+    "**/.venv",
+    "**/.elixir_ls",
+    "**/dist",
+    "**/.next",
+    "**/.mypy_cache",
+    "**/.pytest_cache"
+  ],
+
+  "auto_install_extensions": {
+    "nix": true,
+    "elixir": true,
+    "html": true,
+    "toml": true,
+    "dockerfile": true,
+    "make": true
+  },
+
+  "languages": {
+    "Nix": { "tab_size": 2 },
+    "JSON": { "tab_size": 2 },
+    "JSONC": { "tab_size": 2 },
+    "YAML": { "tab_size": 2 },
+    "HTML": { "tab_size": 2 },
+    "CSS": { "tab_size": 2 },
+    "Markdown": {
+      "tab_size": 2,
+      "format_on_save": "off",
+      "remove_trailing_whitespace_on_save": false
+    },
+    "TypeScript": { "tab_size": 4 },
+    "TSX": { "tab_size": 4 },
+    "JavaScript": { "tab_size": 4 }
+  },
+
+  "lsp": {
+    "rust-analyzer": {
+      "initialization_options": {
+        "cargo": { "features": "all" },
+        "check": { "command": "clippy" }
+      }
+    }
+  },
+
+  "terminal": {
+    "font_family": "JetBrainsMono Nerd Font"
+  },
+
+  "minimap": {
+    "show": "auto"
+  }
+}

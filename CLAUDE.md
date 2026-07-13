@@ -10,9 +10,10 @@ Pedro's NixOS + Home Manager + Doom Emacs configuration (flake-based).
   hardware (e.g. `nvidia-desktop.nix`), hostname. Imports `../../modules`.
 - `modules/` — system config, aggregated by `modules/default.nix` and grouped by
   concern: `system/`, `desktop/`, `hardware/`, `services/`, `programs/`, `users/`.
-- `.config/home-manager/` — Home Manager, entry `home.nix` importing
-  `hyprland/shell/git/terminal/files/mime`.
-- `.config/doom/` — Doom Emacs. `config.el` loads the `lisp/*.el` modules
+- `home/` — Home Manager, entry `home.nix` importing
+  `hyprland/shell/git/terminal/files/mime`. Also holds the raw app configs it
+  symlinks out-of-store: `home/doom/` and `home/zed/`.
+- `home/doom/` — Doom Emacs. `config.el` loads the `lisp/*.el` modules
   (`ui theme editor nav lsp ai org`); `init.el` = enabled Doom modules,
   `packages.el` = extra packages.
 - `dev-flakes/` — per-project dev shells (direnv).
@@ -49,7 +50,7 @@ Security:
 - Current pattern: secrets live outside the repo in `~/.secrets.sh` (sourced by
   `shell.nix`). This is the one non-reproducible gap — the migration target is
   **sops-nix** so encrypted secrets can live in the flake (see the TODO in
-  `.config/home-manager/shell.nix`). Move new secrets toward that, not into
+  `home/shell.nix`). Move new secrets toward that, not into
   plaintext.
 
 ## Conventions

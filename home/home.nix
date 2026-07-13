@@ -14,8 +14,10 @@ in
     ./shell.nix
     ./git.nix
     ./terminal.nix
+    ./zed.nix
     ./greeter.nix
     ./files.nix
+    ./theming.nix
     ./blackwall.nix
     ./secrets.nix
     ./mime.nix
@@ -28,7 +30,7 @@ in
 
   home.packages = with pkgs; [
     fastfetch
-    htop
+    (btop.override { cudaSupport = true; })
     tmux
     (writeShellScriptBin "emacs-upgrade" emacsUpgradeScript)
     (writeShellScriptBin "upgrade-emacs" emacsUpgradeScript)

@@ -25,7 +25,7 @@ function fish_greeting --description 'Mandelbrot greeter'
     set -l maxit $pick[4]; set -l den $pick[5]
     set -l region (string join ' ' -- $pick[6..-1])
 
-    if test "$truecolor" = 0; or test "$cols" -lt 96; or not test -r "$awk"
+    if test "$truecolor" = 0; or test "$cols" -lt 30; or not test -r "$awk"
         set_color -o 61afef
         printf '\n  %s@%s' (whoami) (prompt_hostname)
         set_color normal
@@ -92,12 +92,25 @@ function fish_greeting --description 'Mandelbrot greeter'
 
     functions -e _row
 
-    set -l joined (string join \x1e -- $panel)
-
-    echo
-    env GREETER_PANEL="$joined" \
-        gawk -v W=52 -v ROWS=20 -v CX=$cx -v CY=$cy -v SPAN=$span \
-             -v MAXIT=$maxit -v DENSITY=$den -v PANELCOL=57 -v PANELPAD=4 \
+    if test "$cols" -ge 96
+        set -l joined (string join \x1e -- $panel)
+        echo
+        env GREETER_PANEL="$joined" \
+            gawk -v W=52 -v ROWS=20 -v CX=$cx -v CY=$cy -v SPAN=$span \
+                 -v MAXIT=$maxit -v DENSITY=$den -v PANELCOL=57 -v PANELPAD=4 \
+                 -f "$awk"
+        echo
+    else
+        set -l w (math -s0 "min(52, $cols - 2)")
+        set -l rows (math -s0 "max(8, round($w * 20 / 52))")
+        echo
+        gawk -v W=$w -v ROWS=$rows -v CX=$cx -v CY=$cy -v SPAN=$span \
+             -v MAXIT=$maxit -v DENSITY=$den \
              -f "$awk"
-    echo
+        echo
+        for pline in $panel
+            echo -s '  ' $pline
+        end
+        echo
+    end
 end

@@ -10,6 +10,7 @@
     ./desktop/hyprland.nix
     ./desktop/plasma.nix
     ./desktop/fonts.nix
+    ./desktop/theming.nix
 
     ./hardware/audio.nix
 

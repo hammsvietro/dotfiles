@@ -29,17 +29,27 @@
     '';
 
     functions = {
+      source = ''
+        if test (count $argv) -ge 1
+          set -l target $argv[1]
+          if string match -qr '(^|/)activate$' -- $target; and test -f "$target.fish"
+            set argv[1] "$target.fish"
+          end
+        end
+        builtin source $argv
+      '';
+
       claude = ''
         switch $PWD/
           case "$HOME/work/*"
-            env CLAUDE_CONFIG_DIR="$HOME/.config/claude-work" command claude $argv
+            env CLAUDE_CONFIG_DIR="$HOME/.config/claude-work" claude $argv
           case '*'
             command claude $argv
         end
       '';
 
       pclaude = ''
-        env CLAUDE_CONFIG_DIR="$HOME/.claude" command claude $argv
+        env CLAUDE_CONFIG_DIR="$HOME/.claude" claude $argv
       '';
     };
   };

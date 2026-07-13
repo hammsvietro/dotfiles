@@ -1,7 +1,7 @@
 { config, lib, ... }:
 
 let
-  sopsFile = ../../secrets/construct.yaml;
+  sopsFile = ../secrets/construct.yaml;
   # Enumerate the vault's secret names at eval time so every var lands in the
   # rendered env without being named here. Only column-0 `name:` lines are data
   # keys; the indented `sops:` metadata block and blank lines are skipped.

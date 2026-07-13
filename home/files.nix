@@ -32,7 +32,7 @@ in
 {
   xdg.configFile = {
     "doom" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/.config/doom";
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/doom";
       recursive = true;
     };
   };

@@ -27,7 +27,6 @@
         "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "QT_QPA_PLATFORM,wayland;xcb"
-        "QT_QPA_PLATFORMTHEME,qt6ct"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"
         "MOZ_ENABLE_WAYLAND,1"
@@ -141,6 +140,7 @@
 
       windowrule = [
         "immediate on, match:class ^(steam_app_.*)$"
+        "match:class ^([Tt]hunar)$, opacity 0.90 0.82"
         "match:class ^(emacs)$, workspace 3"
         "match:class ^(discord)$, workspace 6"
         "match:class ^(notion-app)$, workspace 7"

@@ -1,0 +1,95 @@
+[
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "space space": "file_finder::Toggle",
+      "space :": "command_palette::Toggle",
+      "space .": "workspace::Open",
+      "space ,": "tab_switcher::Toggle",
+      "space /": "pane::DeploySearch",
+
+      "space f f": "workspace::Open",
+      "space f r": "file_finder::Toggle",
+      "space f s": "workspace::Save",
+      "space f S": "workspace::SaveAll",
+      "space f x": "project_panel::ToggleFocus",
+
+      "space p p": "projects::OpenRecent",
+      "space p f": "file_finder::Toggle",
+
+      "space s s": "buffer_search::Deploy",
+      "space s p": "pane::DeploySearch",
+      "space s i": "outline::Toggle",
+      "space s I": "project_symbols::Toggle",
+
+      "space b b": "tab_switcher::Toggle",
+      "space b d": "pane::CloseActiveItem",
+      "space b n": "pane::ActivateNextItem",
+      "space b p": "pane::ActivatePreviousItem",
+
+      "space c d": "editor::GoToDefinition",
+      "space c D": "editor::FindAllReferences",
+      "space c t": "editor::GoToTypeDefinition",
+      "space c r": "editor::Rename",
+      "space c a": "editor::ToggleCodeActions",
+      "space c g": "editor::Hover",
+      "space c f": "editor::Format",
+      "space c j": "project_symbols::Toggle",
+      "space c x": "diagnostics::Deploy",
+      "space e": "editor::GoToDiagnostic",
+
+      "space g g": "git_panel::ToggleFocus",
+      "space g s": "git_panel::ToggleFocus",
+
+      "space o p": "project_panel::ToggleFocus",
+      "space o t": "terminal_panel::ToggleFocus",
+
+      "space a a": "agent::ToggleFocus",
+
+      "space w v": "pane::SplitRight",
+      "space w s": "pane::SplitDown",
+      "space w d": "pane::CloseActiveItem",
+      "space w c": "pane::CloseActiveItem",
+      "space w h": "workspace::ActivatePaneLeft",
+      "space w j": "workspace::ActivatePaneDown",
+      "space w k": "workspace::ActivatePaneUp",
+      "space w l": "workspace::ActivatePaneRight",
+
+      "space t d": "theme_selector::Toggle",
+
+      "space q q": "zed::Quit",
+
+      "ctrl-w v": "pane::SplitRight",
+      "ctrl-w s": "pane::SplitDown",
+      "ctrl-w h": "workspace::ActivatePaneLeft",
+      "ctrl-w j": "workspace::ActivatePaneDown",
+      "ctrl-w k": "workspace::ActivatePaneUp",
+      "ctrl-w l": "workspace::ActivatePaneRight",
+      "ctrl-w c": "pane::CloseActiveItem",
+
+      // Mirrors doom's TAB -> better-jumper-jump-forward (pairs with ctrl-o).
+      "tab": "pane::GoForward"
+    }
+  },
+  {
+    "context": "Editor",
+    "bindings": {
+      "ctrl-j": "editor::MoveDown",
+      "ctrl-k": "editor::MoveUp"
+    }
+  },
+  {
+    "context": "Editor && (showing_code_actions || showing_completions)",
+    "bindings": {
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrevious"
+    }
+  },
+  {
+    "context": "menu",
+    "bindings": {
+      "ctrl-j": "menu::SelectNext",
+      "ctrl-k": "menu::SelectPrevious"
+    }
+  }
+]

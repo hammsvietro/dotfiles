@@ -28,6 +28,9 @@
 ;; Register at load time so the hook fires regardless of evil-ghostel load order.
 (add-hook 'ghostel-mode-hook #'evil-ghostel-mode)
 
+;; ghostel is a terminal buffer; line numbers flicker as output streams.
+(add-hook 'ghostel-mode-hook (lambda () (display-line-numbers-mode -1)))
+
 (after! evil-ghostel
   (setq evil-ghostel-escape 'evil)
   (evil-define-key* '(normal insert) evil-ghostel-mode-map
