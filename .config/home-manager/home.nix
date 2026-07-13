@@ -14,6 +14,7 @@ in
     ./shell.nix
     ./git.nix
     ./terminal.nix
+    ./greeter.nix
     ./files.nix
     ./blackwall.nix
     ./secrets.nix
