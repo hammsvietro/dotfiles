@@ -3,8 +3,9 @@ function fish_greeting --description 'Mandelbrot greeter'
 
     set -l awk "$HOME/.config/greeter/mandelbrot.awk"
 
-    set -l cols "$COLUMNS"
-    test -n "$cols"; or set cols (tput cols 2>/dev/null); or set cols 80
+    set -l cols $COLUMNS
+    test -n "$cols"; or set cols (tput cols 2>/dev/null)
+    string match -qr '^\d+$' -- "$cols"; or set cols 80
 
     set -l truecolor 1
     if test -z "$COLORTERM"; and not string match -qr '256|ghostty|kitty|direct' -- "$TERM"
