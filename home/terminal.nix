@@ -16,6 +16,8 @@
     };
 
     settings = {
+      font-family = "JetBrainsMono Nerd Font";
+
       cursor-style = "block";
       cursor-style-blink = false;
       background-opacity = 0.8;

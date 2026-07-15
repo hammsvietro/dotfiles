@@ -11,6 +11,9 @@
   },
   "agent_servers": {
     "Claude · personal (opus)": {
+      "default_config_options": {
+        "mode": "auto"
+      },
       "type": "custom",
       "command": "claude-agent-acp",
       "args": [],
@@ -19,6 +22,10 @@
       }
     },
     "Claude · work (opus)": {
+      "default_config_options": {
+        "mode": "auto",
+        "effort": "high"
+      },
       "type": "custom",
       "command": "claude-agent-acp",
       "args": [],

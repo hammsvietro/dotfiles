@@ -91,5 +91,17 @@
       "ctrl-j": "menu::SelectNext",
       "ctrl-k": "menu::SelectPrevious"
     }
+  },
+  {
+    "context": "GitPanel",
+    "bindings": {
+      "space g g": "git::Diff"
+    }
+  },
+  {
+    "context": "GitPanel",
+    "unbind": {
+      "ctrl-g d": "git::Diff"
+    }
   }
 ]

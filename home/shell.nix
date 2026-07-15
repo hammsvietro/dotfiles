@@ -48,6 +48,10 @@
         end
       '';
 
+      wclaude = ''
+        env CLAUDE_CONFIG_DIR="$HOME/.config/claude-work" claude $argv
+      '';
+
       pclaude = ''
         env CLAUDE_CONFIG_DIR="$HOME/.claude" claude $argv
       '';
@@ -81,6 +85,7 @@
     settings = {
       auto_sync = false;
       search_mode = "fuzzy";
+      filter_mode = "session";
       style = "compact";
       inline_height = 20;
       show_preview = true;
@@ -126,7 +131,7 @@
 
       directory = {
         style = "bold fg:blue";
-        format = "[ $path]($style)[$read_only]($read_only_style) ";
+        format = "[ $path]($style)[$read_only]($read_only_style) ";
         truncation_length = 3;
         truncate_to_repo = true;
         read_only = " 󰌾";
@@ -134,7 +139,7 @@
       };
 
       git_branch = {
-        symbol = " ";
+        symbol = " ";
         style = "bold fg:mauve";
         format = "[on ](fg:subtext)[$symbol$branch]($style) ";
       };
@@ -145,37 +150,37 @@
       };
 
       nix_shell = {
-        symbol = " ";
+        symbol = " ";
         style = "bold fg:cyan";
         format = "[$symbol$state]($style) ";
       };
 
       nodejs = {
-        symbol = " ";
+        symbol = " ";
         style = "fg:green";
         format = "[$symbol$version]($style) ";
       };
 
       python = {
-        symbol = " ";
+        symbol = " ";
         style = "fg:yellow";
         format = "[$symbol$version]($style) ";
       };
 
       rust = {
-        symbol = " ";
+        symbol = " ";
         style = "fg:peach";
         format = "[$symbol$version]($style) ";
       };
 
       golang = {
-        symbol = " ";
+        symbol = " ";
         style = "fg:cyan";
         format = "[$symbol$version]($style) ";
       };
 
       docker_context = {
-        symbol = " ";
+        symbol = " ";
         style = "fg:blue";
         format = "[$symbol$context]($style) ";
         only_with_files = true;
