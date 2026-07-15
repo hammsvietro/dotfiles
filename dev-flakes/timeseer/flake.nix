@@ -38,6 +38,8 @@
       in
       {
         devShells.default = pkgs.mkShell {
+          name = "timeseer";
+
           nativeBuildInputs = with pkgs; [
             pkg-config
             pythonPackages.cython

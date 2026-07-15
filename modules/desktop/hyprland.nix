@@ -24,6 +24,7 @@
     hypridle
     hyprlock
     hyprshade
+    glslviewer
     copyq
     grim
     grimblast

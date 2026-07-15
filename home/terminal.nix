@@ -3,6 +3,7 @@
 {
   programs.ghostty = {
     enable = true;
+    enableFishIntegration = false;
     package = pkgs.symlinkJoin {
       name = "ghostty-wrapped";
       paths = [ pkgs.ghostty ];

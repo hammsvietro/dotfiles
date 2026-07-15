@@ -37,6 +37,8 @@
       in
       {
         devShells.default = pkgs.mkShell {
+          name = "ts-flows";
+
           nativeBuildInputs = with pkgs; [
             pkg-config
             rustc

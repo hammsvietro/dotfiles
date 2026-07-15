@@ -1,7 +1,16 @@
 # Hyprland/portal packages come from the system config; noctalia-shell regenerates
 # theme files under ~/.config/hypr at runtime, so only individual files are managed here.
-{ ... }:
+{ pkgs, ... }:
 
+let
+  screensaverStart = pkgs.writeShellScript "screensaver-start" ''
+    ${pkgs.procps}/bin/pgrep -x glslViewer >/dev/null && exit 0
+    exec ${pkgs.glslviewer}/bin/glslViewer ${./screensaver/mandelbrot.frag}
+  '';
+  screensaverStop = pkgs.writeShellScript "screensaver-stop" ''
+    ${pkgs.procps}/bin/pkill -x glslViewer
+  '';
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -11,7 +20,6 @@
     systemd.enable = true;
 
     settings = {
-      "$srcPath" = "$HOME/.config/hypr/scripts";
       "$ipc" = "noctalia-shell ipc call";
       "$mainMod" = "SUPER";
 
@@ -22,7 +30,6 @@
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "WLR_RENDERER_ALLOW_SOFTWARE,1"
         "NVD_BACKEND,direct"
-        "PATH,$PATH:$srcPath"
         "XDG_CURRENT_DESKTOP,Hyprland"
         "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
@@ -161,6 +168,13 @@
         "match:class ^(steam)$, match:title ^(notificationtoasts_.*_desktop)$, no_focus on"
         "stay_focused 1, match:title ^()$, match:class ^(steam)$"
         "min_size 1 1, match:title ^()$, match:class ^(steam)$"
+        "float true, match:class ^(glslViewer)$"
+        "fullscreen true, match:class ^(glslViewer)$"
+        "pin true, match:class ^(glslViewer)$"
+        "border_size 0, match:class ^(glslViewer)$"
+        "rounding 0, match:class ^(glslViewer)$"
+        "no_blur on, match:class ^(glslViewer)$"
+        "no_initial_focus on, match:class ^(glslViewer)$"
       ];
 
       workspace = [
@@ -264,18 +278,23 @@
     settings = {
       general = {
         lock_cmd = "noctalia-shell ipc call lockScreen lock";
-        before_sleep_cmd = "noctalia-shell ipc call lockScreen lock";
+        before_sleep_cmd = "${screensaverStop}; noctalia-shell ipc call lockScreen lock";
         after_sleep_cmd = "hyprctl dispatch dpms on";
       };
       listener = [
         {
           timeout = 300;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
+          on-timeout = "${screensaverStart}";
+          on-resume = "${screensaverStop}";
         }
         {
           timeout = 600;
-          on-timeout = "noctalia-shell ipc call lockScreen lock";
+          on-timeout = "${screensaverStop}; noctalia-shell ipc call lockScreen lock";
+        }
+        {
+          timeout = 900;
+          on-timeout = "hyprctl dispatch dpms off";
+          on-resume = "hyprctl dispatch dpms on";
         }
         {
           timeout = 1800;
@@ -283,19 +302,5 @@
         }
       ];
     };
-  };
-
-  xdg.configFile."hypr/scripts/resetscreenshare.sh" = {
-    executable = true;
-    text = ''
-      #!/usr/bin/env bash
-      sleep 1
-      killall xdg-desktop-portal-hyprland xdg-desktop-portal
-      sleep 1
-      libDir=/run/current-system/sw/libexec
-      $libDir/xdg-desktop-portal-hyprland &
-      sleep 2
-      $libDir/xdg-desktop-portal &
-    '';
   };
 }

@@ -13,6 +13,7 @@
     ./desktop/theming.nix
 
     ./hardware/audio.nix
+    ./hardware/suspend.nix
 
     ./services/maestral.nix
 

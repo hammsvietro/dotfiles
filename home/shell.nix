@@ -141,18 +141,18 @@
       git_branch = {
         symbol = " ";
         style = "bold fg:mauve";
-        format = "[on ](fg:subtext)[$symbol$branch]($style) ";
+        format = "[on ](fg:subtext)[$symbol$branch]($style)";
       };
 
       git_status = {
         style = "fg:yellow";
-        format = "([$all_status$ahead_behind]($style)) ";
+        format = " ([$all_status$ahead_behind]($style)) ";
       };
 
       nix_shell = {
         symbol = " ";
         style = "bold fg:cyan";
-        format = "[$symbol$state]($style) ";
+        format = "[$symbol$name]($style) ";
       };
 
       nodejs = {
