@@ -15,7 +15,6 @@
       "gamemode"
       "input"
       "kvm"
-      "adbusers"
       "libvirtd"
     ];
     packages = with pkgs; [

@@ -8,14 +8,13 @@
     ];
     flake-registry = "/etc/nix/registry.json";
     auto-optimise-store = true;
+    max-substitution-jobs = 32;
+    http-connections = 50;
     trusted-users = [
       "root"
       "hammsvietro"
     ];
   };
-
-  nix.daemonCPUSchedPolicy = "batch";
-  nix.daemonIOSchedClass = "idle";
 
   nix.gc = {
     automatic = true;

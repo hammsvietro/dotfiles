@@ -17,8 +17,6 @@
 
     protobuf
 
-    android-tools
-
     age
     sops
     gitleaks

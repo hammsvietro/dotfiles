@@ -20,6 +20,9 @@
       "application/pdf" = [ "zen.desktop" ];
 
       "inode/directory" = [ "thunar.desktop" ];
+
+      "x-scheme-handler/insomnia" = [ "insomnia.desktop" ];
+      "x-scheme-handler/claude-cli" = [ "claude-code-url-handler.desktop" ];
     };
   };
 }
