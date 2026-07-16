@@ -8,3 +8,10 @@ result-*
 .config/hypr/*
 
 /blackwall/
+
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+keys.txt
+*.agekey

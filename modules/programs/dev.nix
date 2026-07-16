@@ -21,6 +21,7 @@
 
     age
     sops
+    gitleaks
 
     claude-code
     claude-agent-acp

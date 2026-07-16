@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(gitleaks git:*)",
+      "Bash(gitleaks dir:*)",
+      "Bash(nixfmt:*)",
+      "Bash(nix eval:*)",
+      "Bash(nix flake check:*)",
+      "Bash(nix flake metadata:*)",
+      "Bash(nixos-rebuild dry-build:*)",
+      "Bash(home-manager generations:*)"
+    ]
+  }
+}

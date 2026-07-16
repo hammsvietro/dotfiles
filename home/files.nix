@@ -2,6 +2,38 @@
 { config, pkgs, lib, ... }:
 
 let
+  hooks = import ./claude-hooks.nix { inherit pkgs lib; };
+
+  cmd = drv: {
+    type = "command";
+    command = lib.getExe drv;
+  };
+
+  claudeHooks = {
+    PreToolUse = [
+      {
+        matcher = "Bash";
+        hooks = [
+          (cmd hooks.secret-guard)
+          (cmd hooks.repro-guard)
+        ];
+      }
+      {
+        matcher = "Write|Edit";
+        hooks = [ (cmd hooks.secret-write-guard) ];
+      }
+    ];
+    PostToolUse = [
+      {
+        matcher = "Write|Edit";
+        hooks = [ (cmd hooks.nix-fmt) ];
+      }
+    ];
+    Stop = [
+      { hooks = [ (cmd hooks.secret-guard) ]; }
+    ];
+  };
+
   claudeSettingsFile = pkgs.writeText "claude-settings.json" (builtins.toJSON {
     statusLine = {
       type = "command";
@@ -14,6 +46,7 @@ let
     effortLevel = "high";
     theme = "dark";
     model = "opusplan";
+    hooks = claudeHooks;
   });
   claudeWorkSettingsFile = pkgs.writeText "claude-work-settings.json" (builtins.toJSON {
     statusLine = {
@@ -27,6 +60,7 @@ let
     effortLevel = "medium";
     theme = "dark";
     model = "opusplan";
+    hooks = claudeHooks;
   });
 in
 {
@@ -93,5 +127,12 @@ in
     ${pkgs.coreutils}/bin/cp --no-preserve=mode --remove-destination "${claudeSettingsFile}" "$HOME/.claude/settings.json"
     ${pkgs.coreutils}/bin/mkdir -p "$HOME/.config/claude-work"
     ${pkgs.coreutils}/bin/cp --no-preserve=mode --remove-destination "${claudeWorkSettingsFile}" "$HOME/.config/claude-work/settings.json"
+  '';
+
+  home.activation.dotfilesPreCommit = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    hookDir="${config.home.homeDirectory}/dotfiles/.git/hooks"
+    if [ -d "$hookDir" ]; then
+      ${pkgs.coreutils}/bin/ln -sf "${hooks.preCommit}" "$hookDir/pre-commit"
+    fi
   '';
 }

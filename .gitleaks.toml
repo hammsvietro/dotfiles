@@ -1,0 +1,25 @@
+title = "dotfiles"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "age-secret-key"
+description = "age / sops-nix private key"
+regex = '''AGE-SECRET-KEY-1[0-9A-Z]{58}'''
+keywords = ["age-secret-key-1"]
+
+[allowlist]
+description = "Verified-safe material that lives in this repo by design"
+paths = [
+  '''secrets/construct\.yaml''',
+  '''secrets/blackwall\.enc''',
+  '''\.sops\.yaml''',
+  '''flake\.lock''',
+]
+regexTarget = "match"
+regexes = [
+  '''age1[0-9a-z]{58}''',
+  '''-----BEGIN AGE ENCRYPTED FILE-----''',
+  '''\$nexus_username:\$nexus_password@''',
+]
