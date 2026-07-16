@@ -5,7 +5,7 @@
 let
   screensaverStart = pkgs.writeShellScript "screensaver-start" ''
     ${pkgs.procps}/bin/pgrep -x glslViewer >/dev/null && exit 0
-    exec ${pkgs.glslviewer}/bin/glslViewer ${./screensaver/mandelbrot.frag}
+    exec ${pkgs.glslviewer}/bin/glslViewer ${./screensaver/mandelbrot.frag} --noncurses --nocursor
   '';
   screensaverStop = pkgs.writeShellScript "screensaver-stop" ''
     ${pkgs.procps}/bin/pkill -x glslViewer
@@ -168,13 +168,13 @@ in
         "match:class ^(steam)$, match:title ^(notificationtoasts_.*_desktop)$, no_focus on"
         "stay_focused 1, match:title ^()$, match:class ^(steam)$"
         "min_size 1 1, match:title ^()$, match:class ^(steam)$"
-        "float true, match:class ^(glslViewer)$"
-        "fullscreen true, match:class ^(glslViewer)$"
-        "pin true, match:class ^(glslViewer)$"
-        "border_size 0, match:class ^(glslViewer)$"
-        "rounding 0, match:class ^(glslViewer)$"
-        "no_blur on, match:class ^(glslViewer)$"
-        "no_initial_focus on, match:class ^(glslViewer)$"
+        "float true, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
+        "fullscreen true, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
+        "pin true, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
+        "border_size 0, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
+        "rounding 0, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
+        "no_blur on, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
+        "no_initial_focus on, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
       ];
 
       workspace = [
