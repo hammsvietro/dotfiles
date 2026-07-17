@@ -44,7 +44,7 @@
 
   fileSystems."/mnt/windows-games" = {
     device = "/dev/disk/by-uuid/C4228D35228D2D8C";
-    fsType = "ntfs3";
+    fsType = "ntfs-3g";
     options = [
       "rw"
       "force"
