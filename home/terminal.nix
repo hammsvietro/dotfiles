@@ -17,6 +17,7 @@
     };
 
     settings = {
+      theme = "noctalia";
       font-family = "JetBrainsMono Nerd Font";
 
       cursor-style = "block";

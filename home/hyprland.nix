@@ -72,7 +72,6 @@ in
         "dbus-update-activation-environment --systemd SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)"
         "gpg-connect-agent updatestartuptty /bye > /dev/null"
         "systemctl --user start hyprpolkitagent"
-        "polkit-kde-agent"
         "emacs --daemon"
         "noctalia-shell"
         "pywalfox start"

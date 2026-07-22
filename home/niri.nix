@@ -1,7 +1,8 @@
 { osConfig, lib, ... }:
 
 let
-  isMandelbrot = osConfig.networking.hostName == "mandelbrot";
+  hostName = osConfig.networking.hostName;
+  isMandelbrot = hostName == "mandelbrot";
 
   keyboard =
     if isMandelbrot then
@@ -107,6 +108,11 @@ in
     }
 
     window-rule {
+        match app-id="zen"
+        draw-border-with-background false
+    }
+
+    window-rule {
         match app-id="emacs"
         open-on-workspace "3"
     }
@@ -150,8 +156,10 @@ in
         Mod+Comma { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
         Mod+Shift+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
         Mod+Ctrl+Shift+L { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "lockAndSuspend"; }
-        Mod+Shift+S { spawn "grimblast" "--notify" "--freeze" "copy" "area"; }
-        Print { screenshot; }
+        Mod+Shift+H { spawn "ghostty" "-e" "sh" "-c" "sudo nixos-rebuild switch --flake ~/dotfiles#${hostName}; exec fish"; }
+        Mod+Shift+S { screenshot; }
+        Print { screenshot-screen; }
+        Mod+Print { screenshot-window; }
 
         Mod+Shift+Q { close-window; }
         Mod+Shift+E { quit; }

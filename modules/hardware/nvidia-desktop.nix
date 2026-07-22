@@ -33,4 +33,8 @@
   environment.variables = {
     __GL_SYNC_TO_VBLANK = "0";
   };
+
+  environment.sessionVariables = {
+    VK_LOADER_DRIVERS_SELECT = "nvidia_icd.json";
+  };
 }

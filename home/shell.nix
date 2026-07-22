@@ -228,6 +228,6 @@
 
   home.sessionVariables = {
     CARGO_PROFILE_DEV_BUILD_OVERRIDE_DEBUG = "true";
-    ANTHROPIC_MODEL = "opusplan";
+    ANTHROPIC_MODEL = "opus";
   };
 }

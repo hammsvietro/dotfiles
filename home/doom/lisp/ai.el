@@ -63,7 +63,6 @@
   :init
   (setq claude-code-ide-terminal-backend 'ghostel)
   :config
-  (setq claude-code-ide-cli-extra-flags "--model opusplan")
   (advice-add 'claude-code-ide--setup-terminal-keybindings :around
               #'my/claude-code-ide--skip-ghostel-keys)
   (advice-add 'claude-code-ide :around #'my/claude-code-ide--inject-work-env))

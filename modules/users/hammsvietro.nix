@@ -17,9 +17,6 @@
       "kvm"
       "libvirtd"
     ];
-    packages = with pkgs; [
-      kdePackages.kate
-    ];
   };
 
 }

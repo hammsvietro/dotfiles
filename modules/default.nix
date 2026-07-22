@@ -9,7 +9,7 @@
 
     ./desktop/hyprland.nix
     ./desktop/niri.nix
-    ./desktop/plasma.nix
+    ./desktop/display-manager.nix
     ./desktop/fonts.nix
     ./desktop/theming.nix
 

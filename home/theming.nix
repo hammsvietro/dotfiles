@@ -6,6 +6,6 @@
     custom_palette=true
     color_scheme_path=${config.home.homeDirectory}/.config/qt6ct/colors/noctalia.conf
     style=Fusion
-    icon_theme=breeze-dark
+    icon_theme=Papirus-Dark
   '';
 }

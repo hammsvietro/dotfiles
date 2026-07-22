@@ -4,6 +4,7 @@
   environment.systemPackages = with pkgs; [
     qt6Packages.qt6ct
     adw-gtk3
+    papirus-icon-theme
   ];
 
   environment.sessionVariables = {

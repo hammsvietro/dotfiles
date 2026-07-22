@@ -8,7 +8,7 @@
       "x-scheme-handler/http" = [ "zen.desktop" ];
       "x-scheme-handler/https" = [ "zen.desktop" ];
 
-      "text/plain" = [ "kate.desktop" ];
+      "text/plain" = [ "emacsclient.desktop" ];
 
       "image/png" = [ "org.gnome.Loupe.desktop" ];
       "image/jpeg" = [ "org.gnome.Loupe.desktop" ];

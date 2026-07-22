@@ -3,12 +3,12 @@
 
 ;; Treat _ as part of a word (motions, text objects).
 (modify-syntax-entry ?_ "w")
-(advice-add 'evil-inner-word :around
-            (lambda (orig &rest args)
-              (let ((table (copy-syntax-table (syntax-table))))
-                (modify-syntax-entry ?_ "w" table)
-                (with-syntax-table table
-                  (apply orig args)))))
+(defun my/evil-inner-word-underscore (orig &rest args)
+  (let ((table (copy-syntax-table (syntax-table))))
+    (modify-syntax-entry ?_ "w" table)
+    (with-syntax-table table
+      (apply orig args))))
+(advice-add 'evil-inner-word :around #'my/evil-inner-word-underscore)
 
 (setq evil-kill-on-visual-paste nil)
 ;; Block cursor in insert mode.
