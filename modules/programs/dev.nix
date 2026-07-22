@@ -29,7 +29,6 @@
     go
     gopls
 
-    pyright
     maturin
     (python314.withPackages (
       ps: with ps; [
@@ -59,7 +58,6 @@
     docker-compose
 
     nixfmt
-    nixpkgs-fmt
     nil
 
     gcc

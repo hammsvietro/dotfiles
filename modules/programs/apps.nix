@@ -52,8 +52,6 @@
     ntfs3g
     pciutils
 
-    docker
-    rustup
     libva-utils
     os-prober
     home-manager

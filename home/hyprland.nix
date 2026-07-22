@@ -1,8 +1,9 @@
 # Hyprland/portal packages come from the system config; noctalia-shell regenerates
 # theme files under ~/.config/hypr at runtime, so only individual files are managed here.
-{ pkgs, ... }:
+{ pkgs, osConfig, ... }:
 
 let
+  isMandelbrot = osConfig.networking.hostName == "mandelbrot";
   screensaverStart = pkgs.writeShellScript "screensaver-start" ''
     ${pkgs.procps}/bin/pgrep -x glslViewer >/dev/null && exit 0
     exec ${pkgs.glslviewer}/bin/glslViewer ${./screensaver/mandelbrot.frag} --noncurses --nocursor
@@ -31,15 +32,13 @@ in
         "WLR_RENDERER_ALLOW_SOFTWARE,1"
         "NVD_BACKEND,direct"
         "XDG_CURRENT_DESKTOP,Hyprland"
-        "XDG_SESSION_TYPE,wayland"
         "XDG_SESSION_DESKTOP,Hyprland"
         "QT_QPA_PLATFORM,wayland;xcb"
         "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
         "QT_AUTO_SCREEN_SCALE_FACTOR,1"
         "MOZ_ENABLE_WAYLAND,1"
         "GDK_SCALE,1"
-        "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-        "NIXOS_OZONE_WL, 1"
+        "NIXOS_OZONE_WL,1"
         "ELECTRON_OZONE_PLATFORM_HINT,auto"
         "ELECTRON_ENABLE_WAYLAND,1"
       ];
@@ -68,8 +67,8 @@ in
       ];
 
       input = {
-        kb_layout = "us,br";
-        kb_options = "grp:alt_space_toggle";
+        kb_layout = if isMandelbrot then "br" else "us,br";
+        kb_options = if isMandelbrot then "" else "grp:alt_space_toggle";
         follow_mouse = 1;
         mouse_refocus = false;
         force_no_accel = 0;
@@ -158,14 +157,6 @@ in
         "match:class ^(xwaylandvideobridge)$, opacity 0.0 0.0, no_anim 1, no_initial_focus 1, no_focus 1, max_size 1 1, no_blur 1"
         "match:workspace w[tv1], match:float 0, border_size 0, rounding 0"
         "match:workspace f[1], match:float 0, border_size 0, rounding 0"
-        "match:class ^(xwaylandvideobridge)$, opacity 0.0 0.0"
-        "match:class ^(xwaylandvideobridge)$, no_anim on"
-        "match:class ^(xwaylandvideobridge)$, no_initial_focus on"
-        "match:class ^(xwaylandvideobridge)$, max_size 1 1"
-        "match:class ^(xwaylandvideobridge)$, no_blur on"
-        "match:class ^([Ss]team)$, match:title ^([Ss]team)$, workspace 8 silent"
-        "match:class ^([Ss]team)$, match:title ^([Ss]team)$, tile on"
-        "match:class ^(steam)$, match:title ^(notificationtoasts_.*_desktop)$, no_focus on"
         "stay_focused 1, match:title ^()$, match:class ^(steam)$"
         "min_size 1 1, match:title ^()$, match:class ^(steam)$"
         "float true, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"

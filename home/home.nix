@@ -7,6 +7,7 @@ let
     "${config.home.homeDirectory}/.config/emacs/bin/doom" sync
     emacs --daemon
   '';
+  emacsUpgrade = pkgs.writeShellScriptBin "emacs-upgrade" emacsUpgradeScript;
 in
 {
   imports = [
@@ -30,9 +31,12 @@ in
 
   home.packages = with pkgs; [
     fastfetch
-    (btop.override { cudaSupport = true; })
+    btop
     tmux
-    (writeShellScriptBin "emacs-upgrade" emacsUpgradeScript)
-    (writeShellScriptBin "upgrade-emacs" emacsUpgradeScript)
+    emacsUpgrade
+    (runCommand "upgrade-emacs" { } ''
+      mkdir -p $out/bin
+      ln -s ${emacsUpgrade}/bin/emacs-upgrade $out/bin/upgrade-emacs
+    '')
   ];
 }

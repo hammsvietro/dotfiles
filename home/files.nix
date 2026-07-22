@@ -1,5 +1,10 @@
 # Out-of-store symlinks stay live-editable without a home-manager rebuild.
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   hooks = import ./claude-hooks.nix { inherit pkgs lib; };
@@ -34,34 +39,42 @@ let
     ];
   };
 
-  claudeSettingsFile = pkgs.writeText "claude-settings.json" (builtins.toJSON {
-    statusLine = {
-      type = "command";
-      command = "~/.claude/statusline.sh";
-    };
+  mkClaudeSettings =
+    name:
+    {
+      statuslineCommand,
+      enabledPlugins,
+      effortLevel,
+    }:
+    pkgs.writeText name (
+      builtins.toJSON {
+        statusLine = {
+          type = "command";
+          command = statuslineCommand;
+        };
+        inherit enabledPlugins effortLevel;
+        theme = "dark";
+        model = "opus";
+        hooks = claudeHooks;
+      }
+    );
+
+  claudeSettingsFile = mkClaudeSettings "claude-settings.json" {
+    statuslineCommand = "~/.claude/statusline.sh";
     enabledPlugins = {
       "rust-analyzer-lsp@claude-plugins-official" = true;
       "pyright-lsp@claude-plugins-official" = true;
     };
     effortLevel = "high";
-    theme = "dark";
-    model = "opusplan";
-    hooks = claudeHooks;
-  });
-  claudeWorkSettingsFile = pkgs.writeText "claude-work-settings.json" (builtins.toJSON {
-    statusLine = {
-      type = "command";
-      command = "~/.config/claude-work/statusline.sh";
-    };
+  };
+  claudeWorkSettingsFile = mkClaudeSettings "claude-work-settings.json" {
+    statuslineCommand = "~/.config/claude-work/statusline.sh";
     enabledPlugins = {
       "pyright-lsp@claude-plugins-official" = true;
       "typescript-lsp@claude-plugins-official" = true;
     };
-    effortLevel = "medium";
-    theme = "dark";
-    model = "opusplan";
-    hooks = claudeHooks;
-  });
+    effortLevel = "high";
+  };
 in
 {
   xdg.configFile = {

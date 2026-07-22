@@ -8,6 +8,8 @@
     ];
     flake-registry = "/etc/nix/registry.json";
     auto-optimise-store = true;
+    keep-outputs = true;
+    keep-derivations = true;
     max-substitution-jobs = 32;
     http-connections = 50;
     trusted-users = [

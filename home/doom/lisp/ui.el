@@ -4,7 +4,7 @@
 (setq frame-title-format "Emacs")
 
 ;; Don't truncate the package name in the emacs-lisp modeline/pin.
-(advice-add '+emacs-lisp-truncate-pin :override (lambda () ()))
+(advice-add '+emacs-lisp-truncate-pin :override #'ignore)
 
 ;; Wider ibuffer columns (name 30s were originally 18s).
 (setq ibuffer-formats

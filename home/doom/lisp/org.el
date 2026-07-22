@@ -12,11 +12,9 @@
         '((sequence "TODO(t)" "DOING(o)" "BLOCKED(b)" "|" "DONE(d)" "CANCELLED(c)")))
 
   (setq org-capture-templates
-        `(;; ── Inbox (beorg parity) ─────────────────────────────────────
-          ("i" "Inbox" entry (file "~/org/inbox.org")
+        `(("i" "Inbox" entry (file "~/org/inbox.org")
            "* TODO %?\n%U" :prepend t)
 
-          ;; ── Journal (existing — kept as-is) ──────────────────────────
           ("j" "Journal")
           ("jj" "Quick Journal" entry
            (file+olp+datetree "~/org/journal.org")
@@ -39,7 +37,6 @@
                                     (+popup/raise (selected-window)))
                                   (delete-other-windows)))))))
 
-;; Daily notes skeleton
 (defconst my/daily-head
   (concat "#+title: %<%Y-%m-%d>\n"
           "#+STARTUP: show2levels\n\n"
@@ -83,8 +80,6 @@ Guards against touching existing dailies by checking for any level-1 heading."
     (re-search-forward "^\\* Plan" nil t)))
 
 (after! org-roam
-  ;; ── Capture templates (SPC n r d T) ────────────────────────────────
-  ;; Each key routes directly into the matching skeleton section.
   (setq org-roam-dailies-capture-templates
         `(("d" "note → Notes" entry "* %?"
            :target (file+head+olp "%<%Y-%m-%d>.org" ,my/daily-head ("Notes")))
@@ -95,12 +90,8 @@ Guards against touching existing dailies by checking for any level-1 heading."
           ("p" "plan bullet → Plan" item "- %?"
            :target (file+head+olp "%<%Y-%m-%d>.org" ,my/daily-head ("Plan")))))
 
-  ;; ── Skeleton hook (SPC n r d t) ────────────────────────────────────
-  ;; Fires after goto-today opens/creates the file — inserts the skeleton
-  ;; when the file is new (no level-1 headings), leaves existing dailies alone.
   (add-hook 'org-roam-dailies-find-file-hook #'my/org-roam-daily-skeleton))
 
-;; ── Agenda custom views ───────────────────────────────────────────────────────
 (setq org-agenda-custom-commands
       '(("d" "Day view + unscheduled inbox"
          ((agenda "" ((org-agenda-span 1)))
@@ -108,7 +99,6 @@ Guards against touching existing dailies by checking for any level-1 heading."
                 ((org-agenda-files '("~/org/inbox.org"))
                  (org-agenda-overriding-header "── Inbox (unscheduled) ──")))))))
 
-;; ── Autosave on state changes (existing) ─────────────────────────────────────
 (setq org-agenda-skip-unavailable-files t)
 
 (defun my/org-save-all-after-change (&rest _)

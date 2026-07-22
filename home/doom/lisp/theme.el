@@ -14,8 +14,7 @@
 (setq doom-themes-enable-bold t
       doom-themes-enable-italic nil)
 
-(setq display-line-numbers-type 'relative
-      doom-themes-enable-italic nil)
+(setq display-line-numbers-type 'relative)
 
 (let ((my-font-name (if (eq system-type 'windows-nt)
                         "ZedMono NF"
@@ -24,31 +23,22 @@
         doom-variable-pitch-font (font-spec :family my-font-name :size 17)
         doom-big-font (font-spec :family my-font-name :size 24)))
 
-(defun toggle-emacs-opacity-90 ()
-  "Toggle background transparency."
-  (interactive)
+(defun my/toggle-opacity (level)
+  "Toggle background transparency between LEVEL and full opacity."
   (let ((current-alpha (frame-parameter nil 'alpha-background)))
     (if (or (not current-alpha) (= current-alpha 100))
-        (set-frame-parameter nil 'alpha-background 90)
-      (set-frame-parameter nil 'alpha-background 100))))
-
-(defun toggle-emacs-opacity-70 ()
-  "Toggle background transparency."
-  (interactive)
-  (let ((current-alpha (frame-parameter nil 'alpha-background)))
-    (if (or (not current-alpha) (= current-alpha 100))
-        (set-frame-parameter nil 'alpha-background 70)
+        (set-frame-parameter nil 'alpha-background level)
       (set-frame-parameter nil 'alpha-background 100))))
 
 (add-to-list 'default-frame-alist '(alpha-background . 90))
 
 (map! :leader
       :desc "Toggle editor opacity"
-      "w O" #'toggle-emacs-opacity-70)
+      "w O" (lambda () (interactive) (my/toggle-opacity 70)))
 
 (map! :leader
       :desc "Toggle editor opacity"
-      "w o" #'toggle-emacs-opacity-90)
+      "w o" (lambda () (interactive) (my/toggle-opacity 90)))
 
 (defun my/toggle-theme ()
   "Toggle between light and dark themes."
