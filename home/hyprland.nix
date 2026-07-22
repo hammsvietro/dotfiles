@@ -11,6 +11,20 @@ let
   screensaverStop = pkgs.writeShellScript "screensaver-stop" ''
     ${pkgs.procps}/bin/pkill -x glslViewer
   '';
+  dpmsOff = pkgs.writeShellScript "dpms-off" ''
+    if ${pkgs.procps}/bin/pgrep -x niri >/dev/null; then
+      niri msg action power-off-monitors
+    else
+      hyprctl dispatch dpms off
+    fi
+  '';
+  dpmsOn = pkgs.writeShellScript "dpms-on" ''
+    if ${pkgs.procps}/bin/pgrep -x niri >/dev/null; then
+      niri msg action power-on-monitors
+    else
+      hyprctl dispatch dpms on
+    fi
+  '';
 in
 {
   wayland.windowManager.hyprland = {
@@ -270,7 +284,7 @@ in
       general = {
         lock_cmd = "noctalia-shell ipc call lockScreen lock";
         before_sleep_cmd = "${screensaverStop}; noctalia-shell ipc call lockScreen lock";
-        after_sleep_cmd = "hyprctl dispatch dpms on";
+        after_sleep_cmd = "${dpmsOn}";
       };
       listener = [
         {
@@ -284,8 +298,8 @@ in
         }
         {
           timeout = 900;
-          on-timeout = "hyprctl dispatch dpms off";
-          on-resume = "hyprctl dispatch dpms on";
+          on-timeout = "${dpmsOff}";
+          on-resume = "${dpmsOn}";
         }
         {
           timeout = 1800;

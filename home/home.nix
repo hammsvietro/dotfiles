@@ -12,6 +12,7 @@ in
 {
   imports = [
     ./hyprland.nix
+    ./niri.nix
     ./shell.nix
     ./git.nix
     ./terminal.nix

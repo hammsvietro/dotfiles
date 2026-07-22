@@ -8,6 +8,7 @@
     ./system/overlays.nix
 
     ./desktop/hyprland.nix
+    ./desktop/niri.nix
     ./desktop/plasma.nix
     ./desktop/fonts.nix
     ./desktop/theming.nix

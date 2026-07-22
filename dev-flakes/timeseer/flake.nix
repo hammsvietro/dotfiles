@@ -98,6 +98,9 @@
             export CXX=g++
             export UV_NO_SYNC=1
             export UV_EXCLUDE_NEWER="1 week"
+
+            export UV_INDEX_NEXUS_USERNAME="$nexus_username"
+            export UV_INDEX_NEXUS_PASSWORD="$nexus_password"
           '';
 
           packages = [
