@@ -1,5 +1,10 @@
 # Shared CPU/RAM/IO tuning for all hosts; GPU tuning lives in modules/hardware.
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   boot.kernelParams = [
     "nowatchdog"

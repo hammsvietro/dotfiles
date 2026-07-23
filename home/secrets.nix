@@ -14,7 +14,8 @@ in
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
     defaultSopsFile = sopsFile;
     secrets = lib.genAttrs keys (_: { });
-    templates."construct.env".content =
-      lib.concatMapStrings (k: "${k}=${config.sops.placeholder.${k}}\n") keys;
+    templates."construct.env".content = lib.concatMapStrings (
+      k: "${k}=${config.sops.placeholder.${k}}\n"
+    ) keys;
   };
 }

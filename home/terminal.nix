@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+let
+  glass = import ./glass.nix;
+in
 {
   programs.ghostty = {
     enable = true;
@@ -22,7 +25,7 @@
 
       cursor-style = "block";
       cursor-style-blink = false;
-      background-opacity = 0.85;
+      background-opacity = glass.apps.ghostty.backgroundOpacity;
       shell-integration = "none";
 
       working-directory = "home";

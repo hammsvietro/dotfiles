@@ -8,6 +8,7 @@
 
 let
   hooks = import ./claude-hooks.nix { inherit pkgs lib; };
+  glass = import ./glass.nix;
 
   cmd = drv: {
     type = "command";
@@ -85,6 +86,7 @@ in
   };
 
   home.file = {
+    ".config/doom-glass.el".text = "(setq my/glass-alpha ${glass.apps.emacs.alphaBackground})\n";
     "org" = {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/Dropbox/org";
       recursive = true;

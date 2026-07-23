@@ -58,13 +58,6 @@
     enableSSHSupport = true;
     pinentryPackage = pkgs.pinentry-qt;
   };
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
   services.openssh.enable = true;
   environment.shellInit = ''
     gpg-connect-agent /bye

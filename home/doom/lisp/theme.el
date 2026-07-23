@@ -30,7 +30,9 @@
         (set-frame-parameter nil 'alpha-background level)
       (set-frame-parameter nil 'alpha-background 100))))
 
-(add-to-list 'default-frame-alist '(alpha-background . 85))
+(load (expand-file-name "~/.config/doom-glass.el") t t)
+(add-to-list 'default-frame-alist
+             `(alpha-background . ,(if (boundp 'my/glass-alpha) my/glass-alpha 85)))
 
 (map! :leader
       :desc "Toggle editor opacity"

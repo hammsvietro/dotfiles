@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   home = config.home.homeDirectory;
@@ -10,7 +15,13 @@ let
 
   blackwall-lock = pkgs.writeShellApplication {
     name = "blackwall-lock";
-    runtimeInputs = [ pkgs.age pkgs.gnutar pkgs.gzip pkgs.coreutils pkgs.diffutils ];
+    runtimeInputs = [
+      pkgs.age
+      pkgs.gnutar
+      pkgs.gzip
+      pkgs.coreutils
+      pkgs.diffutils
+    ];
     text = ''
       umask 077
       KEY="''${SOPS_AGE_KEY_FILE:-${keyDefault}}"
@@ -43,7 +54,12 @@ let
 
   blackwall-unlock = pkgs.writeShellApplication {
     name = "blackwall-unlock";
-    runtimeInputs = [ pkgs.age pkgs.gnutar pkgs.gzip pkgs.coreutils ];
+    runtimeInputs = [
+      pkgs.age
+      pkgs.gnutar
+      pkgs.gzip
+      pkgs.coreutils
+    ];
     text = ''
       umask 077
       KEY="''${SOPS_AGE_KEY_FILE:-${keyDefault}}"
@@ -69,7 +85,10 @@ let
   };
 in
 {
-  home.packages = [ blackwall-lock blackwall-unlock ];
+  home.packages = [
+    blackwall-lock
+    blackwall-unlock
+  ];
 
   home.file = {
     "blackwall".source = config.lib.file.mkOutOfStoreSymlink vault;

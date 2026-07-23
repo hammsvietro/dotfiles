@@ -6,6 +6,8 @@
 }:
 
 let
+  glass = import ./glass.nix;
+
   hostName = osConfig.networking.hostName;
   isMandelbrot = hostName == "mandelbrot";
 
@@ -87,15 +89,60 @@ let
 
   # niri parses a numeric reference as a per-monitor index, so workspaces are named
   # non-numerically to be addressable by name from any monitor. Each switch first drags
-  # the workspace to the focused output, so it follows the cursor instead of jumping there.
+  # the workspace to the focused output, so it follows the cursor instead of jumping there,
+  # then pins it to its numbered slot so the per-output order stays ascending after moves.
   focusBinds = lib.concatMapStringsSep "\n        " (
     w:
-    ''Mod+${w.key} { spawn-sh "o=''$(niri msg -j focused-output | jq -r .name); niri msg action move-workspace-to-monitor \"''$o\" --reference ${w.name}; niri msg action focus-workspace ${w.name}"; }''
+    ''Mod+${w.key} { spawn-sh "o=''$(niri msg -j focused-output | jq -r .name); niri msg action move-workspace-to-monitor \"''$o\" --reference ${w.name}; niri msg action focus-workspace ${w.name}; niri msg action move-workspace-to-index ${lib.removePrefix "w" w.name}"; }''
   ) workspaceKeys;
 
   moveBinds = lib.concatMapStringsSep "\n        " (
     w: ''Mod+Shift+${w.key} { move-window-to-workspace "${w.name}" focus=false; }''
   ) workspaceKeys;
+
+  # The laptop pays battery for the glass shader, so it runs a lighter profile: fewer blur
+  # passes and the pure-realism refraction terms dropped (the frost + signature warp stay).
+  blur = if isMandelbrot then glass.niri.blur // { passes = "3"; } else glass.niri.blur;
+  lg =
+    if isMandelbrot then
+      glass.niri.liquidGlass
+      // {
+        physicalRefraction = "0.0";
+        fringing = "0.0";
+        diluteFringing = "0.0";
+        lensDistortion = "0.3";
+      }
+    else
+      glass.niri.liquidGlass;
+  mkGlass = g: ''
+    background-effect {
+            blur true
+            xray true
+            liquid-glass {
+                refraction-strength ${g.refractionStrength}
+                power-factor ${g.powerFactor}
+                refraction-power ${g.refractionPower}
+                glow-weight ${g.glowWeight}
+                edge-lighting ${g.edgeLighting}
+                edge-thickness ${g.edgeThickness}
+                edge-padding ${g.edgePadding}
+                saturation ${g.saturation}
+                vibrancy ${g.vibrancy}
+                brightness ${g.brightness}
+                contrast ${g.contrast}
+                adaptive-dim ${g.adaptiveDim}
+                adaptive-boost ${g.adaptiveBoost}
+                physical-refraction ${g.physicalRefraction}
+                lens-distortion ${g.lensDistortion}
+                fringing ${g.fringing}
+                refraction-dilute ${g.refractionDilute}
+                dilute-strength ${g.diluteStrength}
+                dilute-fringing ${g.diluteFringing}
+            }
+        }'';
+  liquidGlass = mkGlass lg;
+  panelLiquidGlass = mkGlass (lg // glass.niri.panelGlass);
+
   niriConfigText = ''
     input {
         ${keyboard}
@@ -115,12 +162,20 @@ let
         focus-ring {
             off
             width 2
-            active-gradient from="#33ccffee" to="#00ff99ee" angle=45
-            inactive-color "#59595955"
+            active-gradient from="${glass.niri.focusRing.activeFrom}" to="${glass.niri.focusRing.activeTo}" angle=45
+            inactive-color "${glass.niri.focusRing.inactiveColor}"
         }
     }
 
     prefer-no-csd
+
+    // Only tunes strength; noctalia drives the shaped blur region via ext-background-effect.
+    blur {
+        passes ${blur.passes}
+        offset ${blur.offset}
+        noise ${blur.noise}
+        saturation ${blur.saturation}
+    }
 
     animations {
         workspace-switch {
@@ -155,21 +210,28 @@ let
     ${workspaceDecls}
     workspace "special"
 
+    // Rounded corners, shadow, and the shared glass backdrop for every window. liquid-glass
+    // renders only behind translucent pixels (opaque windows cover it), and needs the
+    // niri-glass fork (programs.niri.package) — stock niri rejects the node.
     window-rule {
         geometry-corner-radius 20
         clip-to-geometry true
         shadow {
             on
-            softness 30
-            spread 4
-            offset x=0 y=5
-            color "#00000055"
+            softness ${glass.niri.shadow.softness}
+            spread ${glass.niri.shadow.spread}
+            offset x=${glass.niri.shadow.offsetX} y=${glass.niri.shadow.offsetY}
+            color "${glass.niri.shadow.color}"
         }
+        ${liquidGlass}
     }
 
-    window-rule {
-        match app-id="thunar"
-        opacity 0.90
+    // Panels get the gentler panelLiquidGlass (crisp text). Excludes the wallpaper/background/
+    // exclusion layers so only noctalia's panels get the effect.
+    layer-rule {
+        match namespace="^noctalia-"
+        exclude namespace="^noctalia-(background|wallpaper|image-cache|bar-exclusion)"
+        ${panelLiquidGlass}
     }
 
     window-rule {
@@ -214,7 +276,7 @@ let
 
     binds {
         Mod+Shift+Return { spawn-sh "GTK_IM_MODULE=wayland ghostty"; }
-        Mod+E { spawn "thunar"; }
+        Mod+E { spawn "nemo"; }
         Mod+Period { spawn "emacsclient" "-c" "-a" "emacs"; }
         Mod+D { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
         Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }

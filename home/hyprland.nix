@@ -208,7 +208,7 @@ in
         ''$mainMod SHIFT, return, exec, sh -c "GTK_IM_MODULE=wayland ghostty"''
         "$mainMod SHIFT, Q, killactive,"
         "$mainMod SHIFT, E, exit,"
-        "$mainMod, E, exec, thunar"
+        "$mainMod, E, exec, nemo"
         "$mainMod, I, togglefloating,"
         "$mainMod, F, fullscreen"
         "$mainMod, space, layoutmsg, swapwithmaster"

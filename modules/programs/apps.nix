@@ -23,6 +23,9 @@
     psmisc
     gnupg
 
+    nemo-with-extensions
+    nemo-fileroller
+
     wofi
     desktop-file-utils
     wl-clipboard

@@ -15,15 +15,21 @@ measured against them — see [Priorities](#priorities).
 - `modules/` — system config, aggregated by `modules/default.nix` and grouped by concern:
   `system/`, `desktop/`, `hardware/`, `services/`, `programs/`, `users/`.
 - `home/` — Home Manager, entry `home.nix` importing the per-concern modules
-  (`hyprland shell git terminal files theming greeter blackwall secrets mime`). Also holds
-  the raw app configs it symlinks out-of-store: `home/doom/` and `home/zed/`.
+  (`hyprland niri shell git terminal files theming greeter blackwall secrets mime`). Also holds
+  the raw app configs it symlinks out-of-store: `home/doom/`, `home/zed/`, and `home/noctalia/`.
 - `home/doom/` — Doom Emacs. `config.el` loads the `lisp/*.el` modules
   (`ui theme editor nav lsp emacs-lisp ai org`); `init.el` = enabled Doom modules,
   `packages.el` = extra packages.
 - `dev-flakes/` — per-project dev shells (direnv): `timeseer/`, `ts-flows/`.
 - `secrets/` — sops/age-encrypted material (see [Secrets](#secrets)).
 
-Desktop is Hyprland (Wayland) with the noctalia shell; Plasma is also available.
+Desktop is niri (Wayland, scrollable-tiling) with the noctalia shell; Hyprland and Plasma are
+also available. `home/niri.nix` generates `~/.config/niri/config.kdl` from a KDL string (copied
+out-of-store on activation so it stays live-reloadable). The "glass" look is niri's native blur:
+noctalia requests a shaped blur region per panel via the `ext-background-effect` protocol
+(`general.enableBlurBehind`), niri honors it by default, and the top-level `blur {}` block in
+`niri.nix` only tunes strength — panel translucency lives in `home/noctalia/settings.json`
+(`backgroundOpacity` / `ui.panelBackgroundOpacity`). Validate config edits with `niri validate`.
 
 ## Commands
 
