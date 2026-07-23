@@ -61,7 +61,8 @@
         "middleClickFollowMouse": false,
         "monitors": [
             "HDMI-A-1",
-            "DP-2"
+            "DP-2",
+            "eDP-1"
         ],
         "mouseWheelAction": "none",
         "mouseWheelWrap": true,
@@ -686,7 +687,7 @@
                 "id": "zed"
             }
         ],
-        "enableUserTheming": false
+        "enableUserTheming": true
     },
     "ui": {
         "boxBorderEnabled": false,
