@@ -6,7 +6,25 @@ let
   isMandelbrot = osConfig.networking.hostName == "mandelbrot";
   screensaverStart = pkgs.writeShellScript "screensaver-start" ''
     ${pkgs.procps}/bin/pgrep -x glslViewer >/dev/null && exit 0
-    exec ${pkgs.glslviewer}/bin/glslViewer ${./screensaver/mandelbrot.frag} --noncurses --nocursor
+    glsl() {
+      ${pkgs.glslviewer}/bin/glslViewer ${./screensaver/mandelbrot.frag} --noncurses --nocursor "$@"
+    }
+    if ${pkgs.procps}/bin/pgrep -x niri >/dev/null; then
+      # glslViewer (GLFW/Wayland) can't pick an output, so launch one instance per
+      # monitor and relocate each to its output by pid once niri has mapped its window.
+      for out in $(niri msg -j outputs | ${pkgs.jq}/bin/jq -r 'keys[]'); do
+        glsl &
+        pid=$!
+        for _ in $(seq 1 50); do
+          wid=$(niri msg -j windows | ${pkgs.jq}/bin/jq -r --arg p "$pid" '.[] | select(.pid == ($p | tonumber)) | .id')
+          [ -n "$wid" ] && break
+          sleep 0.1
+        done
+        [ -n "$wid" ] && niri msg action move-window-to-monitor --id "$wid" "$out"
+      done
+    else
+      exec glsl
+    fi
   '';
   screensaverStop = pkgs.writeShellScript "screensaver-stop" ''
     ${pkgs.procps}/bin/pkill -x glslViewer

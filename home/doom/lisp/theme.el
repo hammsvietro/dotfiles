@@ -30,7 +30,7 @@
         (set-frame-parameter nil 'alpha-background level)
       (set-frame-parameter nil 'alpha-background 100))))
 
-(add-to-list 'default-frame-alist '(alpha-background . 90))
+(add-to-list 'default-frame-alist '(alpha-background . 85))
 
 (map! :leader
       :desc "Toggle editor opacity"

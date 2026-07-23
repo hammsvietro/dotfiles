@@ -1,4 +1,9 @@
-{ osConfig, lib, ... }:
+{
+  osConfig,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   hostName = osConfig.networking.hostName;
@@ -22,21 +27,76 @@ let
         }'';
 
   outputs = lib.optionalString (!isMandelbrot) ''
-    output "DP-1" {
-        mode "1920x1080@144.000"
+    output "HDMI-A-1" {
+        mode "2560x1080@75.000"
         position x=0 y=0
         scale 1
     }
 
-    output "HDMI-A-1" {
-        mode "2560x1080@60.000"
-        position x=1920 y=0
+    output "DP-2" {
+        mode "1920x1080@144.000"
+        position x=2560 y=0
         scale 1
     }
   '';
-in
-{
-  xdg.configFile."niri/config.kdl".text = ''
+
+  workspaceKeys = [
+    {
+      key = "1";
+      name = "w1";
+    }
+    {
+      key = "2";
+      name = "w2";
+    }
+    {
+      key = "3";
+      name = "w3";
+    }
+    {
+      key = "4";
+      name = "w4";
+    }
+    {
+      key = "5";
+      name = "w5";
+    }
+    {
+      key = "6";
+      name = "w6";
+    }
+    {
+      key = "7";
+      name = "w7";
+    }
+    {
+      key = "8";
+      name = "w8";
+    }
+    {
+      key = "9";
+      name = "w9";
+    }
+    {
+      key = "0";
+      name = "w10";
+    }
+  ];
+
+  workspaceDecls = lib.concatMapStringsSep "\n    " (w: ''workspace "${w.name}"'') workspaceKeys;
+
+  # niri parses a numeric reference as a per-monitor index, so workspaces are named
+  # non-numerically to be addressable by name from any monitor. Each switch first drags
+  # the workspace to the focused output, so it follows the cursor instead of jumping there.
+  focusBinds = lib.concatMapStringsSep "\n        " (
+    w:
+    ''Mod+${w.key} { spawn-sh "o=''$(niri msg -j focused-output | jq -r .name); niri msg action move-workspace-to-monitor \"''$o\" --reference ${w.name}; niri msg action focus-workspace ${w.name}"; }''
+  ) workspaceKeys;
+
+  moveBinds = lib.concatMapStringsSep "\n        " (
+    w: ''Mod+Shift+${w.key} { move-window-to-workspace "${w.name}" focus=false; }''
+  ) workspaceKeys;
+  niriConfigText = ''
     input {
         ${keyboard}
         touchpad {
@@ -53,13 +113,20 @@ in
         center-focused-column "never"
         default-column-width { proportion 0.5; }
         focus-ring {
-            width 1
+            off
+            width 2
             active-gradient from="#33ccffee" to="#00ff99ee" angle=45
-            inactive-color "#595959aa"
+            inactive-color "#59595955"
         }
     }
 
     prefer-no-csd
+
+    animations {
+        workspace-switch {
+            off
+        }
+    }
 
     hotkey-overlay {
         skip-at-startup
@@ -85,21 +152,19 @@ in
     spawn-at-startup "pywalfox" "start"
     spawn-at-startup "copyq" "--start-server"
 
-    workspace "1"
-    workspace "2"
-    workspace "3"
-    workspace "4"
-    workspace "5"
-    workspace "6"
-    workspace "7"
-    workspace "8"
-    workspace "9"
-    workspace "10"
+    ${workspaceDecls}
     workspace "special"
 
     window-rule {
         geometry-corner-radius 20
         clip-to-geometry true
+        shadow {
+            on
+            softness 30
+            spread 4
+            offset x=0 y=5
+            color "#00000055"
+        }
     }
 
     window-rule {
@@ -114,32 +179,32 @@ in
 
     window-rule {
         match app-id="emacs"
-        open-on-workspace "3"
+        open-on-workspace "w3"
     }
 
     window-rule {
         match app-id="discord"
-        open-on-workspace "6"
+        open-on-workspace "w6"
     }
 
     window-rule {
         match app-id="notion-app"
-        open-on-workspace "7"
+        open-on-workspace "w7"
     }
 
     window-rule {
         match app-id="obsidian"
-        open-on-workspace "7"
+        open-on-workspace "w7"
     }
 
     window-rule {
         match app-id="com.stremio.stremio"
-        open-on-workspace "9"
+        open-on-workspace "w9"
     }
 
     window-rule {
         match app-id="steam"
-        open-on-workspace "8"
+        open-on-workspace "w8"
     }
 
     window-rule {
@@ -163,7 +228,8 @@ in
 
         Mod+Shift+Q { close-window; }
         Mod+Shift+E { quit; }
-        Mod+F { fullscreen-window; }
+        Mod+F { maximize-column; }
+        Mod+Shift+F { fullscreen-window; }
         Mod+I { toggle-window-floating; }
         Mod+C { center-column; }
         Mod+Shift+C { switch-focus-between-floating-and-tiling; }
@@ -191,31 +257,14 @@ in
         Mod+BracketLeft  { consume-or-expel-window-left; }
         Mod+BracketRight { consume-or-expel-window-right; }
         Mod+R { switch-preset-column-width; }
+        Mod+B { spawn "niri-toggle-border"; }
 
         Mod+O { focus-workspace "special"; }
         Mod+Shift+O { move-window-to-workspace "special" focus=false; }
 
-        Mod+1 { focus-workspace "1"; }
-        Mod+2 { focus-workspace "2"; }
-        Mod+3 { focus-workspace "3"; }
-        Mod+4 { focus-workspace "4"; }
-        Mod+5 { focus-workspace "5"; }
-        Mod+6 { focus-workspace "6"; }
-        Mod+7 { focus-workspace "7"; }
-        Mod+8 { focus-workspace "8"; }
-        Mod+9 { focus-workspace "9"; }
-        Mod+0 { focus-workspace "10"; }
+        ${focusBinds}
 
-        Mod+Shift+1 { move-window-to-workspace "1" focus=false; }
-        Mod+Shift+2 { move-window-to-workspace "2" focus=false; }
-        Mod+Shift+3 { move-window-to-workspace "3" focus=false; }
-        Mod+Shift+4 { move-window-to-workspace "4" focus=false; }
-        Mod+Shift+5 { move-window-to-workspace "5" focus=false; }
-        Mod+Shift+6 { move-window-to-workspace "6" focus=false; }
-        Mod+Shift+7 { move-window-to-workspace "7" focus=false; }
-        Mod+Shift+8 { move-window-to-workspace "8" focus=false; }
-        Mod+Shift+9 { move-window-to-workspace "9" focus=false; }
-        Mod+Shift+0 { move-window-to-workspace "10" focus=false; }
+        ${moveBinds}
 
         Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
         Mod+WheelScrollUp   cooldown-ms=150 { focus-workspace-up; }
@@ -228,5 +277,24 @@ in
         XF86AudioNext  allow-when-locked=true { spawn "playerctl" "next"; }
         XF86AudioPrev  allow-when-locked=true { spawn "playerctl" "previous"; }
     }
+  '';
+
+  niriConfigFile = pkgs.writeText "niri-config.kdl" niriConfigText;
+
+  toggleBorder = pkgs.writeShellScriptBin "niri-toggle-border" ''
+    config="$HOME/.config/niri/config.kdl"
+    if ${pkgs.gnused}/bin/sed -n '/focus-ring {/,/}/p' "$config" | ${pkgs.gnugrep}/bin/grep -q '/-off'; then
+      ${pkgs.gnused}/bin/sed -i '/focus-ring {/,/}/ s#/-off#off#' "$config"
+    else
+      ${pkgs.gnused}/bin/sed -i '/focus-ring {/,/}/ s#^\( *\)off#\1/-off#' "$config"
+    fi
+  '';
+in
+{
+  home.packages = [ toggleBorder ];
+
+  home.activation.niriConfigWritable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ${pkgs.coreutils}/bin/mkdir -p "$HOME/.config/niri"
+    ${pkgs.coreutils}/bin/cp --no-preserve=mode --remove-destination "${niriConfigFile}" "$HOME/.config/niri/config.kdl"
   '';
 }

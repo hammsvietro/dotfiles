@@ -17,6 +17,7 @@ in
     ./git.nix
     ./terminal.nix
     ./zed.nix
+    ./zen.nix
     ./noctalia.nix
     ./greeter.nix
     ./files.nix

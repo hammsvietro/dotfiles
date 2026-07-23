@@ -94,6 +94,13 @@ Security:
 
 ## Conventions
 
+### No AI-generated images
+
+**Never add AI-generated images to this repo** — wallpapers or anything else. Only
+human-made artwork (e.g. Olly Moss, OGARart), with the source/artist encoded in the
+filename. Reject any image from DALL·E, Midjourney, Stable Diffusion, or similar
+generators, and never generate one yourself.
+
 ### Comments — keep them minimal
 
 Default to **no comments**. Nix attribute names and Elisp are self-documenting; restating

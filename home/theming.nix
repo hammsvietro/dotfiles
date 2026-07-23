@@ -1,6 +1,14 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
+  home.pointerCursor = {
+    enable = true;
+    gtk.enable = true;
+    name = "Adwaita";
+    package = pkgs.adwaita-icon-theme;
+    size = 24;
+  };
+
   xdg.configFile."qt6ct/qt6ct.conf".text = ''
     [Appearance]
     custom_palette=true

@@ -1,0 +1,52 @@
+/* Frutiger-glass overrides for Zen: translucent browser chrome, fully opaque
+   web content. Loaded via an @import appended after noctalia's theme import
+   (see home/zen.nix). noctalia forces the chrome opaque with `var(--base)
+   !important`, so every rule here is bumped one notch in specificity
+   (`:root ` prefix, `:root:root` for variables) to win regardless of the
+   order the two imports happen to load in. */
+
+:root:root {
+  --glass-chrome: color-mix(in srgb, var(--base) 85%, transparent);
+  --glass-urlbar: color-mix(in srgb, var(--surface) 88%, transparent);
+
+  --zen-themed-toolbar-bg: var(--glass-chrome) !important;
+  --toolbar-bgcolor: var(--glass-chrome) !important;
+  --zen-main-browser-background: var(--glass-chrome) !important;
+  --toolbox-bgcolor-inactive: var(--glass-chrome) !important;
+}
+
+/* Let the desktop show through the translucent chrome. Content is painted on
+   top by the browser element, which is forced opaque below. */
+:root #main-window,
+:root #browser,
+:root #zen-main-app-wrapper,
+:root #navigator-toolbox-background {
+  background-color: transparent !important;
+  background-image: none !important;
+}
+
+/* Translucent chrome surfaces. */
+:root #navigator-toolbox,
+:root #zen-tabbox-wrapper,
+:root #TabsToolbar,
+:root #nav-bar,
+:root #PersonalToolbar,
+:root #zen-appcontent-navbar-container,
+:root .sidebar-panel,
+:root hbox#titlebar {
+  background-color: var(--glass-chrome) !important;
+  background-image: none !important;
+}
+
+:root .urlbar-background,
+:root #urlbar-input-container {
+  background-color: var(--glass-urlbar) !important;
+}
+
+/* Web page content stays fully opaque — never let the page area show through. */
+:root #tabbrowser-tabpanels,
+:root .browserStack,
+:root .browserContainer,
+:root browser[type="content"] {
+  background-color: var(--base) !important;
+}

@@ -22,7 +22,7 @@
 
       cursor-style = "block";
       cursor-style-blink = false;
-      background-opacity = 0.8;
+      background-opacity = 0.85;
       shell-integration = "none";
 
       working-directory = "home";

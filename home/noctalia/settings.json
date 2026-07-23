@@ -40,7 +40,7 @@
  "bar": {
   "autoHideDelay": 500,
   "autoShowDelay": 150,
-  "backgroundOpacity": 0.93,
+  "backgroundOpacity": 0.85,
   "barType": "simple",
   "capsuleColorKey": "none",
   "capsuleOpacity": 1,
@@ -343,7 +343,7 @@
  },
  "dock": {
   "animationSpeed": 1,
-  "backgroundOpacity": 1,
+  "backgroundOpacity": 0.85,
   "colorizeIcons": false,
   "deadOpacity": 0.6,
   "displayMode": "always_visible",
@@ -499,10 +499,10 @@
  },
  "noctaliaPerformance": {
   "disableDesktopWidgets": true,
-  "disableWallpaper": true
+  "disableWallpaper": false
  },
  "notifications": {
-  "backgroundOpacity": 1,
+  "backgroundOpacity": 0.85,
   "clearDismissed": true,
   "criticalUrgencyDuration": 15,
   "density": "default",
@@ -534,7 +534,7 @@
  },
  "osd": {
   "autoHideMs": 2000,
-  "backgroundOpacity": 1,
+  "backgroundOpacity": 0.85,
   "enabled": true,
   "enabledTypes": [
    0,
@@ -683,49 +683,20 @@
   "fontDefaultScale": 0.95,
   "fontFixed": "RobotoMono Nerd Font",
   "fontFixedScale": 0.95,
-  "panelBackgroundOpacity": 0.93,
+  "panelBackgroundOpacity": 0.85,
   "panelsAttachedToBar": true,
   "scrollbarAlwaysVisible": true,
   "settingsPanelMode": "attached",
   "settingsPanelSideBarCardStyle": false,
   "tooltipsEnabled": true,
-  "translucentWidgets": false
+  "translucentWidgets": true
  },
  "wallpaper": {
-  "automationEnabled": false,
+  "automationEnabled": true,
   "directory": "/home/hammsvietro/wallpapers",
   "enableMultiMonitorDirectories": false,
   "enabled": true,
-  "favorites": [
-   {
-    "appearance": "dark",
-    "colorScheme": "Ayu",
-    "darkMode": true,
-    "generationMethod": "tonal-spot",
-    "paletteColors": [
-     "#e6b450",
-     "#aad94c",
-     "#39bae6",
-     "#d95757"
-    ],
-    "path": "/home/hammsvietro/wallpapers/mountain.jpg",
-    "useWallpaperColors": false
-   },
-   {
-    "appearance": "dark",
-    "colorScheme": "Gruvbox",
-    "darkMode": true,
-    "generationMethod": "tonal-spot",
-    "paletteColors": [
-     "#b8bb26",
-     "#fabd2f",
-     "#83a598",
-     "#fb4934"
-    ],
-    "path": "/home/hammsvietro/wallpapers/mountain_2.jpg",
-    "useWallpaperColors": false
-   }
-  ],
+  "favorites": [],
   "fillColor": "#000000",
   "fillMode": "crop",
   "hideWallpaperFilenames": false,
@@ -746,7 +717,7 @@
   "overviewEnabled": false,
   "overviewTint": 0.6,
   "panelPosition": "follow_bar",
-  "randomIntervalSec": 300,
+  "randomIntervalSec": 1800,
   "setWallpaperOnAllMonitors": true,
   "showHiddenFiles": false,
   "skipStartupTransition": false,
