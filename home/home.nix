@@ -16,6 +16,7 @@ in
     ./shell.nix
     ./git.nix
     ./terminal.nix
+    ./fastfetch.nix
     ./zed.nix
     ./zen.nix
     ./noctalia.nix
@@ -33,7 +34,6 @@ in
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
-    fastfetch
     btop
     tmux
     emacsUpgrade

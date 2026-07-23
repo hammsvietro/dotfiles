@@ -1,0 +1,98 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "file",
+    "source": "/home/hammsvietro/.config/fastfetch/fractal.txt",
+    "color": {
+      "1": "38;2;80;230;190",
+      "2": "38;2;98;114;255",
+      "3": "38;2;80;190;240",
+      "4": "38;2;139;133;255",
+      "5": "38;2;255;121;198",
+      "6": "38;2;189;147;249"
+    },
+    "padding": {
+      "top": 1,
+      "left": 2,
+      "right": 3
+    }
+  },
+  "display": {
+    "separator": "  ·  ",
+    "color": {
+      "keys": "38;2;189;147;249"
+    }
+  },
+  "modules": [
+    "break",
+    {
+      "type": "title",
+      "format": "{user-name-colored}{at-symbol-colored}{host-name-colored}"
+    },
+    {
+      "type": "custom",
+      "format": "\u001b[38;2;255;121;198m△ \u001b[38;2;189;147;249mF\u001b[38;2;139;133;255mr\u001b[38;2;98;114;255ma\u001b[38;2;80;150;250mc\u001b[38;2;80;190;240mt\u001b[38;2;80;220;210ma\u001b[38;2;80;230;190ml\u001b[0m  \u001b[38;2;92;99;112mz ↦ z² + c"
+    },
+    {
+      "type": "separator",
+      "string": "────────────────────"
+    },
+    {
+      "type": "os",
+      "key": "󰔷  os",
+      "keyColor": "magenta",
+      "format": "Fractal OS  ·  NixOS {version-id}"
+    },
+    {
+      "type": "kernel",
+      "key": "󰌽  kernel",
+      "keyColor": "blue"
+    },
+    {
+      "type": "uptime",
+      "key": "󰅐  uptime",
+      "keyColor": "green"
+    },
+    {
+      "type": "packages",
+      "key": "󰏗  pkgs",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "shell",
+      "key": "󰆍  shell",
+      "keyColor": "yellow"
+    },
+    {
+      "type": "wm",
+      "key": "󰍹  wm",
+      "keyColor": "magenta"
+    },
+    {
+      "type": "terminal",
+      "key": "  term",
+      "keyColor": "blue"
+    },
+    {
+      "type": "cpu",
+      "key": "  cpu",
+      "keyColor": "green"
+    },
+    {
+      "type": "gpu",
+      "key": "󰢮  gpu",
+      "keyColor": "cyan"
+    },
+    {
+      "type": "memory",
+      "key": "󰘚  memory",
+      "keyColor": "yellow"
+    },
+    "break",
+    {
+      "type": "colors",
+      "paddingLeft": 2,
+      "symbol": "circle"
+    }
+  ]
+}

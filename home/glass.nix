@@ -52,16 +52,10 @@ rec {
     };
   };
 
-  # Per-app background transparency. Each app draws its own background with alpha so text
-  # stays crisp; niri renders the shared blur + liquid-glass backdrop behind it. Values are
-  # in the app's own unit:
-  #   backgroundOpacity — the app's own background alpha, 0..1
-  #   alphaBackground   — emacs frame background alpha, 0..100
-  #   tint              — nemo frosted-scrim alpha applied via GTK css, 0..1
   apps = {
-    ghostty.backgroundOpacity = "0.10";
-    emacs.alphaBackground = "65";
-    nemo.tint = "0.30";
+    ghostty.backgroundOpacity = "0.40";
+    emacs.alphaBackground = "50";
+    nemo.tint = "0.40";
   };
 
   noctalia = {

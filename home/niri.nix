@@ -227,10 +227,14 @@ let
     }
 
     // Panels get the gentler panelLiquidGlass (crisp text). Excludes the wallpaper/background/
-    // exclusion layers so only noctalia's panels get the effect.
+    // exclusion layers so only noctalia's panels get the effect. The popup surfaces
+    // (notifications, toast, osd) are excluded too: each is a large transparent rect (shadow
+    // padding around an inset rounded card), and niri can't clip the layer glass to that card,
+    // so it renders as a hard rectangular block behind the card. They keep their own
+    // translucent card background and QML drop shadow.
     layer-rule {
         match namespace="^noctalia-"
-        exclude namespace="^noctalia-(background|wallpaper|image-cache|bar-exclusion)"
+        exclude namespace="^noctalia-(background|wallpaper|image-cache|bar-exclusion|notifications|toast|osd)"
         ${panelLiquidGlass}
     }
 

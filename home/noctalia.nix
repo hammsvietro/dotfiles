@@ -36,4 +36,6 @@ in
 
   xdg.configFile."noctalia/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/noctalia/settings.json";
+
+  xdg.configFile."noctalia/fractal-logo.svg".source = ./noctalia/fractal-logo.svg;
 }

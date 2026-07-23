@@ -48,7 +48,7 @@ function fish_greeting --description 'Mandelbrot greeter'
     set -l user (whoami)
     set -l host (prompt_hostname)
     set -l ver (string replace -r '.*"(.*)".*' '$1' -- (grep -m1 '^VERSION_ID=' /etc/os-release 2>/dev/null))
-    set -l os (string trim "NixOS $ver")
+    set -l os (string trim "Fractal OS $ver")
     set -l kern (uname -r)
     set -l sh "fish $version"
     set -l wm "$XDG_CURRENT_DESKTOP"
@@ -80,7 +80,7 @@ function fish_greeting --description 'Mandelbrot greeter'
         "$bold$txt$user$off$sub@$bold$blue$host$off" \
         "$sub────────────────────$off" \
         "" \
-        (_row $peach  ❄ os     $os) \
+        (_row $peach  △ os     $os) \
         (_row $blue   󰌽 kernel $kern) \
         (_row $green  󰅐 uptime $up) \
         (_row $cyan   󰆍 shell  $sh) \

@@ -32,15 +32,15 @@
 
 (load (expand-file-name "~/.config/doom-glass.el") t t)
 (add-to-list 'default-frame-alist
-             `(alpha-background . ,(if (boundp 'my/glass-alpha) my/glass-alpha 85)))
+             `(alpha-background . ,(if (boundp 'my/glass-alpha) my/glass-alpha 40)))
 
 (map! :leader
       :desc "Toggle editor opacity"
-      "w O" (lambda () (interactive) (my/toggle-opacity 70)))
+      "w O" (lambda () (interactive) (my/toggle-opacity 40)))
 
 (map! :leader
       :desc "Toggle editor opacity"
-      "w o" (lambda () (interactive) (my/toggle-opacity 90)))
+      "w o" (lambda () (interactive) (my/toggle-opacity 70)))
 
 (defun my/toggle-theme ()
   "Toggle between light and dark themes."

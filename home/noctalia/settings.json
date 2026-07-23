@@ -115,12 +115,12 @@
                 {
                     "colorizeSystemIcon": "none",
                     "colorizeSystemText": "none",
-                    "customIconPath": "",
+                    "customIconPath": "/home/hammsvietro/.config/noctalia/fractal-logo.svg",
                     "enableColorization": false,
                     "icon": "rocket",
                     "iconColor": "none",
                     "id": "Launcher",
-                    "useDistroLogo": true
+                    "useDistroLogo": false
                 },
                 {
                     "clockColor": "none",
