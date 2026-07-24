@@ -94,6 +94,8 @@ in
     "blackwall".source = config.lib.file.mkOutOfStoreSymlink vault;
     ".claude/skills".source = config.lib.file.mkOutOfStoreSymlink skillsDir;
     ".config/claude-work/skills".source = config.lib.file.mkOutOfStoreSymlink skillsDir;
+    "dotfiles/CLAUDE.md".source = config.lib.file.mkOutOfStoreSymlink "${vault}/CLAUDE.md";
+    "dotfiles/wallpapers".source = config.lib.file.mkOutOfStoreSymlink "${vault}/wallpapers";
   };
 
   home.activation.blackwallUnlock = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

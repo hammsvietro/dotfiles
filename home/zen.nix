@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 let
   glassCss = "${config.home.homeDirectory}/dotfiles/home/zen/userChrome-glass.css";
@@ -11,8 +16,8 @@ in
       "${config.home.homeDirectory}"/.zen/*/chrome; do
       [ -d "$dir" ] || continue
       file="$dir/userChrome.css"
-      touch "$file"
-      grep -qF '${importLine}' "$file" || printf '%s\n' '${importLine}' >> "$file"
+      ${pkgs.coreutils}/bin/touch "$file"
+      ${pkgs.gnugrep}/bin/grep -qF '${importLine}' "$file" || printf '%s\n' '${importLine}' >> "$file"
     done
   '';
 }

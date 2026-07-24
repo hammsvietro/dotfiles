@@ -88,12 +88,11 @@ let
   workspaceDecls = lib.concatMapStringsSep "\n    " (w: ''workspace "${w.name}"'') workspaceKeys;
 
   # niri parses a numeric reference as a per-monitor index, so workspaces are named
-  # non-numerically to be addressable by name from any monitor. Each switch first drags
-  # the workspace to the focused output, so it follows the cursor instead of jumping there,
-  # then pins it to its numbered slot so the per-output order stays ascending after moves.
+  # non-numerically to be addressable by name from any monitor. niri-focus-workspace drags
+  # the workspace to the focused output (it follows the cursor instead of jumping there),
+  # then reinserts it in ascending numeric order among that output's workspaces.
   focusBinds = lib.concatMapStringsSep "\n        " (
-    w:
-    ''Mod+${w.key} { spawn-sh "o=''$(niri msg -j focused-output | jq -r .name); niri msg action move-workspace-to-monitor \"''$o\" --reference ${w.name}; niri msg action focus-workspace ${w.name}; niri msg action move-workspace-to-index ${lib.removePrefix "w" w.name}"; }''
+    w: ''Mod+${w.key} { spawn "niri-focus-workspace" "${w.name}"; }''
   ) workspaceKeys;
 
   moveBinds = lib.concatMapStringsSep "\n        " (
@@ -283,14 +282,16 @@ let
         Mod+E { spawn "nemo"; }
         Mod+Period { spawn "emacsclient" "-c" "-a" "emacs"; }
         Mod+D { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
+        Mod+V { spawn "copyq" "toggle"; }
         Mod+S { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
         Mod+Comma { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
         Mod+Shift+L { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
         Mod+Ctrl+Shift+L { spawn "noctalia-shell" "ipc" "call" "sessionMenu" "lockAndSuspend"; }
         Mod+Shift+H { spawn "ghostty" "-e" "sh" "-c" "sudo nixos-rebuild switch --flake ~/dotfiles#${hostName}; exec fish"; }
-        Mod+Shift+S { screenshot; }
+        Mod+Shift+S { spawn "niri-screenshot-annotate"; }
         Print { screenshot-screen; }
         Mod+Print { screenshot-window; }
+        Mod+Shift+Slash { show-hotkey-overlay; }
 
         Mod+Shift+Q { close-window; }
         Mod+Shift+E { quit; }
@@ -325,7 +326,7 @@ let
         Mod+R { switch-preset-column-width; }
         Mod+B { spawn "niri-toggle-border"; }
 
-        Mod+O { focus-workspace "special"; }
+        Mod+O { spawn "niri-toggle-scratchpad"; }
         Mod+Shift+O { move-window-to-workspace "special" focus=false; }
 
         ${focusBinds}
@@ -347,6 +348,40 @@ let
 
   niriConfigFile = pkgs.writeText "niri-config.kdl" niriConfigText;
 
+  focusWorkspace = pkgs.writeShellScriptBin "niri-focus-workspace" ''
+    name="$1"
+    o="$(niri msg -j focused-output | ${pkgs.jq}/bin/jq -r .name)"
+    niri msg action move-workspace-to-monitor "$o" --reference "$name"
+    niri msg action focus-workspace "$name"
+    idx="$(niri msg -j workspaces | ${pkgs.jq}/bin/jq --arg o "$o" --arg self "$name" '
+      [ .[] | select(.output == $o) ]
+      | sort_by(.idx)
+      | sort_by((.name // "") | if test("^w[0-9]+$") then (ltrimstr("w") | tonumber) else 100000 end)
+      | (map(.name) | index($self)) + 1
+    ')"
+    niri msg action move-workspace-to-index "$idx"
+  '';
+
+  toggleScratchpad = pkgs.writeShellScriptBin "niri-toggle-scratchpad" ''
+    if niri msg --json workspaces \
+      | ${pkgs.jq}/bin/jq -e '.[] | select(.is_focused) | .name == "special"' >/dev/null; then
+      niri msg action focus-workspace-previous
+    else
+      o="$(niri msg -j focused-output | ${pkgs.jq}/bin/jq -r .name)"
+      niri msg action move-workspace-to-monitor "$o" --reference special
+      niri msg action focus-workspace special
+    fi
+  '';
+
+  screenshotAnnotate = pkgs.writeShellScriptBin "niri-screenshot-annotate" ''
+    dir="$HOME/Pictures/Screenshots"
+    mkdir -p "$dir"
+    ${pkgs.grim}/bin/grim -g "$(${pkgs.slurp}/bin/slurp)" - \
+      | ${pkgs.satty}/bin/satty --filename - \
+          --output-filename "$dir/satty-$(date '+%Y%m%d-%H%M%S').png" \
+          --early-exit --copy-command wl-copy
+  '';
+
   toggleBorder = pkgs.writeShellScriptBin "niri-toggle-border" ''
     config="$HOME/.config/niri/config.kdl"
     if ${pkgs.gnused}/bin/sed -n '/focus-ring {/,/}/p' "$config" | ${pkgs.gnugrep}/bin/grep -q '/-off'; then
@@ -357,7 +392,12 @@ let
   '';
 in
 {
-  home.packages = [ toggleBorder ];
+  home.packages = [
+    toggleBorder
+    toggleScratchpad
+    screenshotAnnotate
+    focusWorkspace
+  ];
 
   home.activation.niriConfigWritable = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     ${pkgs.coreutils}/bin/mkdir -p "$HOME/.config/niri"

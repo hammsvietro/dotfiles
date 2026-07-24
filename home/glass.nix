@@ -1,10 +1,10 @@
 rec {
   niri = {
     blur = {
-      passes = "5";
-      offset = "5";
+      passes = "3";
+      offset = "2";
       noise = "0.02";
-      saturation = "1.5";
+      saturation = "2";
     };
     liquidGlass = {
       refractionStrength = "2.4";
@@ -33,10 +33,10 @@ rec {
       refractionStrength = "0.4";
       refractionPower = "1.0";
       physicalRefraction = "0.0";
-      lensDistortion = "0.0";
-      fringing = "0.0";
-      diluteFringing = "0.0";
-      edgeLighting = "0.8";
+      lensDistortion = "0.8";
+      fringing = "0.8";
+      diluteFringing = "0.8";
+      edgeLighting = "0.3";
     };
     shadow = {
       softness = "30";
@@ -53,18 +53,18 @@ rec {
   };
 
   apps = {
-    ghostty.backgroundOpacity = "0.40";
-    emacs.alphaBackground = "50";
-    nemo.tint = "0.40";
+    ghostty.backgroundOpacity = "0.85";
+    emacs.alphaBackground = "85";
+    nemo.tint = "0.85";
   };
 
   noctalia = {
-    panelOpacity = "0.28";
-    dimmerOpacity = "0.2";
+    panelOpacity = "0.5";
+    dimmerOpacity = "0.5";
     enableBlurBehind = "true";
     enableShadows = "true";
     lockScreenBlur = "0";
-    overviewBlur = "0.4";
+    overviewBlur = "0.5";
     overviewTint = "0.6";
   };
 }

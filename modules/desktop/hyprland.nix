@@ -5,6 +5,18 @@
   ...
 }:
 
+let
+  noctalia = inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default.overrideAttrs (old: {
+    postFixup = (old.postFixup or "") + ''
+      substituteInPlace $out/share/noctalia-shell/Modules/Bar/Widgets/Workspace.qml \
+        --replace-fail \
+          '        if (hideUnoccupied && !ws.isOccupied && !ws.isFocused)' \
+          '        if (ws.name === "special")
+          continue;
+        if (hideUnoccupied && !ws.isOccupied && !ws.isFocused)'
+    '';
+  });
+in
 {
   programs.hyprland = {
     enable = true;
@@ -32,7 +44,7 @@
     networkmanagerapplet
     hyprpolkitagent
 
-    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default
+    noctalia
     pywalfox-native
   ];
 }

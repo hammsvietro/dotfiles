@@ -19,12 +19,6 @@
         ghostel-point-leave-input-mode nil
         ghostel-mark-activation-input-mode nil))
 
-(defun my/claude-send-escape ()
-  ;; Plain ESC is routed to evil; this sends a real bare escape to Claude.
-  (interactive)
-  (ghostel--on-user-input)
-  (ghostel--send-encoded "escape" ""))
-
 ;; Register at load time so the hook fires regardless of evil-ghostel load order.
 (add-hook 'ghostel-mode-hook #'evil-ghostel-mode)
 
@@ -32,12 +26,13 @@
 (add-hook 'ghostel-mode-hook (lambda () (display-line-numbers-mode -1)))
 
 (after! evil-ghostel
-  (setq evil-ghostel-escape 'evil)
+  (setq evil-ghostel-escape 'auto)
   (evil-define-key* '(normal insert) evil-ghostel-mode-map
     (kbd "S-<tab>")    #'ghostel--send-event
     (kbd "<backtab>")  #'ghostel--send-event
     (kbd "S-<return>") #'ghostel--send-event
-    (kbd "S-<escape>") #'my/claude-send-escape))
+    (kbd "S-<escape>") #'evil-force-normal-state
+    (kbd "M-<escape>") #'evil-force-normal-state))
 
 (defun my/claude-code-ide--skip-ghostel-keys (orig-fn &rest args)
   ;; claude-code-ide rebinds S-<return> to a backslash-return hack that breaks
@@ -61,7 +56,10 @@
 (use-package! claude-code-ide
   :defer t
   :init
-  (setq claude-code-ide-terminal-backend 'ghostel)
+  ;; Claude's own vim mode owns ESC (claude-code-ide otherwise pins these buffers
+  ;; to 'evil, routing ESC to evil normal state); reach evil normal via S-<escape>.
+  (setq claude-code-ide-terminal-backend 'ghostel
+        claude-code-ide-ghostel-evil-escape 'terminal)
   :config
   (advice-add 'claude-code-ide--setup-terminal-keybindings :around
               #'my/claude-code-ide--skip-ghostel-keys)

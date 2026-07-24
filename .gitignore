@@ -8,6 +8,8 @@ result-*
 .config/hypr/*
 
 /blackwall/
+/CLAUDE.md
+/wallpapers
 
 *.pem
 *.key

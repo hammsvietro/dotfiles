@@ -56,6 +56,7 @@ let
         inherit enabledPlugins effortLevel;
         theme = "dark";
         model = "opus";
+        editorMode = "vim";
         hooks = claudeHooks;
       }
     );

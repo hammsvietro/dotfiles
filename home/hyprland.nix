@@ -213,9 +213,10 @@ in
         "$mainMod, F, fullscreen"
         "$mainMod, space, layoutmsg, swapwithmaster"
         "$mainMod SHIFT, space, layoutmsg, focusmaster"
-        "$mainMod SHIFT, S, exec, grimblast --notify --freeze copy area"
+        "$mainMod SHIFT, S, exec, mkdir -p ~/Pictures/Screenshots && grimblast --freeze save area - | satty --filename - --output-filename ~/Pictures/Screenshots/satty-$(date '+%Y%m%d-%H%M%S').png --early-exit --copy-command wl-copy"
         ''$mainMod, PERIOD, exec, emacsclient -c -a "emacs"''
         "$mainMod, D, exec, $ipc launcher toggle"
+        "$mainMod, V, exec, copyq toggle"
         "$mainMod, S, exec,  $ipc controlCenter toggle"
         "$mainMod SHIFT, L, exec,  $ipc lockScreen lock"
         "$mainMod CTRL SHIFT, L, exec,  $ipc sessionMenu lockAndSuspend"

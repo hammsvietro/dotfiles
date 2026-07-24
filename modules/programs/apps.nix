@@ -30,6 +30,7 @@
     desktop-file-utils
     wl-clipboard
     imagemagick
+    satty
 
     teams-for-linux
 

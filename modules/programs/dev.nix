@@ -29,10 +29,11 @@
     go
     gopls
 
+    pyright
+
     maturin
     (python314.withPackages (
       ps: with ps; [
-        pyright
         python-lsp-server
         python-lsp-ruff
         ruff
