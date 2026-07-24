@@ -272,11 +272,6 @@ let
         open-on-workspace "w8"
     }
 
-    window-rule {
-        match app-id="GLFW-Application" title="GlslViewer"
-        open-fullscreen true
-    }
-
     binds {
         Mod+Shift+Return { spawn-sh "GTK_IM_MODULE=wayland ghostty"; }
         Mod+E { spawn "nemo"; }

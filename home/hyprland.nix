@@ -4,31 +4,6 @@
 
 let
   isMandelbrot = osConfig.networking.hostName == "mandelbrot";
-  screensaverStart = pkgs.writeShellScript "screensaver-start" ''
-    ${pkgs.procps}/bin/pgrep -x glslViewer >/dev/null && exit 0
-    glsl() {
-      ${pkgs.glslviewer}/bin/glslViewer ${./screensaver/mandelbrot.frag} --noncurses --nocursor "$@"
-    }
-    if ${pkgs.procps}/bin/pgrep -x niri >/dev/null; then
-      # glslViewer (GLFW/Wayland) can't pick an output, so launch one instance per
-      # monitor and relocate each to its output by pid once niri has mapped its window.
-      for out in $(niri msg -j outputs | ${pkgs.jq}/bin/jq -r 'keys[]'); do
-        glsl &
-        pid=$!
-        for _ in $(seq 1 50); do
-          wid=$(niri msg -j windows | ${pkgs.jq}/bin/jq -r --arg p "$pid" '.[] | select(.pid == ($p | tonumber)) | .id')
-          [ -n "$wid" ] && break
-          sleep 0.1
-        done
-        [ -n "$wid" ] && niri msg action move-window-to-monitor --id "$wid" "$out"
-      done
-    else
-      exec glsl
-    fi
-  '';
-  screensaverStop = pkgs.writeShellScript "screensaver-stop" ''
-    ${pkgs.procps}/bin/pkill -x glslViewer
-  '';
   dpmsOff = pkgs.writeShellScript "dpms-off" ''
     if ${pkgs.procps}/bin/pgrep -x niri >/dev/null; then
       niri msg action power-off-monitors
@@ -190,13 +165,6 @@ in
         "match:workspace f[1], match:float 0, border_size 0, rounding 0"
         "stay_focused 1, match:title ^()$, match:class ^(steam)$"
         "min_size 1 1, match:title ^()$, match:class ^(steam)$"
-        "float true, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
-        "fullscreen true, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
-        "pin true, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
-        "border_size 0, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
-        "rounding 0, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
-        "no_blur on, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
-        "no_initial_focus on, match:class ^(GLFW-Application)$, match:title ^(GlslViewer)$"
       ];
 
       workspace = [
@@ -301,18 +269,13 @@ in
     settings = {
       general = {
         lock_cmd = "noctalia-shell ipc call lockScreen lock";
-        before_sleep_cmd = "${screensaverStop}; noctalia-shell ipc call lockScreen lock";
+        before_sleep_cmd = "noctalia-shell ipc call lockScreen lock";
         after_sleep_cmd = "${dpmsOn}";
       };
       listener = [
         {
-          timeout = 300;
-          on-timeout = "${screensaverStart}";
-          on-resume = "${screensaverStop}";
-        }
-        {
           timeout = 600;
-          on-timeout = "${screensaverStop}; noctalia-shell ipc call lockScreen lock";
+          on-timeout = "noctalia-shell ipc call lockScreen lock";
         }
         {
           timeout = 900;
